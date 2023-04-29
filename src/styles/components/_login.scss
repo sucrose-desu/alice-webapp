@@ -1,0 +1,104 @@
+.ui--login {
+  &-modal {
+    position: relative;
+    width: 360px;
+    padding: 2.5rem 2.5rem 2rem;
+    border-radius: var(--border-radius-large);
+    background-color: var(--color-primary);
+  }
+
+  &-header {
+    .title {
+      text-transform: capitalize;
+      line-height: 1.5;
+    }
+
+    .desc {
+      font-style: italic;
+      color: var(--color-secondary-light);
+    }
+  }
+
+  &-form {
+    margin: 2rem auto;
+
+    .rows {
+      display: grid;
+
+      &:nth-child(1) {
+        gap: 1rem;
+      }
+
+      &:nth-child(2) {
+        margin: 1.5rem 0 0;
+      }
+    }
+
+    .btn {
+      &-login {
+        height: 46px;
+
+        .text {
+          text-transform: capitalize;
+          font-size: var(--font-size-regular);
+          font-weight: var(--font-weight-bold);
+        }
+      }
+    }
+  }
+
+  &-footer {
+    padding: 1rem 0 0;
+    border-top: solid 1px var(--color-divider-light);
+    text-align: center;
+
+    .desc {
+      font-style: italic;
+      color: var(--color-secondary-light);
+    }
+
+    .list {
+      display: grid;
+      gap: 1rem;
+      grid-auto-flow: column;
+      justify-content: center;
+      margin: 1rem 0 1.5rem;
+    }
+
+    .btn {
+      &-addon {
+        width: 50px;
+        height: 50px;
+        border-radius: var(--border-radius-large);
+        background-color: var(--color-primary-light);
+        box-shadow: 0 0 0 2px var(--color-primary), 0 0 0 3px var(--color-primary-light);
+
+        &:hover {
+          background-color: var(--color-primary-dark);
+        }
+
+        .icon {
+          display: block;
+          object-fit: contain;
+          object-position: center;
+
+          &.github {
+            filter: invert(1) opacity(0.8);
+          }
+        }
+      }
+    }
+
+    .escape {
+      display: block;
+      text-align: center;
+      text-transform: capitalize;
+      color: var(--color-secondary-light);
+      opacity: 0.5;
+    }
+  }
+}
+
+@include class-modal('md-login') {
+  padding-top: 4rem;
+}

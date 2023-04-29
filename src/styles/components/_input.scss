@@ -1,0 +1,92 @@
+.ui--input {
+  &-provider {
+    position: relative;
+  }
+
+  &-label {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+
+    &.required::after {
+      margin-left: 5px;
+      content: ' *';
+      color: var(--color-invalid);
+      font-size: var(--font-size-regular);
+    }
+
+    .icon {
+      color: var(--color-meta);
+      line-height: 1;
+      font-size: var(--font-size-regular);
+      margin-right: 7.5px;
+      padding-right: 5px;
+      border-right: 1px solid var(--color-border-1);
+    }
+
+    .text {
+      color: var(--color-meta);
+      font-size: var(--font-size-medium);
+    }
+  }
+
+  &-desc {
+    color: var(--color-desc-2);
+    font-size: var(--font-size-small);
+    margin: 0.5rem 0 0;
+  }
+
+  &-field {
+    position: relative;
+
+    input {
+      height: 46px;
+      padding: 0 1rem;
+      margin: 0.5rem 0 0;
+      font-weight: var(--font-weight-regular);
+      color: var(--color-secondary-dark);
+      background-color: var(--color-primary-light);
+      border-radius: var(--border-radius-small);
+
+      & ~ .icon {
+        position: absolute;
+        right: 0;
+        bottom: 1px;
+        width: 34px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-secondary);
+
+        &.is-text {
+          color: var(--color-secondary-dark);
+        }
+      }
+
+      @include attr('type', 'password') {
+        letter-spacing: 2px;
+        font-weight: var(--font-weight-bold);
+      }
+
+      @include attr('type', ('number', 'search')) {
+        appearance: none;
+        -moz-appearance: textfield;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          appearance: none;
+          -webkit-appearance: none;
+        }
+      }
+    }
+  }
+
+  &-errors {
+    display: block;
+    color: var(--color-invalid);
+    font-style: italic;
+    font-size: var(--font-size-small);
+    font-weight: var(--font-size-medium);
+  }
+}

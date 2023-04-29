@@ -1,0 +1,123 @@
+.ui--navigator {
+  position: fixed;
+  z-index: 10;
+  inset: auto 1rem 1rem;
+
+  display: flex;
+  justify-content: center;
+
+  &-container {
+    display: grid;
+    gap: 0.5rem;
+    grid-auto-flow: column;
+    padding: 0.5rem;
+    border: solid 1px var(--color-divider-light);
+    border-radius: var(--border-radius-medium);
+    background-color: var(--color-primary-alpha);
+    backdrop-filter: blur(1rem);
+  }
+
+  &-menu {
+    padding: 0 0.5rem;
+    background-color: rgba(#000, 0.4);
+    border-radius: var(--border-radius-medium);
+
+    .ul {
+      display: grid;
+      gap: 0.25rem;
+      grid-auto-flow: column;
+    }
+
+    .router-link {
+      height: 55px;
+      padding: 1rem;
+      color: var(--color-meta);
+
+      &:hover {
+        color: var(--color-secondary-dark);
+      }
+
+      &-active {
+        color: #fff;
+      }
+
+      .text {
+        white-space: nowrap;
+        text-transform: capitalize;
+        font-weight: var(--font-weight-regular);
+      }
+    }
+  }
+
+  &-user {
+    background-color: rgba(#000, 0.4);
+    border-radius: var(--border-radius-medium);
+  }
+
+  .btn {
+    &-home {
+      cursor: default;
+      gap: 0.5rem;
+      height: 55px;
+      padding: 0 1rem;
+      color: var(--color-tooltip);
+      background-color: rgba(#000, 0.4);
+      border-radius: var(--border-radius-medium);
+
+      .text {
+        font-weight: var(--font-weight-regular);
+      }
+
+      .icon {
+        width: 18px;
+        aspect-ratio: 1;
+        cursor: pointer;
+      }
+    }
+
+    &-auth {
+      width: 55px;
+      height: 55px;
+      color: var(--color-secondary-dark);
+
+      outline: dashed 1px var(--color-divider-dark);
+      outline-offset: -10px;
+
+      .icon {
+        width: 24px;
+        aspect-ratio: 1;
+      }
+    }
+
+    &-user {
+      gap: 0.5rem;
+      height: 55px;
+      padding: 0 0.75rem 0 0.5rem;
+
+      .image {
+        display: block;
+        width: 36px;
+        height: 36px;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 50%;
+      }
+
+      .info {
+        text-align: left;
+        line-height: 1.128;
+      }
+
+      .name {
+        color: var(--color-secondary-dark);
+        font-size: var(--font-size-medium);
+        font-weight: var(--font-weight-regular);
+      }
+
+      .desc {
+        color: var(--color-secondary);
+        font-size: var(--font-size-small);
+      }
+    }
+  }
+}

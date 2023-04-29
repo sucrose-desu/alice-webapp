@@ -1,0 +1,106 @@
+.ui--modal {
+  &.none {
+    pointer-events: none;
+  }
+
+  &-wrapper {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    display: grid;
+    align-items: flex-start;
+    overflow: hidden auto;
+    padding: 1rem;
+    background-color: rgba(#000, 0.4);
+
+    &.enter-active,
+    &.enter-done {
+      @include class-contains('-container') {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    // &.is-default {}
+
+    &.is-dialog {
+      @include class-endWith('modal-container') {
+        min-width: 320px;
+        padding: 2rem 2rem 1.5rem;
+        background-color: var(--color-space);
+        border-radius: var(--border-radius-large);
+        box-shadow: 0 10px 20px rgba(#1b2430, 0.08);
+      }
+
+      @include class-endWith('modal-footer') {
+        display: grid;
+        gap: 1rem;
+        grid-auto-flow: column;
+        justify-content: flex-end;
+
+        .btn {
+          min-width: 80px;
+          width: auto;
+          height: 30px;
+
+          &:focus {
+            outline: 1px solid var(--color-space-3);
+            outline-offset: 1px;
+          }
+
+          .text {
+            text-transform: capitalize;
+            font-size: var(--font-size-small);
+            font-weight: var(--font-weight-bold);
+          }
+        }
+      }
+    }
+  }
+
+  &-container {
+    position: relative;
+    margin: 0 auto;
+    min-width: 256px;
+    transition: all var(--transition-time) var(--cubic-bezier);
+    transform: translate(0, -10px);
+    opacity: 0;
+  }
+
+  &-header {
+    position: relative;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
+    background-color: var(--color-space);
+    user-select: none;
+
+    .title {
+      color: var(--color-primary);
+      font-size: var(--font-size-regular);
+      font-weight: var(--font-weight-bold);
+    }
+
+    .btn {
+      &-close {
+        width: 24px;
+        height: 24px;
+        color: var(--color-red);
+
+        .icon {
+          font-size: var(--font-size-medium);
+        }
+      }
+    }
+  }
+
+  &-boby {
+    padding: 2rem 0;
+    color: var(--color-desc-1);
+    font-size: var(--font-size-medium);
+  }
+
+  // &-footer {}
+}

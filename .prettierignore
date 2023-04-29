@@ -1,0 +1,3 @@
+# Ignore artifacts: Scss
+**/styles/core/*.scss
+**/styles/main.scss
