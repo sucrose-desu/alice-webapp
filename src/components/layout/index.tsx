@@ -20,25 +20,8 @@ export function LayoutContainer({ children }: Props) {
       <main className='ui--router-view'>{children}</main>
       <NavigatorComponent />
 
-      <Image
-        className='bg-gradient violet'
-        src='/static/media/gradient-right-dark.svg'
-        loading='lazy'
-        alt=''
-        width={1420}
-        height={1420}
-        quality={100}
-      />
-
-      <Image
-        className='bg-gradient blue'
-        src='/static/media/gradient-left-dark.svg'
-        loading='lazy'
-        alt=''
-        width={1260}
-        height={1210}
-        quality={100}
-      />
+      <Image className='bg-gradient violet' src='/static/media/gradient-right-dark.svg' loading='lazy' alt='' width={1420} height={1420} />
+      <Image className='bg-gradient blue' src='/static/media/gradient-left-dark.svg' loading='lazy' alt='' width={1260} height={1210} />
     </div>
   )
 }

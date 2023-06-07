@@ -1,0 +1,23 @@
+.ui--labs {
+  &-container {
+    padding: 2rem;
+  }
+
+  &-rows {
+    &.grid {
+      display: grid;
+      gap: 1rem;
+      grid-auto-flow: column;
+      justify-content: flex-start;
+    }
+
+    .btn {
+      height: 2.5rem;
+      padding: 0 1rem;
+
+      .text {
+        text-transform: capitalize;
+      }
+    }
+  }
+}
