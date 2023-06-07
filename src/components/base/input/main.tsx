@@ -1,7 +1,6 @@
 import { useState, useMemo, useCallback } from 'react'
 import { errorMessage, InputAttrs } from './utils'
 import cls from 'classnames'
-import { isEqual } from '@/utils'
 
 interface Props extends InputAttrs {
   type?: 'text' | 'number' | 'search' | 'email' | 'password' | 'date'
@@ -47,7 +46,7 @@ export function InputComponent({ name, value, register, rules, errors, ...props 
         />
 
         {isPassword && (
-          <a className={cls('icon', { 'is-text': isEqual(type, 'text') })} onClick={handleSwitchType}>
+          <a className={cls('icon', { 'is-text': type === 'text' })} onClick={handleSwitchType}>
             <svg width={20} height={20} fill='currentColor' viewBox='0 0 16 16'>
               <path d='M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z' />
             </svg>

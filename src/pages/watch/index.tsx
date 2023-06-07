@@ -1,20 +1,13 @@
-import { useEffect, useRef } from 'react'
-import { fetchTrack } from '@/features/watch'
-import { useMounted } from '@/hooks'
+import type { GetServerSidePropsContext as Context, GetServerSidePropsResult as Result } from 'next'
 
-interface Props {
-  data?: any
-}
+interface Props {}
 
-export default function WatchContainer({ data }: Props) {
+export default function WatchContainer({}: Props) {
   // __STATE <React.Hooks>
 
   // __FUNCTION's
 
   // __EFFECT's
-  useMounted(() => {
-    console.log(data)
-  })
 
   // __RENDER
   return (
@@ -24,4 +17,10 @@ export default function WatchContainer({ data }: Props) {
   )
 }
 
-export const getServerSideProps = fetchTrack
+export async function getServerSideProps({ query }: Context): Promise<Result<Props>> {
+  // const vid = query.vid instanceof Array ? query.vid[0] : query.vid
+
+  return {
+    props: {}
+  }
+}

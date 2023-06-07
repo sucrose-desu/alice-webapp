@@ -1,7 +1,7 @@
 // Media queries breakpoints
-$screen-xs: 576px;  // Small tablets and large smartphones (landscape view)
-$screen-sm: 768px;  // Small tablets (portrait view)
-$screen-md: 992px;  // Tablets and small desktops
+$screen-xs: 576px; // Small tablets and large smartphones (landscape view)
+$screen-sm: 768px; // Small tablets (portrait view)
+$screen-md: 992px; // Tablets and small desktops
 $screen-lg: 1260px; // Large tablets and desktops
 
 // Slightly lighten a color
@@ -76,21 +76,19 @@ $screen-lg: 1260px; // Large tablets and desktops
 @mixin attr($attr, $values) {
   @if type-of($values) == 'list' {
     @each $value in $values {
-
-      &[#{$attr}=#{$value}] {
+      &[#{$attr}='#{$value}'] {
         @content;
       }
-      
     }
   } @else {
-    &[#{$attr}=#{$values}] {
+    &[#{$attr}='#{$values}'] {
       @content;
     }
   }
 }
 
 @mixin input($type) {
-  input[type=#{$type}] {
+  input[type='#{$type}'] {
     @content;
   }
 }
@@ -108,19 +106,19 @@ $screen-lg: 1260px; // Large tablets and desktops
 }
 
 @mixin class-startWith($class-match) {
-  [class^=#{$class-match}] {
+  [class^='#{$class-match}'] {
     @content;
   }
 }
 
 @mixin class-contains($class-match) {
-  [class*=#{$class-match}] {
+  [class*='#{$class-match}'] {
     @content;
   }
 }
 
 @mixin class-endWith($class-match) {
-  [class$=#{$class-match}] {
+  [class$='#{$class-match}'] {
     @content;
   }
 }

@@ -25,19 +25,19 @@ export function NavigatorComponent() {
         <div className='ui--navigator-menu'>
           <ul className='ul'>
             <li className='li'>
-              <Link className='btn' to='/browse' key='browse'>
+              <Link className='btn' to='/browse' key='.browse'>
                 <span className='text'>browse</span>
               </Link>
             </li>
 
             <li className='li'>
-              <Link className='btn' to='/browse?groupType=anime' key='anime'>
+              <Link className='btn' to='/browse?groupType=anime' key='.anime'>
                 <span className='text'>anime</span>
               </Link>
             </li>
 
             <li className='li'>
-              <Link className='btn' to='/watch?vid=79bb739b-dc92-5fd0-9012-ab88d4105b5d' key='labs'>
+              <Link className='btn' to='/labs' key='.labs'>
                 <span className='text'>labs</span>
               </Link>
             </li>

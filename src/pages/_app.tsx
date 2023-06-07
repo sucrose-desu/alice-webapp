@@ -6,6 +6,7 @@ import { AppProvider, LayoutContainer } from '@/components'
 import { configs } from '@/constants'
 import { useLoader, useMounted } from '@/hooks'
 import { Store } from '@/store'
+import '@/styles/fonts.scss'
 import '@/styles/main.scss'
 
 export default function Application({ Component, pageProps }: AppProps) {

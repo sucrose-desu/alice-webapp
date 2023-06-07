@@ -10,5 +10,4 @@ export class AppProvider {
 
 export { Link } from './link'
 export { LayoutContainer } from './layout'
-export { MediaComponent } from './media'
 export { InputComponent as Input } from './base/input/main'

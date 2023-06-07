@@ -5,7 +5,8 @@ import { notice } from '@/utils/notice'
 import { dispatch } from '@/store'
 import { setProfile, UserState } from '@/store/user.store'
 import type { FormLogin } from '@/types'
-import axios from '@/utils/axios'
+
+import axios from '../axios'
 
 interface RespLogin {
   accessToken: string

@@ -51,7 +51,7 @@
           .text {
             text-transform: capitalize;
             font-size: var(--font-size-small);
-            font-weight: var(--font-weight-bold);
+            font-weight: bold;
           }
         }
       }
@@ -80,7 +80,7 @@
     .title {
       color: var(--color-primary);
       font-size: var(--font-size-regular);
-      font-weight: var(--font-weight-bold);
+      font-weight: bold;
     }
 
     .btn {

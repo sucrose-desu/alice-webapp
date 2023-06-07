@@ -17,19 +17,28 @@ export function NoticeItem({ record, onRemove }: Props) {
 
   // __EFFECT's
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout
+
     if (record.visible) {
       setTimeout(() => setVisible(true), 128)
     } else {
       setVisible(false)
     }
+
+    return () => {
+      clearTimeout(timeoutId)
+    }
   }, [record])
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout
+
     if (duration) {
-      const timeoutId = setTimeout(() => setVisible(false), duration + 320)
-      return () => {
-        clearTimeout(timeoutId)
-      }
+      timeoutId = setTimeout(() => setVisible(false), duration + 320)
+    }
+
+    return () => {
+      clearTimeout(timeoutId)
     }
   }, [duration])
 

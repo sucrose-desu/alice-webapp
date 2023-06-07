@@ -5,7 +5,7 @@ import { useAuth, useMounted } from '@/hooks'
 import { AuthService } from '@/services'
 import { UserState, setProfile } from '@/store/user.store'
 import { cookie, storage } from '@/utils/storage'
-import { modal } from '@/utils'
+import { utils } from '@/utils'
 
 export default function Authorizer() {
   // __STATE <Rect.Hooks>
@@ -28,7 +28,7 @@ export default function Authorizer() {
 
   useEffect(() => {
     if (user.isAuth()) {
-      modal.off('md-login')
+      utils.modal.off('md-login')
     }
   }, [user])
 

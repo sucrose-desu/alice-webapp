@@ -54,7 +54,7 @@ export function Link({ children, to, onClick, ...props }: Props) {
   // __STATE <React.Hooks>
   const router = useRouter()
   const className = useMemo(() => {
-    const isActive = [router.pathname, router.asPath].indexOf(to) > -1
+    const isActive = router.asPath.includes(to)
     return cls(props.className, 'router-link', {
       'router-link-active': isActive,
       [props.activeClass || '']: isActive

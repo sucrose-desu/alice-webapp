@@ -1,20 +1,17 @@
-body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  outline: 0;
+html,
+body {
+  color: #fff;
+  background-color: #000;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
   margin: 0;
-  padding: 0;
-  vertical-align: baseline;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-medium);
 }
 
 * {
@@ -27,45 +24,24 @@ time, mark, audio, video {
   }
 }
 
-html, body {
-  color: #fff;
-  background-color: #000;
+p {
+  margin: 0;
 }
 
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  overflow-x: hidden;
-  font-family: var(--font-family-primary);
-  font-size: var(--font-size-medium);
-  font-weight: var(--font-weight-medium);
-}
-
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display: block;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-weight: bold;
-}
-
-
-code, pre {
-  font-family: var(--font-family-code);
-}
-
-hr {
-  border: unset;
-  margin: 0.75rem 0;
-  border-bottom: 1px solid var(--color-border-1);
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
 }
 
 ul,
 ol {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 img,
@@ -80,7 +56,10 @@ video {
   pointer-events: none;
 }
 
-button, input, select, textarea {
+button,
+input,
+select,
+textarea {
   font-family: var(--font-family-primary);
   font-size: inherit;
   line-height: inherit;
@@ -95,7 +74,7 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-input[type=number] {
+input[type='number'] {
   appearance: textfield;
 }
 
@@ -108,7 +87,9 @@ button {
   user-select: none;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   padding: 0;
   outline: 0;
   width: 100%;

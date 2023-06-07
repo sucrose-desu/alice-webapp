@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosHeaders } from 'axios'
 import { configs } from '@/constants'
-import { cookie } from './storage'
+import { cookie } from '../utils/storage'
 
 /**
  * Create axios instance.
