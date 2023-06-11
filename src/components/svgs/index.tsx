@@ -11,7 +11,7 @@ interface Props {
 export function SVG({ children, className, fill = 'currentColor', viewBox = '0 0 16 16' }: Props) {
   // __RENDER
   return (
-    <svg xmlns='http://www.w3.org/2000/svg' fill={fill} className={cls('icon', className)} viewBox={viewBox}>
+    <svg xmlns='http://www.w3.org/2000/svg' fill={fill} className={cls('icon', className)} width={16} height={16} viewBox={viewBox}>
       {children}
     </svg>
   )

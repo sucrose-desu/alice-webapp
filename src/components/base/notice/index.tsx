@@ -1,8 +1,10 @@
-import { useCallback, useMemo } from 'react'
+import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import type { StoreTypes } from '@/store'
+
 import { setNotice } from '@/store/app.store'
+import type { StoreTypes } from '@/store'
 import type { Notice } from '@/types'
+
 import { NoticeItem } from './item'
 
 export default function NoticeContainer() {
@@ -14,7 +16,7 @@ export default function NoticeContainer() {
   const handleRemove = useCallback((notice: Notice) => {
     const payload: Notice = {
       ...notice,
-      vid: `rm: ${notice.vid}`,
+      name: `rm:${notice.name}`,
       visible: false
     }
 

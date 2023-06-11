@@ -1,62 +1,74 @@
+import { addSeconds } from 'date-fns'
 import { dispatch } from '@/store'
-import { setNotice as dispatchNotice } from '@/store/app.store'
-import type { Notice, NoticeOptions } from '@/types'
-
-const defaultOptions = { visible: true, duration: 3e3 }
-
-function setNotice(options: Notice) {
-  const vid = options.vid || Math.random().toString(16).slice(2)
-  dispatch(dispatchNotice({ ...options, vid }))
-
-  return vid
-}
+import { setNotice } from '@/store/app.store'
+import type { Notice, NoticeContent, NoticeOptions } from '@/types'
 
 export class notice {
-  static info(options: NoticeOptions) {
-    return setNotice({
-      type: 'info',
-      ...defaultOptions,
-      ...options
-    })
-  }
+  static on(option: Notice) {
+    const name = option.name || Math.random().toString(16).slice(2)
+    const title = option.title || "Notification's"
+    const duration = option.duration !== 0 ? +addSeconds(Date.now(), option.duration || 3) : undefined
 
-  static success(options: NoticeOptions) {
-    return setNotice({
-      type: 'success',
-      ...defaultOptions,
-      ...options
-    })
-  }
-
-  static warn(options: NoticeOptions) {
-    return setNotice({
-      type: 'warn',
-      ...defaultOptions,
-      ...options
-    })
-  }
-
-  static error(options: NoticeOptions) {
-    return setNotice({
-      type: 'error',
-      ...defaultOptions,
-      ...options
-    })
-  }
-
-  static close(vid: string) {
     dispatch(
-      dispatchNotice({
-        vid: `rm:${vid}`,
-        visible: false,
-        type: 'success',
-        title: '',
-        content: null
+      setNotice({
+        ...option,
+        visible: true,
+        name,
+        title,
+        duration
       })
     )
+
+    return name
   }
 
-  static clear() {
-    dispatch(dispatchNotice(null))
+  static info(content: NoticeContent, option?: NoticeOptions) {
+    return this.on({
+      ...option,
+      type: 'info',
+      title: '',
+      content
+    })
   }
+
+  static success(content: NoticeContent, option?: NoticeOptions) {
+    return this.on({
+      ...option,
+      type: 'success',
+      title: '',
+      content
+    })
+  }
+
+  static warn(content: NoticeContent, option?: NoticeOptions) {
+    return this.on({
+      ...option,
+      type: 'warn',
+      title: '',
+      content
+    })
+  }
+
+  static error(content: NoticeContent, option?: NoticeOptions) {
+    return this.on({
+      ...option,
+      type: 'error',
+      title: '',
+      content
+    })
+  }
+
+  static close(name: string) {
+    const payload = setNotice({
+      name: `rm:${name}`,
+      type: 'info',
+      title: '',
+      content: null,
+      visible: false
+    })
+
+    dispatch(payload)
+  }
+
+  static clear() {}
 }

@@ -5,13 +5,14 @@ export type NoticeTypes = 'info' | 'success' | 'warn' | 'error'
 export type NoticeContent = ReactNode | NoticeName
 
 export interface Notice {
-  vid?: string
-  visible: boolean
-  type: NoticeTypes
   name?: string
+  type: NoticeTypes
   title: string
   content: NoticeContent
+  visible?: boolean
   duration?: number
 }
 
-export interface NoticeOptions extends Omit<Notice, 'visible' | 'type'> {}
+export interface NoticeOptions extends Pick<Notice, 'name' | 'duration'> {
+  title?: string
+}

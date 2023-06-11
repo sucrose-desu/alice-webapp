@@ -6,10 +6,7 @@ export default function LabsContainer() {
 
   // __FUNCTION's
   const handleNotice = useCallback(() => {
-    utils.notice.error({
-      title: 'Title',
-      content: 'Compiled successfully in 320ms'
-    })
+    utils.notice.error('Compiled successfully in 320ms')
   }, [])
 
   // __EFFECT's

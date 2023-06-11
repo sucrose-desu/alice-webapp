@@ -97,10 +97,9 @@ export default createReducer(initialState, (builder) => {
 
     .addCase(setNotice, (state, { payload }) => {
       if (payload) {
-        const { vid } = payload
-        if (regex.test(vid!)) {
-          const _vid = vid!.replace(regex, '').trim()
-          state.notice = ArrayService.remove(state.notice, 'vid', _vid)
+        if (regex.test(payload.name!)) {
+          const name = payload.name!.replace(regex, '').trim()
+          state.notice = ArrayService.remove(state.notice, 'name', name)
         } else {
           state.notice = [...state.notice, payload]
         }
