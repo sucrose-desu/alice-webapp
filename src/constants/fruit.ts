@@ -1,4 +1,4 @@
-export const Fruit: Record<string, string>[] = [
+export const Fruit: BaseRecord[] = [
   { label: '🍇  Grapes', value: 'grapes' },
   { label: '🍈  Melon', value: 'melon' },
   { label: '🍉  Watermelon', value: 'watermelon' },

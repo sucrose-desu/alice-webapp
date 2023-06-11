@@ -1,7 +1,8 @@
 import { useCallback, useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { setModal } from '@/store/app.store'
-import { generateId, modal } from '@/utils'
+import { generateId } from '@/utils'
+import { modal } from '@/utils/modal'
 import { ModalContent, ModalOptions } from '@/types'
 
 interface CallbackInterface {

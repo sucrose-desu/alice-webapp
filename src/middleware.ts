@@ -14,8 +14,8 @@ export const config = {
 
 export function middleware({ cookies, nextUrl, url }: NextRequest) {
   if (nextUrl.pathname.startsWith('/user')) {
-    const refreshToken = cookies.get(configs.APP_AUTH_REFRESH)
-    if (!refreshToken) {
+    const accessToken = cookies.get(configs.APP_AUTH_ACCESS)
+    if (!accessToken) {
       return NextResponse.redirect(new URL('/browse', url))
     }
   }

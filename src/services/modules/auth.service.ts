@@ -1,18 +1,11 @@
-import { addMonths } from 'date-fns'
 import { configs, UserRole } from '@/constants'
-import { cookie, storage } from '@/utils/storage'
-import { notice } from '@/utils/notice'
 import { dispatch } from '@/store'
 import { setProfile, UserState } from '@/store/user.store'
-import type { FormLogin } from '@/types'
+import { cookie, storage } from '@/utils/storage'
+import type { FormLogin } from '@/types/form'
 
 import axios from '../axios'
-
-interface RespLogin {
-  accessToken: string
-  refreshKey: string
-  expiredAt: Date | string
-}
+import { tryCatch } from '../catch'
 
 export class AuthService {
   /**
@@ -20,37 +13,34 @@ export class AuthService {
    *
    * @param data FormLogin
    */
-  static async login(data: FormLogin): Promise<boolean | void> {
+  static async login(data: FormLogin) {
     try {
-      const response = await axios.post<RespLogin>('/auth/login', data)
+      const response = await axios.post<XHRLogin>('/auth/login', data)
       if (response.data) {
         const { accessToken, refreshKey, expiredAt } = response.data
 
         cookie.set(configs.APP_AUTH_ACCESS, accessToken, { expires: new Date(expiredAt) })
-        cookie.set(configs.APP_AUTH_REFRESH, refreshKey, { expires: addMonths(Date.now(), 2) })
+        cookie.set(configs.APP_AUTH_REFRESH, refreshKey, { expires: new Date(expiredAt) })
 
         return true
       }
     } catch (error: any) {
-      console.error('`AuthService.login`', error)
-      notice.error({ title: error.code, content: error.message, duration: 0 })
+      tryCatch('`AuthService.login`', error)
     }
   }
 
   /**
    * GET user profile.
    */
-  static async profile(): Promise<UserState | void> {
+  static async profile() {
     try {
       const response = await axios.get<UserState>('/users/profile')
       if (response.data) {
         storage.set(configs.APP_USER_INFO, response.data)
         dispatch(setProfile(response.data))
-        return response.data
       }
     } catch (error: any) {
-      console.error('`AuthService.profile`', error)
-      notice.error({ title: error.code, content: error.message })
+      tryCatch('`AuthService.profile`', error)
     }
   }
 
@@ -66,7 +56,7 @@ export class AuthService {
 
     dispatch(
       setProfile({
-        id: '',
+        id: 0,
         role: UserRole.GUEST,
         avatar: '',
         displayName: '',

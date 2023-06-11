@@ -45,6 +45,10 @@ export class ArrayService {
     return payload.filter((record) => record[prop] !== value)
   }
 
+  static removeDuplicates<T = any>(payload: T[]): T[] {
+    return payload.filter((record, index) => payload.indexOf(record) === index)
+  }
+
   static groupBy<P = any>(payload: P[], prop: keyof P) {
     return payload.reduce((previousValue: any, currentValue) => {
       previousValue[currentValue[prop]] = [...(previousValue[currentValue[prop]] || []), currentValue]

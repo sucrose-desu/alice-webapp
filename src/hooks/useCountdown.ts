@@ -1,57 +1,40 @@
-import { useEffect, useMemo, useState } from 'react'
-import { differenceInSeconds } from 'date-fns'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { intervalToDuration, isBefore } from 'date-fns'
+import type { Duration } from 'date-fns'
 
-export interface FuncReturn {
-  days: number
-  hours: number
-  minutes: number
-  seconds: number
-}
-
-export function useCountdown(toDate: Date | number): FuncReturn {
+export function useCountdown(toDate: Date | number): Duration {
   // __STATE <React.Hooks>
-  const [currentTime, setCurrentTime] = useState<number>(new Date().getTime())
-  const secondsPerDay = 86400 // (60 * 60 * 24)
-  const secondsPerHour = 3600 // (60 * 60)
-  const secondsPerMinute = 60
+  const intervalId = useRef<NodeJS.Timer>()
+  const [currentDuration, setCurrentDuration] = useState<Duration>({
+    years: 0,
+    months: 0,
+    weeks: 0,
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  })
 
   // __EFFECT's
   useEffect(() => {
-    let intervalId: NodeJS.Timer
+    intervalId.current = setInterval(() => {
+      if (isBefore(new Date(), toDate)) {
+        const dura = intervalToDuration({
+          start: new Date(),
+          end: toDate
+        })
 
-    intervalId = setInterval(() => {
-      const now = new Date().getTime()
-      setCurrentTime(now)
+        setCurrentDuration(dura)
+      } else {
+        clearInterval(intervalId.current)
+      }
     }, 1e3)
 
     return () => {
-      clearInterval(intervalId)
+      clearInterval(intervalId.current)
     }
-  }, [])
+  }, [toDate])
 
   // __RETURN
-  return useMemo(() => {
-    const diffInSeconds = differenceInSeconds(toDate, currentTime)
-
-    if (diffInSeconds <= 1) {
-      return {
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0
-      }
-    }
-
-    const days = Math.floor(diffInSeconds / secondsPerDay)
-    const hours = Math.floor((diffInSeconds - days * secondsPerDay) / secondsPerHour)
-    const minutes = Math.floor((diffInSeconds - days * secondsPerDay - hours * secondsPerHour) / secondsPerMinute)
-    const seconds = diffInSeconds - days * secondsPerDay - hours * secondsPerHour - minutes * secondsPerMinute
-
-    return {
-      days,
-      hours,
-      minutes,
-      seconds
-    }
-  }, [currentTime])
+  return useMemo(() => currentDuration, [currentDuration])
 }

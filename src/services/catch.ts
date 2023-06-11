@@ -1,4 +1,4 @@
-import { notice } from '@/utils'
+import { notice } from '@/utils/notice'
 
 export function tryCatch(message: string, error: any) {
   console.error(message, error)
@@ -12,8 +12,8 @@ export function tryCatch(message: string, error: any) {
       content = `<p>- ${content}</p>`
     }
 
-    notice.error({ title: `${statusCode}: ${title}`, content, duration: 6e3 })
+    notice.error(content, { title: `${statusCode}: ${title}`, duration: 6 })
   } else {
-    notice.error({ title: error.code, content: error.message, duration: 6e3 })
+    notice.error(error.message, { title: error.code, duration: 6 })
   }
 }

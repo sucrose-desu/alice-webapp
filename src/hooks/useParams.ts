@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useMemo } from 'react'
 
-export function useQuery(name: string) {
+export function useParams<T = any>(name: string, type?: Function): T {
   // __STATE <React.Hooks>
   const router = useRouter()
 
@@ -10,9 +10,10 @@ export function useQuery(name: string) {
     const param = router.query[name]
 
     if (param) {
-      return param instanceof Array ? param[0] : param
+      let value = param instanceof Array ? param[0] : param
+      return type ? type(value) : value
     } else {
       return void 0
     }
-  }, [router, name])
+  }, [router, name, type])
 }

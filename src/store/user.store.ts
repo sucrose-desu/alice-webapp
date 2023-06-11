@@ -1,25 +1,14 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { UserRole } from '@/constants'
+import type { User } from '@/types/user'
 
 /**
  * STATE
  */
-export interface UserState {
-  id: string
-  role: UserRole
-  avatar: string
-  displayName: string
-  username: string
-  email: string
-  bio?: string
-  isVerified?: boolean
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
+export interface UserState extends User {}
 
 export const initialState: UserState = {
-  id: '',
+  id: 0,
   role: UserRole.GUEST,
   avatar: '',
   displayName: '',
@@ -34,7 +23,7 @@ export enum ActionTypes {
   SET_PROFILE = 'SET_USER_PROFILE'
 }
 
-export const setProfile = createAction<UserState, ActionTypes>(ActionTypes.SET_PROFILE)
+export const setProfile = createAction<User, ActionTypes>(ActionTypes.SET_PROFILE)
 
 /**
  * REDUCER's
