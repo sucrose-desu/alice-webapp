@@ -5,7 +5,7 @@ import cls from 'classnames'
 
 export default function LoaderContainer() {
   // __STATE <React.Hooks>
-  const loader = useSelector(({ app }: StoreTypes) => app.loader)
+  const state = useSelector(({ app }: StoreTypes) => app.loader)
   const [visible, setVisible] = useState<boolean>(false)
 
   // __FUNCTION's
@@ -15,20 +15,26 @@ export default function LoaderContainer() {
 
   // __EFFECT's
   useEffect(() => {
-    if (loader) {
+    if (state) {
       setVisible(true)
       addEventListener('keydown', breakAllKeyboardEvents)
     } else {
       setTimeout(() => setVisible(false), 320)
       removeEventListener('keydown', breakAllKeyboardEvents)
     }
-  }, [loader])
+
+    return () => {
+      removeEventListener('keydown', breakAllKeyboardEvents)
+    }
+  }, [state])
 
   // __RENDER
   if (!visible) return null
   return (
     <div className='ui--loader'>
-      <div className={cls('ui--loader-progress', { done: !loader })}></div>
+      <div className={cls('ui--loader-progress', { done: !state })}>
+        <div className='ui--loader-rainbow'></div>
+      </div>
     </div>
   )
 }

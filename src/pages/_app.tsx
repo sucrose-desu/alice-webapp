@@ -31,7 +31,6 @@ export default function Application({ Component, pageProps }: AppProps) {
 
       <ReduxProvider store={Store}>
         <AppProvider.Authorizer />
-        <AppProvider.Loader />
 
         <LayoutContainer>
           <Component {...pageProps} />
@@ -40,6 +39,7 @@ export default function Application({ Component, pageProps }: AppProps) {
         <AppProvider.Dialog />
         <AppProvider.Modal />
         <AppProvider.Notice />
+        <AppProvider.Loader />
       </ReduxProvider>
     </>
   )

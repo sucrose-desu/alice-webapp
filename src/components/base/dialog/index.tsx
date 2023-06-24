@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
-import type { StoreTypes } from '@/store'
+
 import { setDialog } from '@/store/app.store'
 import { scrollOff } from '@/utils'
-import { Dialog } from '@/types'
+import type { StoreTypes } from '@/store'
+import type { Dialog } from '@/types'
+
 import { getCurrentContant } from './register'
 
 export default function DialogContainer() {
@@ -63,7 +65,9 @@ export default function DialogContainer() {
       removeEventListener('keydown', listener)
     }
 
-    return () => removeEventListener('keydown', listener)
+    return () => {
+      removeEventListener('keydown', listener)
+    }
   }, [state, btnConfirm])
 
   // __RENDER

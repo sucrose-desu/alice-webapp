@@ -1,11 +1,14 @@
 import { useCallback, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import type { StoreTypes } from '@/store'
+import cls from 'classnames'
+
 import { setModal } from '@/store/app.store'
-import { modal, scrollOff } from '@/utils'
+import { scrollOff } from '@/utils'
+import { modal } from '@/utils/modal'
+import type { StoreTypes } from '@/store'
+
 import { ModalItem } from './item'
 import { getCurrentContant } from './register'
-import cls from 'classnames'
 
 export default function ModalContainer() {
   // __STATE <React.Hooks>
@@ -29,8 +32,8 @@ export default function ModalContainer() {
   useEffect(() => {
     function listener({ code }: KeyboardEvent) {
       if (code === 'Escape') {
-        const { vid, allowEscape } = modals.slice(-1)[0]
-        if (allowEscape) modal.off(vid)
+        const _modal = modals.slice(-1)[0]
+        if (_modal.allowEscape) modal.off(_modal.vid)
       }
     }
 

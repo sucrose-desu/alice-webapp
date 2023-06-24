@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useRef, useState } from 'react'
-import { modal } from '@/utils'
+import { modal } from '@/utils/modal'
 
-export interface Props {
+interface Props {
   title: string
   children: ReactNode
 }

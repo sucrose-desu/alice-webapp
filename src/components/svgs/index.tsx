@@ -1,18 +1,20 @@
-import { ReactNode } from 'react'
+import { SVGAttributes } from 'react'
 import cls from 'classnames'
 
-interface Props {
-  children: ReactNode
-  className?: string
-  fill?: string
-  viewBox?: string
-}
+interface Props extends SVGAttributes<SVGElement> {}
 
-export function SVG({ children, className, fill = 'currentColor', viewBox = '0 0 16 16' }: Props) {
+export function SVG({ fill = 'currentColor', viewBox = '0 0 16 16', width = 16, height = 16, ...rest }: Props) {
   // __RENDER
   return (
-    <svg xmlns='http://www.w3.org/2000/svg' fill={fill} className={cls('icon', className)} width={16} height={16} viewBox={viewBox}>
-      {children}
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      className={cls('icon', rest.className)}
+      width={width}
+      height={height}
+      fill={fill}
+      viewBox={viewBox}
+    >
+      {rest.children}
     </svg>
   )
 }

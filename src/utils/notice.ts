@@ -24,37 +24,37 @@ export class notice {
 
   static info(content: NoticeContent, option?: NoticeOptions) {
     return this.on({
-      ...option,
       type: 'info',
       title: '',
-      content
+      content,
+      ...option
     })
   }
 
   static success(content: NoticeContent, option?: NoticeOptions) {
     return this.on({
-      ...option,
       type: 'success',
       title: '',
-      content
+      content,
+      ...option
     })
   }
 
   static warn(content: NoticeContent, option?: NoticeOptions) {
     return this.on({
-      ...option,
       type: 'warn',
       title: '',
-      content
+      content,
+      ...option
     })
   }
 
   static error(content: NoticeContent, option?: NoticeOptions) {
     return this.on({
-      ...option,
       type: 'error',
       title: '',
-      content
+      content,
+      ...option
     })
   }
 

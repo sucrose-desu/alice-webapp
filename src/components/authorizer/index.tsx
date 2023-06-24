@@ -1,11 +1,12 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+
 import { configs } from '@/constants'
 import { useAuth, useMounted } from '@/hooks'
 import { AuthService } from '@/services'
 import { UserState, setProfile } from '@/store/user.store'
+import { modal } from '@/utils/modal'
 import { cookie, storage } from '@/utils/storage'
-import { utils } from '@/utils'
 
 export default function Authorizer() {
   // __STATE <Rect.Hooks>
@@ -14,8 +15,8 @@ export default function Authorizer() {
 
   // __EFFECT's
   useMounted(() => {
-    const refreshToken = cookie.get<string>(configs.APP_AUTH_REFRESH)
-    if (refreshToken) {
+    const accessToken = cookie.get(configs.APP_AUTH_ACCESS)
+    if (accessToken) {
       const user = storage.get<UserState>(configs.APP_USER_INFO, 1)
 
       if (user) {
@@ -28,7 +29,7 @@ export default function Authorizer() {
 
   useEffect(() => {
     if (user.isAuth()) {
-      utils.modal.off('md-login')
+      modal.off('md-login')
     }
   }, [user])
 
