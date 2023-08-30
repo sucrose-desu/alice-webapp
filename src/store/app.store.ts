@@ -10,23 +10,16 @@ export interface AppState {
   lang: string
   theme: Theme
   loader: boolean
-  dialog: Dialog
-  modal: Modal[]
-  notice: Notice[]
+  dialog?: Dialog
+  modal?: Record<any, Modal>
+  notice?: Record<any, Notice>
 }
 
 export const initialState: AppState = {
   appVersion: 'v0.1-beta (April, 2023)',
   lang: 'en-US',
   theme: Theme.DARK,
-  loader: false,
-  dialog: {
-    visible: false,
-    type: 'alert',
-    content: null
-  },
-  modal: [],
-  notice: []
+  loader: false
 }
 
 /**
@@ -52,8 +45,6 @@ export const setNotice = createAction<Notice | null, ActionTypes>(ActionTypes.SE
  * REDUCER's
  */
 export default createReducer(initialState, (builder) => {
-  const regex = /^rm:|remove:/gi
-
   return builder
     .addCase(setLanguage, (state, { payload }) => {
       state.lang = payload
@@ -69,41 +60,77 @@ export default createReducer(initialState, (builder) => {
 
     .addCase(setDialog, (state, { payload }) => {
       state.dialog = {
-        ...payload,
         type: payload?.type || 'alert',
         confirmLabel: payload?.confirmLabel || 'OK',
         cancelLabel: payload?.cancelLabel || 'Cancel',
-        resolve: payload?.resolve
+        resolve: payload?.resolve,
+        ...payload
       }
     })
 
     .addCase(setModal, (state, { payload }) => {
-      const { vid } = payload
-      if (regex.test(vid)) {
-        const _vid = vid.replace(regex, '').trim()
-        state.modal = state.modal.filter((r) => r.vid !== _vid)
-      } else {
-        if (!payload.visible) {
-          state.modal = state.modal.map((record) => {
-            if (record.vid === vid) record.visible = payload.visible
-            return record
+      if (state.modal) {
+        const regex = /^rm:|remove:/g
+        const vid = payload.vid.replace(regex, '').trim()
+
+        const modals = Object.values(state.modal)
+        let draft: Record<number, Modal> = {}
+
+        if (regex.test(payload.vid)) {
+          modals.forEach((record, index) => {
+            if (record.vid !== vid) {
+              draft[index] = record
+            }
           })
         } else {
-          state.modal = [...state.modal, payload]
+          if (!payload.visible) {
+            modals.forEach((record, index) => {
+              if (record.vid === vid) {
+                record.visible = payload.visible
+              }
+
+              draft[index] = record
+            })
+          } else {
+            const nextKey = Object.keys(state.modal).length
+            draft = state.modal
+            draft[nextKey] = payload
+          }
         }
+
+        state.modal = draft
+      } else {
+        state.modal = { 0: payload }
       }
     })
 
     .addCase(setNotice, (state, { payload }) => {
-      if (payload) {
-        if (regex.test(payload.name!)) {
+      if (state.notice) {
+        if (payload) {
+          const regex = /^rm:|remove:/g
           const name = payload.name!.replace(regex, '').trim()
-          state.notice = state.notice.filter((r) => r.name !== name)
+
+          const notices = Object.values(state.notice)
+          let draft: Record<number, Notice> = {}
+
+          if (regex.test(payload.name!)) {
+            notices.forEach((record, index) => {
+              if (record.name !== name) {
+                draft[index] = record
+              }
+            })
+          } else {
+            const nextKey = Object.keys(state.notice).length
+            draft = state.notice
+            draft[nextKey] = payload
+          }
+
+          state.notice = draft
         } else {
-          state.notice = [...state.notice, payload]
+          state.notice = void 0
         }
       } else {
-        state.notice = []
+        if (payload) state.notice = { 0: payload }
       }
     })
 })

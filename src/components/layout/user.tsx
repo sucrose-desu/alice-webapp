@@ -8,7 +8,7 @@ export function UserComponent() {
   return (
     <div className='ui--navigator-user' suppressHydrationWarning>
       {true ? (
-        <Link className='btn btn-user' href='/user'>
+        <Link className='btn btn-user' href='/account'>
           <Image
             className='image'
             width={36}
@@ -21,7 +21,7 @@ export function UserComponent() {
           />
 
           <div>
-            <h4 className='capitalize font-normal text-sm text-zinc-300'>Display Name</h4>
+            <h4 className='capitalize leading-4 font-normal text-sm text-zinc-300'>Display Name</h4>
             <i className='lowercase text-xs text-zinc-400'>example@email.com</i>
           </div>
         </Link>

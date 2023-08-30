@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-import { LayoutContainer } from '@/components'
+import { ReduxProvider, LayoutContainer } from '@/components'
 import '@/styles/fonts.scss'
 import '@/styles/main.scss'
 
@@ -13,7 +13,9 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang='en-US'>
       <body style={{ backgroundColor: '#000' }}>
-        <LayoutContainer>{children}</LayoutContainer>
+        <ReduxProvider>
+          <LayoutContainer node={children} />
+        </ReduxProvider>
       </body>
     </html>
   )

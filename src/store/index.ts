@@ -1,4 +1,5 @@
-import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { useSelector as useReduxSelector, useDispatch as useReduxDispatch, TypedUseSelectorHook } from 'react-redux'
 import { configs } from '@/constants'
 
 import app from './app.store'
@@ -17,9 +18,11 @@ const createStore = configureStore({
   }
 })
 
-export type StoreTypes = ReturnType<typeof createStore.getState>
-export type StoreDispatch = typeof createStore.dispatch
-export type StoreThunk<ReturnType = void> = ThunkAction<ReturnType, StoreTypes, unknown, Action<string>>
+type StoreTypes = ReturnType<typeof createStore.getState>
+type StoreDispatch = typeof createStore.dispatch
 
-export { createStore as Store }
+export const useSelector: TypedUseSelectorHook<StoreTypes> = useReduxSelector
+export const useDispatch = () => useReduxDispatch<StoreDispatch>()
+
 export const dispatch = createStore.dispatch
+export default createStore

@@ -5,13 +5,8 @@ body {
 }
 
 body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  @apply font-base text-sm antialiased overflow-x-hidden;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
-  margin: 0;
-  font-family: var(--font-family-primary);
-  font-size: var(--font-size-medium);
 }
 
 * {
@@ -60,7 +55,7 @@ button,
 input,
 select,
 textarea {
-  font-family: var(--font-family-primary);
+  @apply font-base;
   font-size: inherit;
   line-height: inherit;
   margin: 0;
