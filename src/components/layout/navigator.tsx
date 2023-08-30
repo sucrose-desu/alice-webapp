@@ -1,14 +1,9 @@
+import Link from 'next/link'
+
 import { SVG } from '../svgs'
-import { Link } from '../link'
 import { UserComponent } from './user'
 
 export function NavigatorComponent() {
-  // __STATE <React.Hooks>
-
-  // __FUNCTION's
-
-  // __EFFECT's
-
   // __RENDER
   return (
     <nav className='ui--navigator'>
@@ -25,19 +20,19 @@ export function NavigatorComponent() {
         <div className='ui--navigator-menu'>
           <ul className='ul'>
             <li className='li'>
-              <Link className='btn' to='/browse' key='.browse'>
+              <Link className='router-link' href='/browse' key='.browse'>
                 <span className='text'>browse</span>
               </Link>
             </li>
 
             <li className='li'>
-              <Link className='btn' to='/browse?groupType=anime' key='.anime'>
-                <span className='text'>anime</span>
+              <Link className='router-link' href='/watch' key='.watch'>
+                <span className='text'>watch</span>
               </Link>
             </li>
 
             <li className='li'>
-              <Link className='btn' to='/labs' key='.labs'>
+              <Link className='router-link' href='/labs' key='.labs'>
                 <span className='text'>labs</span>
               </Link>
             </li>

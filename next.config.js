@@ -12,9 +12,6 @@ const nextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true
   },
-  experimental: {
-    appDir: false
-  },
 
   httpAgentOptions: {
     keepAlive: false
@@ -26,17 +23,17 @@ const nextConfig = {
   sassOptions: {
     includePaths: [join(__dirname, 'src/styles')]
   },
-  trailingSlash: false,
+  trailingSlash: false
 
-  redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/browse',
-        permanent: true
-      }
-    ]
-  }
+  // redirects() {
+  //   return [
+  //     {
+  //       source: '/',
+  //       destination: '/browse',
+  //       permanent: false
+  //     }
+  //   ]
+  // }
 }
 
 module.exports = nextConfig

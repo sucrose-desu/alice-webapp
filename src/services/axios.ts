@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosHeaders } from 'axios'
+import axios, { AxiosInstance } from 'axios'
 import { configs } from '@/constants'
 import { cookie } from '@/utils/storage'
 
@@ -25,9 +25,7 @@ Axios.interceptors.request.use((reqConfig) => {
   if (reqConfig.headers) {
     const accessToken = cookie.get(configs.APP_AUTH_ACCESS)
     if (accessToken) {
-      reqConfig.headers = new AxiosHeaders({
-        Authorization: `Bearer ${accessToken}`
-      })
+      reqConfig.headers.Authorization = `Bearer ${accessToken}`
     }
   }
 

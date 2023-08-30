@@ -1,6 +1,5 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { Theme } from '@/constants'
-import { ArrayService } from '@/utils/array'
 import type { Dialog, Modal, Notice } from '@/types'
 
 /**
@@ -82,7 +81,7 @@ export default createReducer(initialState, (builder) => {
       const { vid } = payload
       if (regex.test(vid)) {
         const _vid = vid.replace(regex, '').trim()
-        state.modal = ArrayService.remove(state.modal, 'vid', _vid)
+        state.modal = state.modal.filter((r) => r.vid !== _vid)
       } else {
         if (!payload.visible) {
           state.modal = state.modal.map((record) => {
@@ -99,7 +98,7 @@ export default createReducer(initialState, (builder) => {
       if (payload) {
         if (regex.test(payload.name!)) {
           const name = payload.name!.replace(regex, '').trim()
-          state.notice = ArrayService.remove(state.notice, 'name', name)
+          state.notice = state.notice.filter((r) => r.name !== name)
         } else {
           state.notice = [...state.notice, payload]
         }

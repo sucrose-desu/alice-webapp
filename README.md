@@ -1,14 +1,16 @@
 # Project Alicization - Webapp.
 
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
 ## Directory structure
 
 ```
 src               # App entry point.
+└─ app            # App Router.
 └─ components     # Global custom components.
 └─ constants      # Initiate constant & configs.
-└─ features       # Setup features & modules.
 └─ hooks          # Customs React hooks.
-└─ pages          # Application page view.
+└─ pages          # Pages Router.
 └─ services       # APIs services.
 └─ store          # Redux state management.
 └─ styles         # Stylesheet.
@@ -28,17 +30,11 @@ npm install
 npm run start:dev
 ```
 
-Runs the app in the development mode.\
-Open [http://localhost:8443](http://localhost:8443) to view it in the browser.
+Open [http://localhost:8443](http://localhost:8443) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:8443/api](http://localhost:8443/api). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 ## 📦 Compiles and minifies for production
 

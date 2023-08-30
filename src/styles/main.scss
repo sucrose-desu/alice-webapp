@@ -1,31 +1,37 @@
 /**
-  =========================================================
-  * This website is produced by Unnamed Co., ltd.
-  * e-mail: {emailAddress}
-  * website: {website}
-  =========================================================
-  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-**/
+ * This injects Tailwind's base styles and any base styles registered by
+ * plugins.
+ */
+@tailwind base;
 
-// Core Styles
-@import 
-  'core/variable',
-  'core/mixin',
-  'core/reset',
-  'core/global';
+/**
+ * This injects Tailwind's component classes and any component classes
+ * registered by plugins.
+ */
+@tailwind components;
 
-// Global Components
-@import 
-  'components/button',
-  'components/input',
-  'components/loader',
-  'components/modal',
-  'components/notice',
-  'components/navigator',
-  'components/login';
+/**
+ * This injects Tailwind's utility classes and any utility classes registered
+ * by plugins.
+ */
+@tailwind utilities;
 
-// Page Styles
-@import 
-  'pages/browse/index',
-  'pages/watch/index',
-  'pages/labs/index';
+/**
+ * Use this directive to control where Tailwind injects the hover, focus,
+ * responsive, dark mode, and other variants of each class.
+ *
+ * If omitted, Tailwind will append these classes to the very end of
+ * your stylesheet by default.
+ */
+@tailwind variants;
+
+/** Core Styles **/
+@import 'core/variable';
+@import 'core/mixin';
+@import 'core/reset';
+@import 'core/global';
+
+/** Global Components **/
+@import 'components/loader';
+@import 'components/button';
+@import 'components/navigator';
