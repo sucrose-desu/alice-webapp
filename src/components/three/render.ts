@@ -118,7 +118,7 @@ export class BusterDrone {
 
   private async ModalLoader() {
     const loader = new GLTFLoader()
-    const glTF = await loader.loadAsync('/static/models/buster_drone/scene.gltf')
+    const glTF = await loader.loadAsync('/static/three/models/buster_drone/scene.gltf')
     // glTF.animations // Array<THREE.AnimationClip>
     // glTF.scene // THREE.Group
     // glTF.scenes // Array<THREE.Group>
@@ -130,7 +130,7 @@ export class BusterDrone {
 
   private async TextureLoader() {
     const loader = new RGBELoader()
-    const texture = await loader.loadAsync('/static/texture/studio_small_03_4k.hdr')
+    const texture = await loader.loadAsync('/static/three/texture/studio_small_03_4k.hdr')
 
     texture.mapping = THREE.EquirectangularReflectionMapping
     return texture
