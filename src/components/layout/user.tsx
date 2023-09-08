@@ -1,13 +1,20 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { useAuth } from '@/hooks'
+import { modal } from '@/utils/addon'
+
 import { SVG } from '../svgs'
+import { LoginComponent } from '../modals/login'
 
 export function UserComponent() {
+  // __STATE<React.Hooks>
+  const user = useAuth()
+
   // __RENDER
   return (
     <div className='ui--navigator-user' suppressHydrationWarning>
-      {true ? (
+      {user.isAuth() ? (
         <Link className='btn btn-user' href='/account'>
           <Image
             className='image'
@@ -21,12 +28,12 @@ export function UserComponent() {
           />
 
           <div>
-            <h4 className='capitalize leading-4 font-normal text-sm text-zinc-300'>Display Name</h4>
-            <i className='lowercase text-xs text-zinc-400'>example@email.com</i>
+            <h4 className='capitalize leading-4 font-normal text-sm text-zinc-300'>{user.displayName}</h4>
+            <i className='lowercase text-xs text-zinc-400'>{user.email}</i>
           </div>
         </Link>
       ) : (
-        <button className='btn btn-auth'>
+        <button className='btn btn-auth' onClick={() => modal.on(<LoginComponent />, { className: 'md-login' })}>
           <SVG className='bi-person-fill' key='person-fill'>
             <path d='M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z' />
           </SVG>

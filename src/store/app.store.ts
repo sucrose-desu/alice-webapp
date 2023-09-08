@@ -1,6 +1,6 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { Theme } from '@/constants'
-import type { Dialog, Modal, Notice } from '@/types'
+import type { Dialog, Modal, Notice } from '@/types/addon'
 
 /**
  * STATE

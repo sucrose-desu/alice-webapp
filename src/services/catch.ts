@@ -1,4 +1,4 @@
-import { notice } from '@/utils/notice'
+import { notice } from '@/utils/addon'
 
 export function tryCatch(message: string, error: any) {
   console.error(message, error)

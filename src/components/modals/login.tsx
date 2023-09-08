@@ -1,9 +1,12 @@
+'use client'
+
 import Image from 'next/image'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
-import { Input } from '@/components'
 import { AuthService } from '@/services'
-import type { FormLogin } from '@/types'
+import type { FormLogin } from '@/types/form'
+
+import { InputComponent as Input } from '../input/main'
 
 export function LoginComponent() {
   // __STATE <React.Hooks>
@@ -22,8 +25,8 @@ export function LoginComponent() {
 
   // __FUNCTION's
   const onSubmit = handleSubmit(async (data) => {
-    const resp = await AuthService.login(data)
-    if (resp) {
+    const response = await AuthService.login(data)
+    if (response) {
       await AuthService.profile()
       router.push('/browse')
     }
