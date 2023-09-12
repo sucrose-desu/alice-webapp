@@ -8,9 +8,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 src               # App entry point.
 └─ app            # App Router.
 └─ components     # Global custom components.
-└─ constants      # Initiate constant & configs.
+└─ constants      # Constant variable.
 └─ hooks          # Customs React hooks.
-└─ pages          # Pages Router.
 └─ services       # APIs services.
 └─ store          # Redux state management.
 └─ styles         # Stylesheet.

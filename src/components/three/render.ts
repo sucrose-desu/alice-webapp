@@ -1,12 +1,18 @@
 import * as THREE from 'three'
+import Stats from 'three/addons/libs/stats.module.js'
+import { GUI } from 'three/addons/libs/lil-gui.module.min.js'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+
 import { TransformControls } from 'three/examples/jsm/controls/TransformControls.js'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js'
 import { BloomPass } from 'three/examples/jsm/postprocessing/BloomPass.js'
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js'
 
 export class BusterDrone {
   private scene: THREE.Scene
@@ -26,70 +32,98 @@ export class BusterDrone {
     this.renderer.setPixelRatio(window.devicePixelRatio)
     this.renderer.setSize(_w, _h)
     this.renderer.shadowMap.enabled = true
-    this.renderer.toneMapping = THREE.ACESFilmicToneMapping
+    // this.renderer.toneMapping = THREE.ACESFilmicToneMapping
+    this.renderer.toneMapping = THREE.ReinhardToneMapping
     this.renderer.outputColorSpace = THREE.SRGBColorSpace
 
     this.composer = new EffectComposer(this.renderer)
     this.controls = new OrbitControls(this.camera, this.renderer.domElement)
+
+    // Disable vertical rotation (upward and downward)
+    // this.controls.minPolarAngle = Math.PI / 2
+    // this.controls.maxPolarAngle = Math.PI / 2
   }
 
   public async init() {
     const [texture, model] = await Promise.all([this.TextureLoader(), this.ModalLoader()])
 
     // this.scene.background = new THREE.Color(0xffffff)
-    this.scene.background = texture
+    // this.scene.background = texture
     this.scene.environment = texture
 
     model.scene.castShadow = true
     model.scene.receiveShadow = true
     model.scene.traverse((child) => {
       if (child instanceof THREE.Mesh) {
-        const material = child.material
-        console.log(material)
-
-        if (material.name === 'Boden') {
-          if (material.hasOwnProperty('opacity')) {
-            material.opacity = 0.5
-          }
-        } else {
-          if (material.map) {
-            material.map.mapping = THREE.EquirectangularReflectionMapping
-          }
-
-          if (material.hasOwnProperty('roughness')) {
-            material.roughness = 0
-          }
-
-          if (material.hasOwnProperty('metalness')) {
-            material.metalness = 0.75
-          }
+        if (child.material.hasOwnProperty('roughness')) {
+          child.material.roughness = 0
         }
+
+        if (child.material.hasOwnProperty('metalness')) {
+          child.material.metalness = 0.5
+        }
+
+        // if (child.material.hasOwnProperty('wireframe')) {
+        //   child.material.wireframe = true
+        // }
       }
     })
-    this.scene.add(model.scene)
 
+    const renderScene = new RenderPass(this.scene, this.camera)
+
+    const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85)
+    const params = {
+      threshold: 1,
+      strength: 0.2,
+      radius: 0,
+      exposure: 1
+    }
+    bloomPass.threshold = params.threshold
+    bloomPass.strength = params.strength
+    bloomPass.radius = params.radius
+
+    const outputPass = new OutputPass()
+
+    this.composer.addPass(renderScene)
+    this.composer.addPass(bloomPass)
+    this.composer.addPass(outputPass)
+
+    this.scene.add(model.scene)
     this.scene.add(...this.sphere())
 
-    const mixer = new THREE.AnimationMixer(model.scene)
-    const action = mixer.clipAction(model.animations[0])
-    action.play()
+    if (model.animations.length) {
+      const mixer = new THREE.AnimationMixer(model.scene)
+      const action = mixer.clipAction(model.animations[0])
+      action.play()
 
-    const renderPass = new RenderPass(this.scene, this.camera)
-    this.composer.addPass(renderPass)
+      this.animate(mixer)
+    } else {
+      this.animate()
+    }
 
-    const bloomPass = new BloomPass()
-    this.composer.addPass(bloomPass)
+    const gui = new GUI()
 
-    this.animate(mixer)
+    const bloomFolder = gui.addFolder('Unreal Bloom Pass')
+    bloomFolder.add(params, 'threshold', 0.0, 1.0).onChange((value: number) => {
+      bloomPass.threshold = Number(value)
+    })
+    bloomFolder.add(params, 'strength', 0.0, 3.0).onChange((value: number) => {
+      bloomPass.strength = Number(value)
+    })
+
+    const toneMappingFolder = gui.addFolder('Tone Mapping')
+    toneMappingFolder.add(params, 'exposure', 0.1, 2).onChange((value: number) => {
+      this.renderer.toneMappingExposure = Math.pow(value, 4.0)
+    })
   }
 
-  public animate(mixer: THREE.AnimationMixer) {
+  public animate(mixer?: THREE.AnimationMixer) {
     requestAnimationFrame(() => this.animate(mixer))
 
-    mixer.update(0.01)
+    if (mixer) mixer.update(0.01)
+
     this.controls.update()
-    this.composer.render(0.01)
-    this.renderer.render(this.scene, this.camera)
+    this.composer.render()
   }
 
   private sphere() {
@@ -118,7 +152,9 @@ export class BusterDrone {
 
   private async ModalLoader() {
     const loader = new GLTFLoader()
-    const glTF = await loader.loadAsync('/static/three/models/buster_drone/scene.gltf')
+    const glTF = await loader.loadAsync('/static/three/models/sony_digimatic_flip_clock/scene.gltf')
+    glTF.scene.scale.set(10, 10, 10)
+    glTF.scene.position.y = -0.5
     // glTF.animations // Array<THREE.AnimationClip>
     // glTF.scene // THREE.Group
     // glTF.scenes // Array<THREE.Group>
