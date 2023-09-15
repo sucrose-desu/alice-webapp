@@ -1,10 +1,11 @@
-import '@/styles/pages/watch.scss'
+import { Three } from '@/components/three'
+// import '@/styles/pages/watch.scss'
 
 export default function WatchContainer() {
   // __RENDER
   return (
     <div className='ui--watch-container'>
-      <i>.ui--watch-container</i>
+      <Three />
     </div>
   )
 }

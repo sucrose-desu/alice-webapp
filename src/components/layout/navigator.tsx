@@ -27,7 +27,7 @@ export function NavigatorComponent() {
 
             <li className='li'>
               <Link className='router-link' href='/watch' key='.watch'>
-                <span className='text'>watch</span>
+                <span className='text'>three.js</span>
               </Link>
             </li>
 

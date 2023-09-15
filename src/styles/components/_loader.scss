@@ -7,7 +7,7 @@
     max-width: 98%;
     height: 2px;
     pointer-events: none;
-    animation: loader 1s cubic-bezier(0.86, 0.01, 0.08, 1) infinite;
+    animation: loader 1s cubic-bezier(0.86, 0.01, 0.08, 1);
 
     &::before {
       position: absolute;
@@ -27,17 +27,18 @@
     position: relative;
     height: 100%;
     background-color: var(--color-theme);
-    // background-image: linear-gradient(
-    //   90deg,
-    //   rgb(250 0 0) 0%,
-    //   rgb(250 250 0) 15%,
-    //   rgb(0 250 0) 30%,
-    //   rgb(0 250 250) 50%,
-    //   rgb(0 0 250) 65%,
-    //   rgb(250 0 250) 80%,
-    //   rgb(250 0 0) 100%
-    // );
-    background-image: linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #eeff41, #f9a825, #ff5722);
+    background-image: linear-gradient(
+      to right,
+      #ef5350,
+      #f48fb1,
+      #7e57c2,
+      #2196f3,
+      #26c6da,
+      #43a047,
+      #eeff41,
+      #f9a825,
+      #ff5722
+    );
     background-size: 200%;
     animation: rainbow 3s linear infinite;
   }

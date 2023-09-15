@@ -1,9 +1,10 @@
 .ui--labs {
   &-container {
-  }
+    padding: 2rem;
 
-  &-three {
-    .three-js {
+    .btn {
+      height: 2.5rem;
+      padding: 0 2rem;
     }
   }
 }
