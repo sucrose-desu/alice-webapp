@@ -1,5 +1,5 @@
 import { NoticeName } from '@/constants'
-import type { Notice } from '@/types'
+import type { Notice } from '@/types/addon'
 
 export function getCurrentContant({ content }: Notice) {
   switch (content) {

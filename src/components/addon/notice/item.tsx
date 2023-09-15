@@ -3,7 +3,7 @@ import { CSSTransition } from 'react-transition-group'
 import { isAfter } from 'date-fns'
 import cls from 'classnames'
 
-import type { Notice } from '@/types'
+import type { Notice } from '@/types/addon'
 import { getCurrentContant } from './register'
 import { SVG } from '@/components/svgs'
 

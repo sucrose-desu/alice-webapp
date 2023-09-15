@@ -1,5 +1,5 @@
 import { DialogName } from '@/constants'
-import type { Dialog } from '@/types'
+import type { Dialog } from '@/types/addon'
 
 export function getCurrentContant({ content }: Dialog) {
   switch (content) {
