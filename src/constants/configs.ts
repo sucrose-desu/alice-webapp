@@ -11,11 +11,11 @@ export const isProduction = APP_MODE === 'production'
 export const isDevelop = APP_MODE === 'development'
 
 // STORAGE KEY-NAME
-export const APP_LANG = 'APP.Language__' + APP_NAME
-export const APP_THEME = 'APP.Theme__' + APP_NAME
-export const APP_AUTH_ACCESS = 'APP.AccessToken__' + APP_NAME
-export const APP_AUTH_REFRESH = 'APP.RefreshKey__' + APP_NAME
-export const APP_USER_INFO = 'APP.UserInfo__' + APP_NAME
+export const APP_LANG = '__APP.Language.' + APP_NAME
+export const APP_THEME = '__APP.Theme.' + APP_NAME
+export const APP_AUTH_ACCESS = '__APP.AccessToken.' + APP_NAME
+export const APP_AUTH_REFRESH = '__APP.RefreshKey.' + APP_NAME
+export const APP_USER_INFO = '__APP.UserInfo.' + APP_NAME
 
 // REQUEST HEADERS
 export const AUTHORIZATION = 'Authorization'

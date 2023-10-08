@@ -13,7 +13,7 @@ export function LayoutContainer({ node }: Props) {
   const protectedPage = useMemo(() => pathname.startsWith('/watch'), [pathname])
 
   // __RENDER
-  // if (protectedPage) return <>{node}</>
+  if (protectedPage) return <>{node}</>
   return (
     <div className='ui--app-container'>
       <main className='ui--router-view'>{node}</main>

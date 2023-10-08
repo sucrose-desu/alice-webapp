@@ -1,32 +1,5 @@
 .ui--loader {
-  position: fixed;
-  inset: 0;
-  z-index: 992;
-
-  &-progress {
-    max-width: 98%;
-    height: 2px;
-    pointer-events: none;
-    animation: loader 1s cubic-bezier(0.86, 0.01, 0.08, 1);
-
-    &::before {
-      position: absolute;
-      inset: 0 0 auto 0;
-      height: 2px;
-      content: '';
-      background-color: rgba(255 255 255 / 0.2);
-    }
-
-    &.done {
-      max-width: 100%;
-      animation: none;
-    }
-  }
-
   &-rainbow {
-    position: relative;
-    height: 100%;
-    background-color: var(--color-theme);
     background-image: linear-gradient(
       to right,
       #ef5350,
@@ -39,27 +12,5 @@
       #f9a825,
       #ff5722
     );
-    background-size: 200%;
-    animation: rainbow 3s linear infinite;
-  }
-
-  @keyframes loader {
-    from {
-      width: 0%;
-    }
-
-    to {
-      width: 100%;
-    }
-  }
-
-  @keyframes rainbow {
-    from {
-      background-position: 0 0;
-    }
-
-    to {
-      background-position: -200% 0;
-    }
   }
 }

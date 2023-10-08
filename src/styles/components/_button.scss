@@ -1,44 +1,36 @@
 .btn {
-  position: relative;
-  display: grid;
-  gap: 0.25rem;
-  grid-auto-flow: column;
-  justify-content: center;
-  align-items: center;
-  line-height: 1.25rem;
-  border-radius: var(--border-radius-small);
-  transition: all var(--transition-time) ease;
+  @apply relative grid grid-flow-col items-center justify-center gap-1 rounded leading-5 duration-150 ease-out;
+
+  .text {
+    @apply font-semibold;
+  }
 
   &-text {
     &:hover {
       .text {
-        text-decoration: underline;
+        @apply underline;
       }
     }
   }
 
   &-primary {
-    color: var(--color-secondary-dark);
-    background-color: var(--color-theme);
+    @apply bg-theme text-neutral-50;
 
     &:hover {
-      background-color: var(--color-theme-dark);
+      @apply bg-theme-dark;
     }
   }
 
   &-secondary {
-    color: var(--color-secondary);
-    background-color: var(--color-primary-light);
-    box-shadow: 0 0 0 1px var(--color-divider);
+    @apply bg-neutral-950 ring-1 ring-neutral-400 ring-offset-0;
 
     &:hover {
-      color: var(--color-secondary-dark);
+      @apply bg-neutral-900;
     }
   }
 
   &:disabled,
   &.disabled {
-    opacity: 0.5 !important;
-    cursor: not-allowed !important;
+    @apply cursor-not-allowed opacity-50;
   }
 }

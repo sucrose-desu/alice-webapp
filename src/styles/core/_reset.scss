@@ -1,26 +1,9 @@
-html,
-body {
-  color: #fff;
-  background-color: #000;
-}
-
-body {
-  @apply font-base text-sm antialiased overflow-x-hidden;
-  text-rendering: optimizeLegibility;
-}
-
-* {
-  -webkit-tap-highlight-color: transparent;
-  box-sizing: border-box;
-
-  &::before,
-  &::after {
-    box-sizing: border-box;
-  }
+a {
+  @apply inline-block cursor-pointer select-none text-inherit no-underline outline-none;
 }
 
 p {
-  margin: 0;
+  @apply m-0;
 }
 
 h1,
@@ -29,44 +12,34 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0;
+  @apply m-0 leading-normal;
 }
 
 ul,
 ol {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  @apply m-0 list-none p-0;
 }
 
 img,
 label {
-  width: inherit;
-  user-select: none;
+  @apply select-none;
 }
 
 img,
 video {
-  user-select: none;
-  pointer-events: none;
+  @apply pointer-events-none select-none;
 }
 
 button,
 input,
 select,
 textarea {
-  @apply font-base;
-  font-size: inherit;
-  line-height: inherit;
-  margin: 0;
-  outline: unset;
-  background-color: transparent;
+  @apply font-primary m-0 bg-transparent outline-none first-line:text-inherit;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+  @apply m-0 appearance-none;
 }
 
 input[type='number'] {
@@ -74,29 +47,11 @@ input[type='number'] {
 }
 
 button {
-  cursor: pointer;
-  outline: 0;
-  padding: 0;
-  border: 0 solid transparent;
-  box-shadow: 0 0 0 transparent;
-  user-select: none;
+  @apply cursor-pointer select-none border-none p-0 shadow-none outline-none;
 }
 
 input,
 select,
 textarea {
-  padding: 0;
-  outline: 0;
-  width: 100%;
-  border: none;
-  box-shadow: 0 0 0 transparent;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-  outline: 0;
-  cursor: pointer;
-  display: inline-block;
-  user-select: none;
+  @apply w-full border-none p-0 shadow-none outline-none;
 }

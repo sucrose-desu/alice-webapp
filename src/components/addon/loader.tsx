@@ -32,9 +32,15 @@ export default function LoaderProvider() {
   // __RENDER
   if (!visible) return null
   return (
-    <div className='ui--loader'>
-      <div className={cls('ui--loader-progress', { done: !state })}>
-        <div className='ui--loader-rainbow'></div>
+    <div className='ui--loader fixed inset-0 z-[992]'>
+      <div
+        className={cls(
+          'ui--loader-progress animate-loader pointer-events-none h-[2px] max-w-[98%]',
+          'before:absolute before:inset-x-0 before:bottom-auto before:top-0 before:h-[2px] before:bg-white/20 before:content-[""]',
+          !state && 'max-w-full animate-none'
+        )}
+      >
+        <div className='ui--loader-rainbow bg-theme animate-rainbow relative h-full bg-[length:200%]'></div>
       </div>
     </div>
   )

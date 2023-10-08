@@ -1,14 +1,25 @@
 /**
  * This injects Tailwind's base styles and any base styles registered by
  * plugins.
+ * 
+ * @tailwind base;
  */
-@tailwind base;
+@import 'core/mixin';
+@import 'core/reset';
+@import 'core/global';
 
 /**
  * This injects Tailwind's component classes and any component classes
  * registered by plugins.
+ * 
+ * @tailwind components;
  */
-@tailwind components;
+@import 'components/loader';
+@import 'components/input';
+@import 'components/button';
+@import 'components/navigator';
+@import 'components/modal';
+@import 'components/login';
 
 /**
  * This injects Tailwind's utility classes and any utility classes registered
@@ -24,17 +35,3 @@
  * your stylesheet by default.
  */
 @tailwind variants;
-
-/** Core Styles **/
-@import 'core/variable';
-@import 'core/mixin';
-@import 'core/reset';
-@import 'core/global';
-
-/** Global Components **/
-@import 'components/loader';
-@import 'components/input';
-@import 'components/button';
-@import 'components/navigator';
-@import 'components/modal';
-@import 'components/login';

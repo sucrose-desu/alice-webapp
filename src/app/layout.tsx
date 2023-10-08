@@ -11,8 +11,11 @@ export { metadata } from '@/constants/metadata'
 export default function RootLayout({ children }: Props) {
   // __RENDER
   return (
-    <html lang='en-US'>
-      <body style={{ backgroundColor: '#000' }}>
+    <html lang='en-US' className='m-0 bg-black text-white' style={{ colorScheme: 'dark' }}>
+      <body
+        className='font-primary m-0 overflow-x-hidden bg-black text-sm text-white antialiased'
+        style={{ backgroundColor: '#000', textRendering: 'optimizeLegibility' }}
+      >
         <ReduxProvider>
           <AddonProvider.Bootstrap />
 

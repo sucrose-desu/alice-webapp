@@ -13,7 +13,7 @@ export function UserComponent() {
 
   // __RENDER
   return (
-    <div className='ui--navigator-user' suppressHydrationWarning>
+    <div className='ui--navigator-user rounded-lg bg-black/40' suppressHydrationWarning>
       {user.isAuth() ? (
         <Link className='btn btn-user' href='/account'>
           <Image
@@ -27,14 +27,14 @@ export function UserComponent() {
             alt='User Avatar'
           />
 
-          <div>
-            <h4 className='capitalize leading-4 font-normal text-sm text-zinc-300'>{user.displayName}</h4>
-            <i className='lowercase text-xs text-zinc-400'>{user.email}</i>
+          <div className='text-left leading-tight'>
+            <h4 className='text-sm font-normal capitalize leading-4 text-zinc-300'>{user.displayName}</h4>
+            <i className='text-xs lowercase text-zinc-400'>{user.email}</i>
           </div>
         </Link>
       ) : (
         <button className='btn btn-auth' onClick={() => modal.on(<LoginComponent />, { className: 'md-login' })}>
-          <SVG className='bi-person-fill' key='person-fill'>
+          <SVG className='bi-person-fill aspect-square w-6' key='person-fill'>
             <path d='M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z' />
           </SVG>
         </button>
