@@ -1,21 +1,19 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 import { useSelector as useReduxSelector, useDispatch as useReduxDispatch, TypedUseSelectorHook } from 'react-redux'
 import { configs } from '@/constants'
 
 import app from './app.store'
+import common from './common.store'
 import user from './user.store'
 
-const createReducer = combineReducers({
-  app,
-  user
-})
-
 const createStore = configureStore({
-  reducer: createReducer,
+  reducer: {
+    app,
+    common,
+    user
+  },
   devTools: configs.isDevelop,
-  middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware({ serializableCheck: false })
-  }
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false })
 })
 
 type StoreTypes = ReturnType<typeof createStore.getState>

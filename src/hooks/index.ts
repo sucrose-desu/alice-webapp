@@ -1,4 +1,5 @@
 export { useAuth } from './useAuth'
+export { useGenre } from './useGenre'
 export { useLoader } from './useLoader'
 export { useMounted } from './useMounted'
 export { useTheme } from './useTheme'

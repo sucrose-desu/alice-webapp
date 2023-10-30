@@ -1,36 +1,38 @@
-.btn {
-  @apply relative grid grid-flow-col items-center justify-center gap-1 rounded leading-5 duration-150 ease-out;
+@layer components {
+  .btn {
+    @apply relative grid grid-flow-col items-center justify-center gap-1 rounded-sm leading-5 duration-150 ease-out;
 
-  .text {
-    @apply font-semibold;
-  }
+    .text {
+      @apply font-medium;
+    }
 
-  &-text {
-    &:hover {
-      .text {
-        @apply underline;
+    &-text {
+      &:hover {
+        .text {
+          @apply underline;
+        }
       }
     }
-  }
 
-  &-primary {
-    @apply bg-theme text-neutral-50;
+    &-primary {
+      @apply bg-rose-600 text-neutral-50;
 
-    &:hover {
-      @apply bg-theme-dark;
+      &:hover {
+        @apply bg-rose-700;
+      }
     }
-  }
 
-  &-secondary {
-    @apply bg-neutral-950 ring-1 ring-neutral-400 ring-offset-0;
+    &-secondary {
+      @apply bg-neutral-950 ring-1 ring-neutral-400 ring-offset-0;
 
-    &:hover {
-      @apply bg-neutral-900;
+      &:hover {
+        @apply bg-neutral-900;
+      }
     }
-  }
 
-  &:disabled,
-  &.disabled {
-    @apply cursor-not-allowed opacity-50;
+    &:disabled,
+    &.disabled {
+      @apply cursor-not-allowed opacity-50;
+    }
   }
 }

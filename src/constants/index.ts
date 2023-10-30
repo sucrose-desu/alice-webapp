@@ -14,6 +14,12 @@ export enum UserRole {
   MEMBER = 'member'
 }
 
+export enum GenreGroup {
+  ANIME = 'anime',
+  CINEMA = 'cinema',
+  THE_MOVIE = 'the-movie'
+}
+
 export enum DialogName {
   SYSTEM_ALERT = '@DIALOG:SYSTEM_ALERT'
 }

@@ -1,6 +1,6 @@
-interface BaseRecord {
+interface BaseRecord<V = any> {
   label: string
-  value: string
+  value: V
 }
 
 interface BaseDate {
