@@ -34,14 +34,14 @@ export function LoginComponent() {
 
   // __RENDER
   return (
-    <div className='ui--login-modal'>
+    <div className='ui--login-modal relative w-80 rounded-xl border-4 border-solid border-neutral-900/80 bg-neutral-950/80 px-12 pb-8 pt-12'>
       <div className='ui--login-header'>
-        <h2 className='title'>system login</h2>
-        <p className='desc'>Generate Lorem Ipsum placeholder text.</p>
+        <h2 className='capitalize leading-6'>system login</h2>
+        <p className='desc text-xs italic text-neutral-400'>Generate Lorem Ipsum placeholder text.</p>
       </div>
 
-      <form className='ui--login-form' onSubmit={onSubmit}>
-        <div className='rows'>
+      <form className='ui--login-form mx-auto my-8' onSubmit={onSubmit}>
+        <div className='grid gap-4'>
           <Input
             key='.username'
             type='text'
@@ -63,17 +63,17 @@ export function LoginComponent() {
           />
         </div>
 
-        <div className='rows'>
-          <button className='btn btn-primary btn-login' type='submit'>
-            <span className='text'>login</span>
+        <div className='mt-6 grid'>
+          <button className='btn btn-primary h-12' type='submit'>
+            <span className='text-base font-bold capitalize'>login</span>
           </button>
         </div>
       </form>
 
-      <div className='ui--login-footer'>
-        <p className='desc'>or Login with,</p>
+      <div className='ui--login-footer border-0 border-t border-solid border-neutral-900 pt-4 text-center'>
+        <p className='italic text-neutral-400'>or Login with,</p>
 
-        <div className='list'>
+        <div className='mb-6 mt-4 grid grid-flow-col justify-center gap-4'>
           <button className='btn btn-addon'>
             <Image
               className='icon twitter'
@@ -108,7 +108,7 @@ export function LoginComponent() {
           </button>
         </div>
 
-        <i className='escape'>close [ESC]</i>
+        <i className='block text-center capitalize text-neutral-500'>close [ESC]</i>
       </div>
     </div>
   )

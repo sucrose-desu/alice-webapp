@@ -2,7 +2,6 @@
 
 import { useCallback } from 'react'
 
-import { Genre } from '@/constants/genre'
 import { useLoader, useMounted } from '@/hooks'
 import { modal, notice } from '@/utils/addon'
 
@@ -25,9 +24,7 @@ export function ContextComponent() {
   }, [])
 
   // __EFFECT's
-  useMounted(() => {
-    console.log(Genre.getList())
-  })
+  // useMounted(() => {})
 
   // __RENDER
   return (

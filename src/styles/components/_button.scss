@@ -1,6 +1,6 @@
 @layer components {
   .btn {
-    @apply relative grid grid-flow-col items-center justify-center gap-1 rounded-sm leading-5 duration-150 ease-out;
+    @apply relative grid grid-flow-col items-center justify-center gap-1 rounded-md leading-5 duration-150 ease-out;
 
     .text {
       @apply font-medium;

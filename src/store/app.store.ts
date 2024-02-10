@@ -19,7 +19,7 @@ export const initialState: AppState = {
   appVersion: 'v0.1-beta (April, 2023)',
   lang: 'en-US',
   theme: Theme.DARK,
-  loader: false
+  loader: true
 }
 
 /**

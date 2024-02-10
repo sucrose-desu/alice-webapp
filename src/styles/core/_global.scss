@@ -2,6 +2,11 @@
 .ui- {
   &-app {
     &-container {
+      transition: opacity 640ms ease-in;
+
+      &:not(.ready) {
+        opacity: 0;
+      }
     }
   }
 

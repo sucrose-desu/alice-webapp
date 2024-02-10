@@ -4,15 +4,12 @@ import { useEffect } from 'react'
 
 import { configs } from '@/constants'
 import { useAuth, useLoader, useMounted } from '@/hooks'
-import { AuthService } from '@/services'
+import { AuthService, CommonService } from '@/services'
 import { useDispatch } from '@/store'
 import { setProfile } from '@/store/user.store'
-import { setGenres } from '@/store/common.store'
 import { modal } from '@/utils/addon'
 import { cookie, storage } from '@/utils/storage'
 import type { User } from '@/types/user'
-
-import Genres from '@/constants/genre'
 
 export default function Bootstrap() {
   // __STATE <Rect.Hooks>
@@ -29,11 +26,18 @@ export default function Bootstrap() {
       }
 
       // AuthService.profile()
+      // CommonService.getGenres()
     } else {
       AuthService.logout()
     }
 
-    dispatch(setGenres(Genres))
+    const elm = document.querySelector('.ui--app-container')
+    if (elm) {
+      setTimeout(() => {
+        elm.classList.add('ready')
+        loader.off()
+      }, 1e3)
+    }
   })
 
   useEffect(() => {

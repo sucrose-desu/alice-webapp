@@ -6,7 +6,7 @@ import '@/styles/main.scss'
 
 type Props = { children: ReactNode }
 
-export { metadata } from '@/constants/metadata'
+export { metadata, viewport } from '@/constants/metadata'
 
 export default function RootLayout({ children }: Props) {
   // __RENDER

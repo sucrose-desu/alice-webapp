@@ -8,7 +8,7 @@ import { cookie } from '@/utils/storage'
 const Axios: AxiosInstance = axios.create({
   baseURL: `${configs.API_GATEWAY}/services`,
   headers: {
-    'api-secret-key': configs.API_SECRET_KEY,
+    'X-Secret-Auth': configs.API_SECRET_KEY,
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET,POST,PATCH,DELETE'
   }

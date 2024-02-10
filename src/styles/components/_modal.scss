@@ -1,23 +1,15 @@
 .ui--modal {
   &.none {
-    pointer-events: none;
+    @apply pointer-events-none;
   }
 
   &-wrapper {
-    position: fixed;
-    inset: 0;
-    z-index: 40;
-    display: grid;
-    align-items: flex-start;
-    overflow: hidden auto;
-    padding: 1rem;
-    background-color: rgba(#000, 0.4);
+    @apply fixed inset-0 z-40 grid items-start overflow-x-hidden bg-black/80 p-4;
 
     &.enter-active,
     &.enter-done {
       @include class-contains('-container') {
-        opacity: 1;
-        transform: translateY(0);
+        @apply translate-y-0 opacity-100;
       }
     }
 
@@ -25,10 +17,7 @@
 
     &.is-dialog {
       @include class-endWith('modal-container') {
-        min-width: 320px;
-        padding: 2rem 2rem 1.5rem;
-        background-color: var(--color-space);
-        border-radius: var(--border-radius-large);
+        @apply min-w-[320px] rounded-xl bg-neutral-900 px-8 pb-6 pt-8;
         box-shadow: 0 10px 20px rgba(#1b2430, 0.08);
       }
 
@@ -62,7 +51,7 @@
     position: relative;
     margin: 0 auto;
     min-width: 256px;
-    transition: all var(--transition-time) var(--cubic-bezier);
+    transition: all 200ms ease;
     transform: translate(0, -10px);
     opacity: 0;
   }
@@ -96,11 +85,7 @@
     }
   }
 
-  &-boby {
-    padding: 2rem 0;
-    color: var(--color-desc-1);
-    font-size: var(--font-size-medium);
-  }
+  // &-boby {}
 
   // &-footer {}
 }

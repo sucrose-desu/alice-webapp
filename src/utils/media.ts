@@ -28,28 +28,16 @@ export async function getMediaBlob(file: string | Blob | File): Promise<IMedia> 
     const response = await fetch(file).then((r) => r.blob())
     return {
       url: createObjectURL(response),
-      isImage: isImage(response.type),
-      isVideo: isVideo(response.type),
-      isAudio: isAudio(response.type)
+      isImage: response.type.includes('image'),
+      isVideo: response.type.includes('video'),
+      isAudio: response.type.includes('audio')
     }
   }
 
   return {
     url: createObjectURL(file),
-    isImage: isImage(file.type),
-    isVideo: isVideo(file.type),
-    isAudio: isAudio(file.type)
+    isImage: file.type.includes('image'),
+    isVideo: file.type.includes('video'),
+    isAudio: file.type.includes('audio')
   }
-}
-
-export function isImage(value: string): boolean {
-  return value.includes('image')
-}
-
-export function isVideo(value: string): boolean {
-  return value.includes('video')
-}
-
-export function isAudio(value: string): boolean {
-  return value.includes('audio')
 }

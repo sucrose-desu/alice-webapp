@@ -1,4 +1,4 @@
-export default [
+export const Genres = [
   {
     id: 1,
     text: 'Action (ต่อสู้)',

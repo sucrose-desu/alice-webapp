@@ -15,7 +15,7 @@ export function LayoutContainer({ node }: Props) {
   // __RENDER
   if (protectedPage) return <>{node}</>
   return (
-    <div className='ui--app-container'>
+    <div className='ui--app-container bg-black'>
       <main className='ui--router-view'>{node}</main>
       <NavigatorComponent />
     </div>

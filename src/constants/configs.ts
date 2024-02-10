@@ -2,8 +2,8 @@ export const APP_MODE = process.env.NODE_ENV
 export const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME || 'project_alice'
 export const APP_WEB_TITLE = process.env.NEXT_PUBLIC_WEB_TITLE || 'ALICIZATION'
 export const APP_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:8443'
-export const API_SECRET_KEY = process.env.NEXT_PUBLIC_API_SECRET_KEY || 'AP1-S3C23T-K3Y'
 export const API_GATEWAY = process.env.NEXT_PUBLIC_API_GATEWAY || 'http://localhost:3030'
+export const API_SECRET_KEY = process.env.NEXT_PUBLIC_API_SECRET_KEY || 'AP1-S3C23T-K3Y'
 export const WS_GATEWAY = process.env.WS_GATEWAY || 'ws://127.0.0.1:5050'
 
 export const isBrowser = typeof window !== 'undefined'

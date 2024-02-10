@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -15,7 +17,7 @@ export function UserComponent() {
   return (
     <div className='ui--navigator-user rounded-lg bg-black/40' suppressHydrationWarning>
       {user.isAuth() ? (
-        <Link className='btn btn-user' href='/account'>
+        <Link className='btn btn-user' href='/my'>
           <Image
             className='image'
             width={36}
@@ -28,8 +30,8 @@ export function UserComponent() {
           />
 
           <div className='text-left leading-tight'>
-            <h4 className='text-sm font-normal capitalize leading-4 text-zinc-300'>{user.displayName}</h4>
-            <i className='text-xs lowercase text-zinc-400'>{user.email}</i>
+            <h4 className='text-sm font-normal capitalize leading-4 text-neutral-300'>{user.displayName}</h4>
+            <i className='text-xs lowercase text-neutral-500'>{user.email}</i>
           </div>
         </Link>
       ) : (

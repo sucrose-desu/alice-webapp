@@ -4,7 +4,7 @@
  */
 module.exports = {
   htmlWhitespaceSensitivity: 'ignore',
-  importOrder: ['^[a-zA-Z0-9-]+', '^@', '^[./]'],
+  importOrder: ['^[a-zA-Z0-9-]+', '^@', '^[./]', '^[../]'],
   jsxSingleQuote: true,
   plugins: ['prettier-plugin-tailwindcss'],
   printWidth: 120,
@@ -12,5 +12,6 @@ module.exports = {
   quoteProps: 'consistent',
   semi: false,
   singleQuote: true,
-  trailingComma: 'none'
+  trailingComma: 'none',
+  tailwindFunctions: ['cls', 'clsx']
 }
