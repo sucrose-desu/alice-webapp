@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
-import { ContextComponent } from './context'
-import { GenreComponent } from './genre'
+import { ContextComponent } from './components/context'
+import { GenreComponent } from './components/genre'
 import '@/styles/pages/labs.scss'
 
 export default function LabsContainer() {

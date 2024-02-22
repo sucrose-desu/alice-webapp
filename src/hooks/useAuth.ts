@@ -16,7 +16,7 @@ export function useAuth() {
       ...user,
       isAuth: () => {
         const accessToken = cookie.get(configs.APP_AUTH_ACCESS)
-        return user.id && accessToken ? true : false
+        return Boolean(user.id && accessToken)
       }
     }),
     [router, user]

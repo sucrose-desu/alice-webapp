@@ -1,5 +1,8 @@
 import { dialog, modal, notice } from './addon'
 
+export { Hexadecimal } from './hex'
+export { queryString } from './qs'
+
 export class xs {
   static readonly alert = dialog
   static readonly modal = modal
