@@ -1,3 +1,4 @@
+import { ZodError } from 'zod'
 import { notice } from '@/utils/addon'
 
 export function tryCatch(message: string, error: any) {
@@ -16,4 +17,25 @@ export function tryCatch(message: string, error: any) {
   } else {
     notice.error(error.message, { title: error.code, duration: 6 })
   }
+}
+
+export function apiTryCatch(error: any, statusCode: number = 422) {
+  let message: string | string[] = error?.message || 'Something went wrong!'
+
+  if (error instanceof ZodError && !error.isEmpty) {
+    const { errors: err } = error as ZodError
+    message = err.map((r) => `Property \`${r.path[0]}\`: ${r.message.toLowerCase()}`)
+  } else {
+    console.error(error)
+  }
+
+  return Response.json(
+    {
+      statusCode,
+      message
+    },
+    {
+      status: statusCode
+    }
+  )
 }

@@ -20,3 +20,7 @@ export function generateId(radix: number = 16) {
 export function scrollOff(input: boolean = true) {
   document.body.style.overflowY = input ? 'hidden' : 'auto'
 }
+
+export function toCapitalize(input: string) {
+  return input.charAt(0).toUpperCase() + input.slice(1)
+}

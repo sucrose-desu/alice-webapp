@@ -1,10 +1,10 @@
-interface Response<D = any> {
+interface IResponse<D = any> {
   statusCode: number
   message: string
   data?: D
 }
 
-interface Paginate<T = any> {
+interface IPaginate<T = any> {
   data: T[]
   total: number
   currentPage: number
