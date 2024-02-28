@@ -10,8 +10,9 @@ export enum Theme {
 export enum UserRole {
   ROOT = 'root',
   ADMIN = 'admin',
+  MEMBER = 'member',
+  USER = 'user',
   GUEST = 'guest',
-  MEMBER = 'member'
 }
 
 export enum GenreGroup {

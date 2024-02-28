@@ -16,10 +16,12 @@
 /build
 /dist
 
+# prisma
+/src/prisma
+
 # misc
 .DS_Store
 *.pem
-**/three
 
 # debug
 npm-debug.log*

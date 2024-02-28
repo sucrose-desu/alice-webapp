@@ -23,17 +23,17 @@ const nextConfig = {
   sassOptions: {
     includePaths: [join(__dirname, 'src/styles')]
   },
-  trailingSlash: false
+  trailingSlash: false,
 
-  // redirects() {
-  //   return [
-  //     {
-  //       source: '/',
-  //       destination: '/browse',
-  //       permanent: false
-  //     }
-  //   ]
-  // }
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/browse',
+        permanent: true
+      }
+    ]
+  }
 }
 
 module.exports = nextConfig

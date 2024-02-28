@@ -12,5 +12,8 @@
   },
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "prettier.configPath": "prettier.config.js"
+  "prettier.configPath": "prettier.config.js",
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  }
 }

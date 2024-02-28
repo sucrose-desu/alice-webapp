@@ -1,20 +1,22 @@
 {
   "name": "project_alise-webapp",
-  "version": "0.1.0",
+  "version": "0.2.148",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
     "start:dev": "next dev --turbo --port 8443",
     "start:prod": "next start",
     "build": "next build",
-    "prebuild": "rimraf dist"
+    "prebuild": "rimraf dist",
+    "prisma:client": "prisma generate --generator client",
+    "prisma:migrate": "prisma migrate dev --skip-seed --create-only"
   },
   "dependencies": {
+    "@prisma/client": "5.10.2",
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.6.7",
     "classnames": "^2.5.1",
     "date-fns": "^2.30.0",
-    "drizzle-orm": "^0.29.3",
     "jose": "^5.2.2",
     "next": "^14.1.0",
     "postgres": "^3.4.3",
@@ -35,13 +37,16 @@
     "@types/react-redux": "^7.1.33",
     "@types/react-transition-group": "^4.4.10",
     "autoprefixer": "^10.4.17",
-    "drizzle-kit": "^0.20.14",
     "postcss": "^8.4.35",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.11",
+    "prisma": "^5.10.2",
     "rimraf": "^5.0.5",
     "sass": "^1.71.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   }
 }
