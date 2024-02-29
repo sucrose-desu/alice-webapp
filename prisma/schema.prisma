@@ -6,19 +6,20 @@ datasource db {
 
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["relationJoins"]
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 model Profile {
   id          Int        @id @default(autoincrement()) @db.Integer
+  uid         String     @unique @db.Text
   role        String     @default("user") @db.Text
   displayName String     @default("diaplay name") @db.Text
   avatar      String     @default("https://i.pravatar.cc/320") @db.Text
   bio         String?    @db.Text
-  isActive    Boolean    @default(false) @db.Boolean
+  isActive    Boolean    @default(true) @db.Boolean
   isVerified  Boolean    @default(false) @db.Boolean
   createdAt   DateTime   @default(now()) @db.Timestamptz()
-  updatedAt   DateTime   @updatedAt @db.Timestamptz()
+  updatedAt   DateTime   @default(now()) @db.Timestamptz()
   watchList   Watch[]
   favorites   Favorite[]
 
@@ -28,7 +29,7 @@ model Profile {
 model Genre {
   id        Int            @id @default(autoincrement()) @db.Integer
   text      String         @unique @db.Text
-  updatedAt DateTime       @updatedAt @db.Timestamptz()
+  updatedAt DateTime       @default(now()) @db.Timestamptz()
   albums    GenreOfAlbum[]
 
   @@map("genres")
@@ -45,7 +46,7 @@ model Album {
   isActive    Boolean        @default(true) @db.Boolean
   releaseAt   DateTime?      @db.Timestamptz()
   createdAt   DateTime       @default(now()) @db.Timestamptz()
-  updatedAt   DateTime       @updatedAt @db.Timestamptz()
+  updatedAt   DateTime       @default(now()) @db.Timestamptz()
   genres      GenreOfAlbum[]
   tracks      Track[]
   favorites   Favorite[]
@@ -68,7 +69,7 @@ model Track {
   chunkSize   Float    @default(0) @db.DoublePrecision
   isActive    Boolean  @default(true) @db.Boolean
   createdAt   DateTime @default(now()) @db.Timestamptz()
-  updatedAt   DateTime @updatedAt @db.Timestamptz()
+  updatedAt   DateTime @default(now()) @db.Timestamptz()
   albumId     String   @db.Uuid
   albums      Album    @relation(fields: [albumId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   watch       Watch[]

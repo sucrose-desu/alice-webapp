@@ -6,6 +6,9 @@ export const API_GATEWAY = process.env.NEXT_PUBLIC_API_GATEWAY || 'http://localh
 export const API_SECRET_KEY = process.env.NEXT_PUBLIC_API_SECRET_KEY || 'AP1-S3C23T-K3Y'
 export const WS_GATEWAY = process.env.WS_GATEWAY || 'ws://127.0.0.1:5050'
 
+export const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'project-url'
+export const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'anon-key'
+
 export const isBrowser = typeof window !== 'undefined'
 export const isProduction = APP_MODE === 'production'
 export const isDevelop = APP_MODE === 'development'

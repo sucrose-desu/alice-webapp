@@ -24,7 +24,7 @@ export function apiTryCatch(error: any, statusCode: number = 422) {
 
   if (error instanceof ZodError && !error.isEmpty) {
     const { errors: err } = error as ZodError
-    message = err.map((r) => `Property \`${r.path[0]}\`: ${r.message.toLowerCase()}`)
+    message = err.map((r) => `This field "${r.path[0]}": ${r.message.toLowerCase()}`)
   } else {
     console.error(error)
   }
