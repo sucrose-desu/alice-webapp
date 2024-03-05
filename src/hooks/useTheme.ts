@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { Theme } from '@/constants'
-import { setTheme } from '@/store/app.store'
+import { appAct } from '@/store/app.store'
 
 export function useTheme() {
   // __STATE <React.Hooks>
@@ -15,12 +15,12 @@ export function useTheme() {
 
   const set = useCallback((theme: Theme) => {
     document.documentElement.setAttribute('theme', theme)
-    dispatch(setTheme(theme))
+    dispatch(appAct.setTheme(theme))
   }, [])
 
   const remove = useCallback(() => {
     document.documentElement.removeAttribute('theme')
-    dispatch(setTheme(Theme.DEFAULT))
+    dispatch(appAct.setTheme(Theme.DEFAULT))
   }, [])
 
   // __EFFECT's

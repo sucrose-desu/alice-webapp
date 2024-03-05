@@ -1,11 +1,11 @@
 import { useCallback, useMemo } from 'react'
 import { dispatch } from '@/store'
-import { setLoader } from '@/store/app.store'
+import { appAct } from '@/store/app.store'
 
 export function useLoader() {
   // __FUNCTION's
   const handleAction = useCallback((active: boolean, delay: number = 512) => {
-    const action = setLoader(active)
+    const action = appAct.setLoader(active)
 
     if (active) {
       dispatch(action)

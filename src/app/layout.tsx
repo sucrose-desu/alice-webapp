@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-import { AddonProvider, ReduxProvider, LayoutContainer } from '@/components'
+import { AppProvider } from '@/components/provider'
 import '@/styles/fonts.scss'
 import '@/styles/main.scss'
 
@@ -16,14 +16,7 @@ export default function RootLayout({ children }: Props) {
         className='m-0 overflow-x-hidden bg-black font-primary text-sm text-white antialiased'
         style={{ backgroundColor: '#000', textRendering: 'optimizeLegibility' }}
       >
-        <ReduxProvider>
-          <AddonProvider.Bootstrap />
-
-          <LayoutContainer node={children} />
-
-          <AddonProvider.Loader />
-          <AddonProvider.Modal />
-        </ReduxProvider>
+        <AppProvider>{children}</AppProvider>
       </body>
     </html>
   )

@@ -1,115 +1,46 @@
-.ui--notice {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 50;
-  pointer-events: none;
+@layer components {
+  .ui--notice {
+    &-item {
+      box-shadow: 0 4px 8px rgba(#1b2430, 0.06);
+      backdrop-filter: blur(1rem);
 
-  &-item {
-    position: relative;
-    display: grid;
-    grid-template-columns: 40px 1fr;
-    width: fit-content;
-    min-width: 275px;
-    max-width: 425px;
-    margin-left: auto;
+      &:not(:last-child) {
+        margin-bottom: 1rem;
+      }
 
-    border-radius: var(--border-radius-medium);
-    box-shadow: 0 4px 8px rgba(#1b2430, 0.06);
-    backdrop-filter: blur(1rem);
+      &.exit {
+        opacity: 1;
+        transform: translateX(0);
+      }
 
-    pointer-events: all;
-    transition: all var(--animation-time) ease-out;
-    overflow: hidden;
-
-    &:not(:last-child) {
-      margin-bottom: 1rem;
-    }
-
-    &.exit {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    &.exit-active {
-      opacity: 0;
-      transform: translateX(0.5rem);
-    }
-  }
-
-  &-type {
-    display: grid;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 0.88rem 0;
-    background-color: rgba(15 15 15 / 0.75);
-
-    &.info {
-      .icon {
-        color: var(--color-link);
+      &.exit-active {
+        opacity: 0;
+        transform: translateX(0.5rem);
       }
     }
 
-    &.success {
-      .icon {
-        color: var(--color-variable);
-      }
-    }
-
-    &.warn {
-      .icon {
-        color: var(--color-keyword);
-      }
-    }
-
-    &.error {
-      .icon {
-        color: var(--color-invalid);
-      }
-    }
-  }
-
-  &-content {
-    padding: 0.75rem 2.25rem 0.75rem 1rem;
-    background-color: rgba(24 24 24 / 0.75);
-
-    .title {
-      color: var(--color-secondary-dark);
-      font-size: var(--font-size-medium);
-      font-weight: bold;
-    }
-
-    .content {
-      margin: 0.25rem 0 0;
-      color: var(--color-secondary);
-      font-size: var(--font-size-small);
-
-      b {
-        font-weight: bold;
-      }
-    }
-  }
-
-  &-close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 1;
-    padding: 0.25rem 0.25rem 0 0;
-
-    .btn {
-      &-close {
-        width: 26px;
-        height: 26px;
-        padding: 0;
-        color: var(--color-secondary-light);
-
-        &:hover {
-          color: var(--color-invalid);
-        }
-
+    &-type {
+      &.info {
         .icon {
-          font-size: var(--font-size-small);
+          @apply text-blue-500;
+        }
+      }
+
+      &.success {
+        .icon {
+          @apply text-green-500;
+        }
+      }
+
+      &.warn {
+        .icon {
+          @apply text-yellow-500;
+        }
+      }
+
+      &.error {
+        .icon {
+          @apply text-rose-500;
         }
       }
     }

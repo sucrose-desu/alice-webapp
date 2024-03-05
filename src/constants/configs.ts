@@ -23,6 +23,7 @@ export const APP_USER_INFO = '__APP.UserInfo.' + APP_NAME
 // REQUEST HEADERS
 export const AUTHORIZATION = 'Authorization'
 export const ACCEPT_RANGES = 'Accept-Ranges'
+export const ACCEPT_LANG = 'Accept-Language'
 export const CONTENT_RANGE = 'Content-Range'
 export const CONTENT_TYPE = 'Content-Type'
 export const CONTENT_LENGTH = 'Content-Length'

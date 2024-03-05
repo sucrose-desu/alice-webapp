@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useAuth } from '@/hooks'
 import { modal } from '@/utils/addon'
 
-import { SVG } from '../svgs'
+import { SVG } from '../svg'
 import { LoginComponent } from '../modals/login'
 
 export function UserComponent() {
@@ -15,7 +15,7 @@ export function UserComponent() {
 
   // __RENDER
   return (
-    <div className='ui--navigator-user rounded-lg bg-black/40' suppressHydrationWarning>
+    <div className='ui--navigator-user rounded-lg bg-black/40'>
       {user.isAuth() ? (
         <Link className='btn btn-user' href='/my'>
           <Image

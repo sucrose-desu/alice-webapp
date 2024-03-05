@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useMemo, useCallback } from 'react'
 import { errorMessage, InputAttrs } from './utils'
 import cls from 'classnames'

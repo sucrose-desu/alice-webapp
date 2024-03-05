@@ -1,6 +1,8 @@
+'use client'
+
 import { useCallback } from 'react'
 
-import { setNotice } from '@/store/app.store'
+import { appAct } from '@/store/app.store'
 import { useDispatch, useSelector } from '@/store'
 import type { Notice } from '@/types/addon'
 
@@ -19,13 +21,13 @@ export default function NoticeContainer() {
       visible: false
     }
 
-    dispatch(setNotice(payload))
+    dispatch(appAct.setNotice(payload))
   }, [])
 
   // __RENDER
   if (!notices) return null
   return (
-    <div className='ui--notice'>
+    <div className='ui--notice pointer-events-none fixed right-8 top-8 z-50'>
       {Object.values(notices).map((record, index) => (
         <NoticeItem key={index} record={record} onRemove={handleRemove} />
       ))}

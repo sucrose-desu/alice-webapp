@@ -14,16 +14,23 @@ const nextConfig = {
   },
 
   httpAgentOptions: {
-    keepAlive: false
+    keepAlive: true
   },
 
-  poweredByHeader: false,
-  productionBrowserSourceMaps: false,
+  productionBrowserSourceMaps: true,
   reactStrictMode: true,
   sassOptions: {
     includePaths: [join(__dirname, 'src/styles')]
   },
-  trailingSlash: false,
+
+  async rewrites() {
+    return [
+      {
+        source: '/services/:path*',
+        destination: '/api/:path*'
+      }
+    ]
+  },
 
   async redirects() {
     return [

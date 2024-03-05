@@ -15,7 +15,15 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    return Response.json({ statusCode: 200, message: 'The record has been successfully created.' })
+    const formData = await request.formData()
+    const file = formData.get('file') as File | null
+
+    if (file) console.log(file)
+
+    return Response.json({
+      statusCode: 200,
+      message: 'The record has been successfully created.'
+    })
   } catch (error) {
     return apiTryCatch(error)
   }

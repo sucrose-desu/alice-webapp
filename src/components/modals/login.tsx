@@ -17,8 +17,8 @@ export function LoginComponent() {
     formState: { errors }
   } = useForm<FormLogin>({
     defaultValues: {
-      username: 'app.ts@alice.live',
-      password: 'password',
+      email: 'app.ts@alice.live',
+      password: '',
       keepLoggedIn: true
     }
   })
@@ -28,7 +28,7 @@ export function LoginComponent() {
     const response = await AuthService.login(data)
     if (response) {
       await AuthService.profile()
-      router.push('/browse')
+      // router.push('/browse')
     }
   })
 
@@ -43,12 +43,12 @@ export function LoginComponent() {
       <form className='ui--login-form mx-auto my-8' onSubmit={onSubmit}>
         <div className='grid gap-4'>
           <Input
-            key='.username'
+            key='.email'
             type='text'
-            name='username'
-            label='Username'
+            name='email'
+            label='Email Address'
             register={register}
-            errors={errors.username}
+            errors={errors.email}
             rules={{ required: true }}
           />
 

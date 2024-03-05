@@ -20,7 +20,11 @@ export async function POST(request: NextRequest) {
       const { access_token, refresh_token, expires_at } = data.session
 
       return Response.json(
-        { accessToken: access_token, refreshKey: refresh_token, expiresAt: fromUnixTime(expires_at!).toISOString() },
+        {
+          accessToken: access_token,
+          refreshKey: refresh_token,
+          expiresAt: fromUnixTime(expires_at!).toISOString()
+        } as XHRLogin,
         { status: 200 }
       )
     }

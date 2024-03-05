@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState, useRef, useMemo } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import { isAfter } from 'date-fns'
@@ -5,14 +7,14 @@ import cls from 'classnames'
 
 import type { Notice } from '@/types/addon'
 import { getCurrentContant } from './register'
-import { SVG } from '@/components/svgs'
+import { SVG } from '@/components/svg'
 
 interface Props {
   record: Notice
-  onRemove: (notice: Notice) => void
+  onRemove?: (notice: Notice) => void
 }
 
-export function NoticeItem({ record, onRemove }: Props) {
+export function NoticeItem({ record, ...rest }: Props) {
   // __STATE <React.Hooks>
   const nodeRef = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState<boolean>(false)
@@ -68,20 +70,32 @@ export function NoticeItem({ record, onRemove }: Props) {
 
   // __RENDER
   return (
-    <CSSTransition nodeRef={nodeRef} in={visible} timeout={320} unmountOnExit onExited={() => onRemove(record)}>
-      <div className='ui--notice-item' ref={nodeRef}>
-        <div className={cls('ui--notice-type', record.type)}>
-          <SVG>{path}</SVG>
+    <CSSTransition
+      nodeRef={nodeRef}
+      in={visible}
+      timeout={320}
+      unmountOnExit
+      onExited={() => rest?.onRemove && rest.onRemove(record)}
+    >
+      <div
+        className='ui--notice-item pointer-events-auto relative ml-auto grid w-fit min-w-[275px] max-w-[425px] grid-cols-[40px_1fr] overflow-hidden rounded-md transition-all'
+        ref={nodeRef}
+      >
+        <div className={cls('ui--notice-type', 'grid items-start justify-center bg-black/75 py-4', record.type)}>
+          <SVG className='icon'>{path}</SVG>
         </div>
 
-        <div className='ui--notice-content'>
-          <h4 className='title'>{record.title}</h4>
-
-          <div className='content'>{getCurrentContant(record)}</div>
+        <div className='ui--notice-content bg-black/90 py-3 pl-4 pr-9'>
+          <h4 className='text-sm font-bold'>{record.title}</h4>
+          <div className='mt-1 text-xs text-neutral-700'>{getCurrentContant(record)}</div>
         </div>
 
-        <div className='ui--notice-close'>
-          <button className='btn btn-close' title='Close' onClick={() => setVisible(false)}>
+        <div className='ui--notice-close absolute right-0 top-0 z-[1] pr-1 pt-1'>
+          <button
+            className='btn h-7 w-7 p-0 text-neutral-600 hover:text-rose-500'
+            title='Close'
+            onClick={() => setVisible(false)}
+          >
             <SVG className='bi bi-x-lg'>
               <path d='M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z' />
             </SVG>

@@ -1,5 +1,5 @@
 import { dispatch } from '@/store'
-import { setGenres } from '@/store/common.store'
+import { commonAct } from '@/store/common.store'
 import type { Genre } from '@/types/common'
 
 import axios from '../axios'
@@ -18,7 +18,7 @@ export class CommonService {
     try {
       const response = await axios.get<Genre[]>('/common/genres')
       if (response.data) {
-        dispatch(setGenres(response.data))
+        dispatch(commonAct.setGenres(response.data))
       }
     } catch (error) {
       tryCatch('`CommonService.getGenres`', error)

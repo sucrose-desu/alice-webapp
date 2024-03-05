@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef } from 'react'
 import cls from 'classnames'
 
 import { useDispatch, useSelector } from '@/store'
-import { setModal } from '@/store/app.store'
+import { appAct } from '@/store/app.store'
 import { scrollOff } from '@/utils'
 import { modal } from '@/utils/addon'
 
@@ -20,7 +20,7 @@ export default function ModalContainer() {
   // __FUNCTION's
   const handleExited = useCallback((vid: string) => {
     dispatch(
-      setModal({
+      appAct.setModal({
         vid: `rm:${vid}`,
         visible: false,
         content: null

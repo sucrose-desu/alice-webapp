@@ -34,31 +34,33 @@ export enum ActionTypes {
   SET_NOTICE = 'SET_APP_NOTICE'
 }
 
-export const setLanguage = createAction<string, ActionTypes>(ActionTypes.SET_LANG)
-export const setTheme = createAction<Theme, ActionTypes>(ActionTypes.SET_THEME)
-export const setLoader = createAction<boolean, ActionTypes>(ActionTypes.SET_LOADER)
-export const setDialog = createAction<Dialog, ActionTypes>(ActionTypes.SET_DIALOG)
-export const setModal = createAction<Modal, ActionTypes>(ActionTypes.SET_MODALS)
-export const setNotice = createAction<Notice | null, ActionTypes>(ActionTypes.SET_NOTICE)
+export class appAct {
+  static setLanguage = createAction<string, ActionTypes>(ActionTypes.SET_LANG)
+  static setTheme = createAction<Theme, ActionTypes>(ActionTypes.SET_THEME)
+  static setLoader = createAction<boolean, ActionTypes>(ActionTypes.SET_LOADER)
+  static setDialog = createAction<Dialog, ActionTypes>(ActionTypes.SET_DIALOG)
+  static setModal = createAction<Modal, ActionTypes>(ActionTypes.SET_MODALS)
+  static setNotice = createAction<Notice | null, ActionTypes>(ActionTypes.SET_NOTICE)
+}
 
 /**
  * REDUCER's
  */
 export default createReducer(initialState, (builder) => {
   return builder
-    .addCase(setLanguage, (state, { payload }) => {
+    .addCase(appAct.setLanguage, (state, { payload }) => {
       state.lang = payload
     })
 
-    .addCase(setTheme, (state, { payload }) => {
+    .addCase(appAct.setTheme, (state, { payload }) => {
       state.theme = payload
     })
 
-    .addCase(setLoader, (state, { payload }) => {
+    .addCase(appAct.setLoader, (state, { payload }) => {
       state.loader = payload
     })
 
-    .addCase(setDialog, (state, { payload }) => {
+    .addCase(appAct.setDialog, (state, { payload }) => {
       state.dialog = {
         type: payload?.type || 'alert',
         confirmLabel: payload?.confirmLabel || 'OK',
@@ -68,7 +70,7 @@ export default createReducer(initialState, (builder) => {
       }
     })
 
-    .addCase(setModal, (state, { payload }) => {
+    .addCase(appAct.setModal, (state, { payload }) => {
       if (state.modal) {
         const regex = /^rm:|remove:/g
         const vid = payload.vid.replace(regex, '').trim()
@@ -104,7 +106,7 @@ export default createReducer(initialState, (builder) => {
       }
     })
 
-    .addCase(setNotice, (state, { payload }) => {
+    .addCase(appAct.setNotice, (state, { payload }) => {
       if (state.notice) {
         if (payload) {
           const regex = /^rm:|remove:/g

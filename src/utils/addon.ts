@@ -1,6 +1,6 @@
 import { addSeconds } from 'date-fns'
 import { dispatch } from '@/store'
-import { setDialog, setModal, setNotice } from '@/store/app.store'
+import { appAct } from '@/store/app.store'
 import type {
   Dialog,
   DialogContent,
@@ -16,7 +16,7 @@ import type {
 
 export async function dialog(content: DialogContent, options?: DialogOptions): Promise<DialogResults> {
   return new Promise((resolve) => {
-    const action = setDialog({
+    const action = appAct.setDialog({
       visible: true,
       content,
       resolve,
@@ -30,7 +30,7 @@ export async function dialog(content: DialogContent, options?: DialogOptions): P
 export class modal {
   static on(content: ModalContent, options?: ModalOptions) {
     const vid = options?.className || Math.random().toString(16).slice(2)
-    const action = setModal({
+    const action = appAct.setModal({
       vid,
       content,
       visible: true,
@@ -42,7 +42,7 @@ export class modal {
   }
 
   static off(vid: string) {
-    const action = setModal({
+    const action = appAct.setModal({
       vid,
       visible: false,
       content: null
@@ -59,7 +59,7 @@ export class notice {
     const duration = option.duration !== 0 ? +addSeconds(Date.now(), option.duration || 3) : undefined
 
     dispatch(
-      setNotice({
+      appAct.setNotice({
         ...option,
         visible: true,
         name,
@@ -108,7 +108,7 @@ export class notice {
   }
 
   static close(name: string) {
-    const payload = setNotice({
+    const payload = appAct.setNotice({
       name: `rm:${name}`,
       type: 'info',
       title: '',

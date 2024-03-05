@@ -1,92 +1,62 @@
-.ui--input {
-  &-provider {
-    position: relative;
-  }
+@layer components {
+  .ui--input {
+    &-label {
+      @apply inline-flex items-center leading-4;
 
-  &-label {
-    display: inline-flex;
-    align-items: center;
-    line-height: 1;
+      &.required::after {
+        @apply ml-1 text-base text-rose-600;
+        content: ' *';
+      }
 
-    &.required::after {
-      margin-left: 5px;
-      content: ' *';
-      color: var(--color-invalid);
-      font-size: var(--font-size-regular);
+      .icon {
+        @apply mr-2 border-r border-solid border-neutral-900 pr-1 text-base leading-4 text-neutral-300;
+      }
+
+      .text {
+        @apply text-sm text-neutral-300;
+      }
     }
 
-    .icon {
-      color: var(--color-meta);
-      line-height: 1;
-      font-size: var(--font-size-regular);
-      margin-right: 7.5px;
-      padding-right: 5px;
-      border-right: 1px solid var(--color-border-1);
+    &-desc {
+      @apply mt-2 text-xs text-neutral-400;
     }
 
-    .text {
-      color: var(--color-meta);
-      font-size: var(--font-size-medium);
-    }
-  }
+    &-field {
+      @apply relative flex;
 
-  &-desc {
-    color: var(--color-desc-2);
-    font-size: var(--font-size-small);
-    margin: 0.5rem 0 0;
-  }
+      input {
+        @apply mt-2 block h-12 rounded-md bg-black px-4 font-normal text-neutral-100;
 
-  &-field {
-    position: relative;
-
-    input {
-      height: 46px;
-      padding: 0 1rem;
-      margin: 0.5rem 0 0;
-      font-weight: normal;
-      color: var(--color-secondary-dark);
-      background-color: var(--color-primary-light);
-      border-radius: var(--border-radius-small);
-
-      & ~ .icon {
-        position: absolute;
-        right: 0;
-        bottom: 1px;
-        width: 34px;
-        height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--color-secondary);
-
-        &.is-text {
-          color: var(--color-secondary-dark);
+        &:focus {
+          @apply ring ring-pink-500 ring-offset-2;
         }
-      }
 
-      @include attr('type', 'password') {
-        letter-spacing: 2px;
-        font-weight: bold;
-      }
+        & ~ .icon {
+          @apply absolute bottom-[1px] right-0 flex h-11 w-8 items-center justify-center text-neutral-400;
 
-      @include attr('type', ('number', 'search')) {
-        appearance: none;
-        -moz-appearance: textfield;
+          &.is-text {
+            @apply text-neutral-100;
+          }
+        }
 
-        &::-webkit-outer-spin-button,
-        &::-webkit-inner-spin-button {
-          appearance: none;
-          -webkit-appearance: none;
+        @include attr('type', 'password') {
+          @apply font-bold tracking-[2px];
+        }
+
+        @include attr('type', ('number', 'search')) {
+          @apply appearance-none;
+          -moz-appearance: textfield;
+
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            @apply appearance-none;
+          }
         }
       }
     }
-  }
 
-  &-errors {
-    display: block;
-    color: var(--color-invalid);
-    font-style: italic;
-    font-size: var(--font-size-small);
-    font-weight: normal;
+    &-errors {
+      @apply block text-xs font-normal italic text-rose-600;
+    }
   }
 }

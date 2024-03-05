@@ -8,8 +8,8 @@
     "start:prod": "next start",
     "build": "next build",
     "prebuild": "rimraf dist",
-    "prisma:client": "prisma generate --generator client",
-    "prisma:migrate": "prisma migrate dev --skip-seed --create-only"
+    "prisma:gen-client": "prisma generate --generator client",
+    "prisma:db-migrate": "prisma migrate dev --skip-seed --create-only"
   },
   "dependencies": {
     "@prisma/client": "5.10.2",

@@ -1,5 +1,5 @@
 export interface FormLogin {
-  username: string
+  email: string
   password: string
   keepLoggedIn?: boolean
 }

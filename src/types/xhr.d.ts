@@ -17,5 +17,5 @@ interface IPaginate<T = any> {
 interface XHRLogin {
   accessToken: string
   refreshKey: string
-  expiredAt: Date | string
+  expiresAt: Date | string
 }

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
-import { SVG } from '../svgs'
 import { UserComponent } from './user'
+import { SVG } from '../svg'
 
 export function NavigatorComponent() {
   // __RENDER
@@ -26,7 +26,7 @@ export function NavigatorComponent() {
             </li>
 
             <li className='li'>
-              <Link className='router-link' href='/watch' key='.watch'>
+              <Link className='router-link' href='/watch/0' key='.watch'>
                 <span className='text'>watch</span>
               </Link>
             </li>

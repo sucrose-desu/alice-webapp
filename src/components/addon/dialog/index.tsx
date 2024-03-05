@@ -1,7 +1,9 @@
+'use client'
+
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { CSSTransition } from 'react-transition-group'
 
-import { setDialog } from '@/store/app.store'
+import { appAct } from '@/store/app.store'
 import { scrollOff } from '@/utils'
 import { useDispatch, useSelector } from '@/store'
 import type { Dialog } from '@/types/addon'
@@ -34,13 +36,13 @@ export default function DialogContainer() {
         resolve: void 0
       }
 
-      dispatch(setDialog(payload))
+      dispatch(appAct.setDialog(payload))
     },
     [state, dispatch]
   )
 
   const handleOnExited = useCallback(() => {
-    dispatch(setDialog({ visible: false, content: null }))
+    dispatch(appAct.setDialog({ visible: false, content: null }))
     scrollOff(false)
   }, [dispatch])
 

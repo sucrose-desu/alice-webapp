@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { APP_AUTH_ACCESS } from '@/constants/configs'
 
 export const config = {
-  matcher: ['/my/:path*']
+  matcher: ['/watch/:path*', '/my/:path*']
 }
 
 export async function middleware({ url, nextUrl, cookies }: NextRequest) {
