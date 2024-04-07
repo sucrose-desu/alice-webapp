@@ -119,5 +119,7 @@ export class notice {
     dispatch(payload)
   }
 
-  static clear() {}
+  static clear() {
+    dispatch(appAct.setNotice(null))
+  }
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { AuthService } from '@/services'
 import type { FormLogin } from '@/types/form'
@@ -11,6 +11,7 @@ import { InputComponent as Input } from '../input/main'
 export function LoginComponent() {
   // __STATE <React.Hooks>
   const router = useRouter()
+  const searchParams = useSearchParams()
   const {
     register,
     handleSubmit,
@@ -28,7 +29,11 @@ export function LoginComponent() {
     const response = await AuthService.login(data)
     if (response) {
       await AuthService.profile()
-      // router.push('/browse')
+
+      const fallbackTo = searchParams.get('fallback')
+      if (fallbackTo) {
+        router.push(fallbackTo)
+      }
     }
   })
 

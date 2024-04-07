@@ -15,5 +15,8 @@
   "prettier.configPath": "prettier.config.js",
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
+  },
+  "[dockercompose]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   }
 }

@@ -1,4 +1,4 @@
-[
+export default [
   {
     "text": "Action (ต่อสู้)"
   },
