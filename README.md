@@ -20,13 +20,13 @@ src               # App entry point.
 ## Install dependencies
 
 ```sh
-npm install
+pnpm install
 ```
 
 ## 🚀 Compiles and hot-reloads for development
 
 ```sh
-npm run start:dev
+pnpm start:dev
 ```
 
 Open [http://localhost:8443](http://localhost:8443) with your browser to see the result.
@@ -38,7 +38,7 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 ## 📦 Compiles and minifies for production
 
 ```sh
-npm run build
+pnpm build
 ```
 
 ## Learn More
