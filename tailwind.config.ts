@@ -1,4 +1,5 @@
-import type { Config } from 'tailwindcss'
+import { type Config } from 'tailwindcss'
+import plugin from 'tailwindcss/plugin'
 
 const tailwindConfig: Config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
@@ -15,6 +16,12 @@ const tailwindConfig: Config = {
           light: '#818cf8',
           dark: '#5b54f1'
         }
+      },
+
+      grayscale: {
+        25: '25%',
+        50: '50%',
+        75: '75%'
       },
 
       animation: {
@@ -35,22 +42,22 @@ const tailwindConfig: Config = {
             'background-position': '-200% 0'
           }
         }
-      },
-
-      screens: {
-        tablet: '640px', // @media (min-width: 640px)
-        laptop: '1024px', // @media (min-width: 1024px)
-        desktop: '1280px' // @media (min-width: 1280px)
-      },
-
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
       }
     }
   },
 
-  plugins: []
+  plugins: [
+    plugin(({ addBase, theme }) => {
+      addBase({
+        h1: { fontSize: theme('fontSize.4xl'), lineHeight: 'normal' },
+        h2: { fontSize: theme('fontSize.2xl'), lineHeight: 'normal' },
+        h3: { fontSize: theme('fontSize.xl'), lineHeight: 'normal' },
+        h4: { fontSize: theme('fontSize.base'), lineHeight: 'normal' },
+        h5: { fontSize: theme('fontSize.sm'), lineHeight: 'normal' },
+        h6: { fontSize: theme('fontSize.xs'), lineHeight: 'normal' }
+      })
+    })
+  ]
 }
 
 export default tailwindConfig

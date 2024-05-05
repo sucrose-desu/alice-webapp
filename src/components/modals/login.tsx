@@ -9,7 +9,7 @@ import type { FormLogin } from '@/types/form'
 import { InputComponent as Input } from '../input/main'
 
 export function LoginComponent() {
-  // __STATE <React.Hooks>
+  // __STATE's
   const router = useRouter()
   const searchParams = useSearchParams()
   const {

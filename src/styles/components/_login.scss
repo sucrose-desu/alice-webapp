@@ -1,6 +1,6 @@
 .ui--login {
   &-modal {
-    backdrop-filter: blur(1rem);
+    @apply min-w-96 backdrop-blur-lg;
   }
 
   &-header {

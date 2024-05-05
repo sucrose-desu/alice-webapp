@@ -5,7 +5,7 @@ import { GenreComponent } from './components/genre'
 import '@/styles/pages/labs.scss'
 
 export default function LabsContainer() {
-  // __STATE<React.Hooks>
+  // __STATE's
 
   // __FUNCTION's
 

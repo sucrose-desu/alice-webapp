@@ -10,7 +10,7 @@ import { SVG } from '../svg'
 import { LoginComponent } from '../modals/login'
 
 export function UserComponent() {
-  // __STATE<React.Hooks>
+  // __STATE's
   const user = useAuth()
 
   // __RENDER

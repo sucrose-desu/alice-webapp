@@ -14,7 +14,7 @@ type Props = {
 }
 
 export function ModalItem({ vid, index, visible, className, children, ...rest }: Props) {
-  // __STATE <React.Hooks>
+  // __STATE's
   const nodeRef = useRef<HTMLDivElement>(null)
   const [state, setState] = useState(false)
 

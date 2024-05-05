@@ -9,7 +9,7 @@ import type { Notice } from '@/types/addon'
 import { NoticeItem } from './item'
 
 export default function NoticeContainer() {
-  // __STATE <React.Hooks>
+  // __STATE's
   const dispatch = useDispatch()
   const notices = useSelector(({ app }) => app.notice)
 

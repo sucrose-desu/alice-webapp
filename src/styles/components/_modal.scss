@@ -7,40 +7,39 @@
     @apply fixed inset-0 z-40 grid items-start overflow-x-hidden bg-black/80 p-4;
 
     &.enter-active,
-    &.enter-done {
-      @include class-contains('-container') {
+    &.enter-done,
+    &.exit {
+      @include class-contains('modal-container') {
         @apply translate-y-0 opacity-100;
+      }
+    }
+
+    &.exit-active {
+      @include class-contains('modal-container') {
+        @apply translate-y-1 scale-[0.99] opacity-0;
       }
     }
 
     // &.is-default {}
 
     &.is-dialog {
-      @include class-endWith('modal-container') {
-        @apply min-w-[320px] rounded-xl bg-neutral-900 px-8 pb-6 pt-8;
+      @include class-contains('modal-container') {
+        @apply min-w-80 rounded-xl bg-neutral-900 px-8 pb-6 pt-8;
         box-shadow: 0 10px 20px rgba(#1b2430, 0.08);
       }
 
-      @include class-endWith('modal-footer') {
-        display: grid;
-        gap: 1rem;
-        grid-auto-flow: column;
-        justify-content: flex-end;
+      @include class-contains('modal-footer') {
+        @apply grid grid-flow-col justify-end gap-4;
 
         .btn {
-          min-width: 80px;
-          width: auto;
-          height: 30px;
+          @apply h-8 w-auto min-w-20;
 
           &:focus {
-            outline: 1px solid var(--color-space-3);
-            outline-offset: 1px;
+            @apply outline outline-1 outline-offset-2 outline-slate-100;
           }
 
           .text {
-            text-transform: capitalize;
-            font-size: var(--font-size-small);
-            font-weight: bold;
+            @apply text-xs font-bold capitalize;
           }
         }
       }
@@ -48,44 +47,7 @@
   }
 
   &-container {
-    position: relative;
-    margin: 0 auto;
-    min-width: 256px;
-    transition: all 200ms ease;
-    transform: translate(0, -10px);
-    opacity: 0;
+    @apply relative mx-auto min-w-64 -translate-y-2 opacity-0;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
-
-  &-header {
-    position: relative;
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
-    background-color: var(--color-space);
-    user-select: none;
-
-    .title {
-      color: var(--color-primary);
-      font-size: var(--font-size-regular);
-      font-weight: bold;
-    }
-
-    .btn {
-      &-close {
-        width: 24px;
-        height: 24px;
-        color: var(--color-red);
-
-        .icon {
-          font-size: var(--font-size-medium);
-        }
-      }
-    }
-  }
-
-  // &-boby {}
-
-  // &-footer {}
 }

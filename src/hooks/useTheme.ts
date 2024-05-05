@@ -5,7 +5,7 @@ import { Theme } from '@/constants'
 import { appAct } from '@/store/app.store'
 
 export function useTheme() {
-  // __STATE <React.Hooks>
+  // __STATE's
   const dispatch = useDispatch()
 
   // __FUNCTION's

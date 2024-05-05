@@ -8,7 +8,7 @@ type Props = {
 }
 
 export default function WatchContainer({ params }: Props) {
-  // __STATE<React.Hooks>
+  // __STATE's
   const [album, track, ep] = useMemo(() => params.slug, [params])
 
   console.log({ album, track, ep })

@@ -5,7 +5,7 @@ import { useSelector } from '@/store'
 import cls from 'classnames'
 
 export default function LoaderProvider() {
-  // __STATE <React.Hooks>
+  // __STATE's
   const state = useSelector(({ app }) => app.loader)
   const [visible, setVisible] = useState<boolean>(false)
 
@@ -35,12 +35,12 @@ export default function LoaderProvider() {
     <div className='ui--loader fixed inset-0 z-[992]'>
       <div
         className={cls(
-          'ui--loader-progress animate-loader pointer-events-none h-[2px] max-w-[98%]',
+          'ui--loader-progress pointer-events-none h-[2px] max-w-[98%] animate-loader',
           'before:absolute before:inset-x-0 before:bottom-auto before:top-0 before:h-[2px] before:bg-white/20 before:content-[""]',
           !state && 'max-w-full animate-none'
         )}
       >
-        <div className='ui--loader-rainbow bg-theme animate-rainbow relative h-full bg-[length:200%]'></div>
+        <div className='ui--loader-rainbow relative h-full animate-rainbow bg-theme bg-[length:200%]'></div>
       </div>
     </div>
   )

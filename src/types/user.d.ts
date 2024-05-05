@@ -1,9 +1,9 @@
-import { UserRole } from '@/constants'
+import { Roles } from '@prisma/client'
 
 interface User extends BaseDate {
   id: number
   uid: string
-  role: UserRole
+  role: Roles
   avatar: string
   displayName: string
   email: string

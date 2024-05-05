@@ -9,7 +9,7 @@ interface Props {
 }
 
 export function ModalComponent({ title, children }: Props) {
-  // __STATE <React.Hooks>
+  // __STATE's
   const nodeRef = useRef<HTMLDivElement>(null)
   const [vid, setVid] = useState<string>('')
 

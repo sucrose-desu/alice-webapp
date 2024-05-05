@@ -9,13 +9,32 @@ generator client {
   previewFeatures = ["postgresqlExtensions"]
 }
 
-model Profile {
-  id          Int        @id @default(autoincrement()) @db.Integer
+enum Roles {
+  ROOT
+  ADMIN
+  MEMBER
+  USER
+  GUEST
+}
+
+enum Category {
+  ANIME
+  CINEMA
+  CLASSIFIED
+  MOVIE
+  UNKNOWN
+}
+
+model Account {
+  id          String     @id @default(uuid()) @db.Uuid
   uid         String     @unique @db.Text
-  role        String     @default("user") @db.Text
+  email       String     @db.Text
+  password    String     @db.Text
+  role        Roles      @default(USER)
   displayName String     @default("diaplay name") @db.Text
   avatar      String     @default("https://i.pravatar.cc/320") @db.Text
   bio         String?    @db.Text
+  provider    String     @default("email") @db.Text
   isActive    Boolean    @default(true) @db.Boolean
   isVerified  Boolean    @default(false) @db.Boolean
   createdAt   DateTime   @default(now()) @db.Timestamptz()
@@ -23,7 +42,8 @@ model Profile {
   watchList   Watch[]
   favorites   Favorite[]
 
-  @@map("profiles")
+  @@index(fields: [uid, email])
+  @@map("accounts")
 }
 
 model Genre {
@@ -32,6 +52,7 @@ model Genre {
   updatedAt DateTime       @default(now()) @db.Timestamptz()
   albums    GenreOfAlbum[]
 
+  @@index(fields: [text])
   @@map("genres")
 }
 
@@ -39,8 +60,8 @@ model Album {
   id          String         @id @default(uuid()) @db.Uuid
   name        String         @unique @db.Text
   description String?        @db.Text
-  poster      String?        @db.Text
-  category    String         @default("cinema") @db.Text
+  poster      String         @db.Text
+  category    Category       @default(ANIME)
   groupId     String         @default(uuid()) @db.Uuid
   seasonNo    Int            @default(1) @db.Integer
   isActive    Boolean        @default(true) @db.Boolean
@@ -79,23 +100,23 @@ model Track {
 }
 
 model Watch {
-  id       String  @id @default(uuid()) @db.Uuid
-  seekTime Float   @default(0) @db.DoublePrecision
-  status   String  @default("new") @db.Text
-  userId   Int     @db.Integer
-  users    Profile @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  trackId  String  @db.Uuid
-  tracks   Track   @relation(fields: [trackId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  id        String  @id @default(uuid()) @db.Uuid
+  seekTime  Float   @default(0) @db.DoublePrecision
+  status    String  @default("new") @db.Text
+  accountId String  @db.Uuid
+  account   Account @relation(fields: [accountId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  trackId   String  @db.Uuid
+  tracks    Track   @relation(fields: [trackId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("watch")
 }
 
 model Favorite {
-  id      Int     @id @default(autoincrement()) @db.Integer
-  userId  Int     @db.Integer
-  users   Profile @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  albumId String  @db.Uuid
-  album   Album   @relation(fields: [albumId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  id        Int     @id @default(autoincrement()) @db.Integer
+  accountId String  @db.Uuid
+  account   Account @relation(fields: [accountId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  albumId   String  @db.Uuid
+  album     Album   @relation(fields: [albumId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("favorites")
 }

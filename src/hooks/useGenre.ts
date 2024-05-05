@@ -2,7 +2,7 @@ import { useCallback, useMemo } from 'react'
 import { useSelector } from '@/store'
 
 export function useGenre() {
-  // __STATE<React.Hooks>
+  // __STATE's
   const genres = useSelector(({ common }) => common.genres)
 
   // __FUNCTION's

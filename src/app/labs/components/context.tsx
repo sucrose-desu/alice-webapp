@@ -6,7 +6,7 @@ import { useLoader, useMounted } from '@/hooks'
 import { modal, notice } from '@/utils/addon'
 
 export function ContextComponent() {
-  // __STATE<React.Hooks>
+  // __STATE's
   const loader = useLoader()
 
   // __FUNCTION's
@@ -20,7 +20,7 @@ export function ContextComponent() {
   }, [])
 
   const handleModal = useCallback(() => {
-    modal.on('Generate Lorem Ipsum placeholder text.')
+    modal.on(<div className='rounded-xl bg-white p-8 text-black'>Generate Lorem Ipsum placeholder text.</div>)
   }, [])
 
   // __EFFECT's

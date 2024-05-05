@@ -1,11 +1,11 @@
-interface IResponse<D = any> {
+interface IResponse<D extends Record<string, any>> {
   statusCode: number
   message: string
   data?: D
 }
 
-interface IPaginate<T = any> {
-  data: T[]
+interface IPaginate<D extends Record<string, any>> {
+  data: D[]
   total: number
   currentPage: number
   nextPage: number | null

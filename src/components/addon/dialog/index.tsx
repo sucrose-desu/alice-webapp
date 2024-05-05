@@ -11,7 +11,7 @@ import type { Dialog } from '@/types/addon'
 import { getCurrentContant } from './register'
 
 export default function DialogContainer() {
-  // __STATE <React.Hooks>
+  // __STATE's
   const dispatch = useDispatch()
   const state = useSelector(({ app }) => app.dialog)
 

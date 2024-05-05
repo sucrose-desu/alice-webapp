@@ -9,10 +9,9 @@ import { scrollOff } from '@/utils'
 import { modal } from '@/utils/addon'
 
 import { ModalItem } from './item'
-import { getCurrentContant } from './register'
 
 export default function ModalContainer() {
-  // __STATE <React.Hooks>
+  // __STATE's
   const nodeRef = useRef<HTMLDivElement>(null)
   const dispatch = useDispatch()
   const modals = useSelector(({ app }) => app.modal)
@@ -53,7 +52,7 @@ export default function ModalContainer() {
 
   // __RENDER
   return (
-    <div className={cls('ui--modal', { none: !modals })} ref={nodeRef}>
+    <div className={cls('ui--modal', { 'pointer-events-none': Object.keys(modals || {}).length < 1 })} ref={nodeRef}>
       {modals &&
         Object.values(modals).map((modal, index) => (
           <ModalItem
@@ -62,7 +61,7 @@ export default function ModalContainer() {
             className={modal.className}
             vid={modal.vid}
             visible={modal.visible}
-            children={getCurrentContant(modal)}
+            children={modal.content}
             onExited={handleExited}
           />
         ))}

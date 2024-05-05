@@ -15,7 +15,7 @@ interface Props {
 }
 
 export function NoticeItem({ record, ...rest }: Props) {
-  // __STATE <React.Hooks>
+  // __STATE's
   const nodeRef = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState<boolean>(false)
 

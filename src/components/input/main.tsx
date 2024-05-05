@@ -13,7 +13,7 @@ interface Props extends InputAttrs {
 }
 
 export function InputComponent({ name, value, register, rules, errors, ...props }: Props) {
-  // __STATE <React.Hooks>
+  // __STATE's
   const vid = useMemo(() => `ui--form-model-${name}`, [name])
   const defaultValue = useMemo(() => value, [value])
 

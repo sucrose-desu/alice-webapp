@@ -1,57 +1,58 @@
+html,
+body {
+  @apply scroll-smooth bg-black font-primary text-white antialiased;
+}
+
+* {
+  &::-webkit-scrollbar {
+    @apply size-[5px];
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply bg-white/[0.06];
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply rounded-[1px] bg-white/20 hover:bg-white/40;
+  }
+}
+
 a {
   @apply inline-block cursor-pointer select-none text-inherit no-underline outline-none;
 }
 
-p {
-  @apply m-0;
+img {
+  @apply pointer-events-none select-none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  @apply m-0 leading-normal;
-}
-
-ul,
-ol {
-  @apply m-0 list-none p-0;
-}
-
-img,
 label {
   @apply select-none;
-}
-
-img,
-video {
-  @apply pointer-events-none select-none;
 }
 
 button,
 input,
 select,
 textarea {
-  @apply font-primary m-0 bg-transparent outline-none first-line:text-inherit;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  @apply m-0 appearance-none;
-}
-
-input[type='number'] {
-  appearance: textfield;
+  @apply border-none bg-transparent font-primary shadow-none outline-none first-line:text-inherit;
 }
 
 button {
-  @apply cursor-pointer select-none border-none p-0 shadow-none outline-none;
+  @apply select-none;
 }
 
 input,
 select,
 textarea {
-  @apply w-full border-none p-0 shadow-none outline-none;
+  @apply w-full;
+}
+
+input {
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    @apply m-0 appearance-none;
+  }
+
+  &[type='number'] {
+    appearance: textfield;
+  }
 }

@@ -6,7 +6,7 @@ import { useSelector } from '@/store'
 import { cookie } from '@/utils/storage'
 
 export function useAuth() {
-  // __STATE <React.Hooks>
+  // __STATE's
   const router = useRouter()
   const user = useSelector(({ user }) => user)
 
