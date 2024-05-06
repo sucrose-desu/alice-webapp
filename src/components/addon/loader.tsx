@@ -20,7 +20,7 @@ export default function LoaderProvider() {
       setVisible(true)
       addEventListener('keydown', breakAllKeyboardEvents)
     } else {
-      setTimeout(() => setVisible(false), 320)
+      setTimeout(() => setVisible(false), 256)
       removeEventListener('keydown', breakAllKeyboardEvents)
     }
 
@@ -32,11 +32,12 @@ export default function LoaderProvider() {
   // __RENDER
   if (!visible) return null
   return (
-    <div className='ui--loader fixed inset-0 z-[992]'>
+    <div className='ui--loader fixed inset-0 z-[992] max-sm:flex max-sm:items-end'>
       <div
         className={cls(
           'ui--loader-progress pointer-events-none h-[2px] max-w-[98%] animate-loader',
           'before:absolute before:inset-x-0 before:bottom-auto before:top-0 before:h-[2px] before:bg-white/20 before:content-[""]',
+          'max-sm:before:bottom-0 max-sm:before:top-auto',
           !state && 'max-w-full animate-none'
         )}
       >

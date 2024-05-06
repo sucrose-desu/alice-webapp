@@ -1,6 +1,6 @@
 .ui--login {
   &-modal {
-    @apply min-w-96 backdrop-blur-lg;
+    @apply my-16 min-w-96 border-4 border-solid border-neutral-900/80 bg-neutral-950/20 backdrop-blur-lg;
   }
 
   &-header {
@@ -12,23 +12,11 @@
   &-footer {
     .btn {
       &-addon {
-        @apply h-12 w-12 rounded-xl bg-neutral-900/30 hover:bg-neutral-950;
+        @apply size-12 rounded-xl hover:bg-neutral-950;
         box-shadow:
-          0 0 0 3px rgba(10 10 10 / 1),
-          0 0 0 4px rgba(25 25 25 / 1);
-
-        .icon {
-          @apply block h-6 w-6 object-contain object-center;
-
-          &.github {
-            filter: invert(1) opacity(0.8);
-          }
-        }
+          0 0 0 3px rgb(10 10 10),
+          0 0 0 4px rgb(25 25 25);
       }
     }
   }
-}
-
-@include class-modal('md-login') {
-  padding-top: 4rem;
 }

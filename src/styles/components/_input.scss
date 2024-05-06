@@ -25,10 +25,11 @@
       @apply relative flex;
 
       input {
-        @apply mt-2 block h-12 rounded-md bg-black px-4 font-normal text-neutral-100;
+        @apply mt-2 block h-12 rounded-md bg-neutral-500/10 px-4 font-normal text-neutral-100 transition-all;
 
         &:focus {
-          @apply ring ring-pink-500 ring-offset-2;
+          @apply bg-neutral-500/5;
+          box-shadow: 0 0 0 1px rgba(white, 0.08);
         }
 
         & ~ .icon {

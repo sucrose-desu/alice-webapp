@@ -6,10 +6,8 @@ import { isAfter } from 'date-fns'
 import cls from 'classnames'
 
 import type { Notice } from '@/types/addon'
-import { getCurrentContant } from './register'
-import { SVG } from '@/components/svg'
 
-interface Props {
+type Props = {
   record: Notice
   onRemove?: (notice: Notice) => void
 }
@@ -19,32 +17,19 @@ export function NoticeItem({ record, ...rest }: Props) {
   const nodeRef = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState<boolean>(false)
 
-  const path = useMemo(() => {
+  const icon = useMemo(() => {
     switch (record.type) {
       case 'info':
-        return (
-          <>
-            <path d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z' />
-            <path d='m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z' />
-          </>
-        )
+        return 'bi-info-circle'
 
       case 'success':
-        return (
-          <>
-            <path d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z' />
-            <path d='M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z' />
-          </>
-        )
+        return 'bi-check-circle'
 
       case 'warn':
+        return 'bi-exclamation-circle'
+
       case 'error':
-        return (
-          <>
-            <path d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z' />
-            <path d='M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z' />
-          </>
-        )
+        return 'bi-x-circle'
     }
   }, [record.type])
 
@@ -82,23 +67,28 @@ export function NoticeItem({ record, ...rest }: Props) {
         ref={nodeRef}
       >
         <div className={cls('ui--notice-type', 'grid items-start justify-center bg-black/75 py-4', record.type)}>
-          <SVG className='icon'>{path}</SVG>
+          <span className={cls('icon', 'bi', icon)} />
         </div>
 
         <div className='ui--notice-content bg-black/90 py-3 pl-4 pr-9'>
           <h4 className='text-sm font-bold'>{record.title}</h4>
-          <div className='mt-1 text-xs text-neutral-700'>{getCurrentContant(record)}</div>
+          <div className='mt-1 text-xs text-neutral-700'>
+            {typeof record.content === 'string' ? (
+              <div className='_dangerously' dangerouslySetInnerHTML={{ __html: record.content }} />
+            ) : (
+              record.content
+            )}
+          </div>
         </div>
 
         <div className='ui--notice-close absolute right-0 top-0 z-[1] pr-1 pt-1'>
           <button
-            className='btn h-7 w-7 p-0 text-neutral-600 hover:text-rose-500'
+            className='btn size-7 p-0 text-neutral-600 hover:text-rose-500'
+            type='button'
             title='Close'
             onClick={() => setVisible(false)}
           >
-            <SVG className='bi bi-x-lg'>
-              <path d='M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z' />
-            </SVG>
+            <span className='bi bi-x-lg' />
           </button>
         </div>
       </div>

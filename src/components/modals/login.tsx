@@ -1,14 +1,20 @@
 'use client'
 
-import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
+import cls from 'classnames'
+
+import { useMounted } from '@/hooks'
 import { AuthService } from '@/services'
 import type { FormLogin } from '@/types/form'
 
 import { InputComponent as Input } from '../input/main'
 
-export function LoginComponent() {
+type Props = {
+  className?: string
+}
+
+export function LoginComponent({ className }: Props) {
   // __STATE's
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -37,11 +43,16 @@ export function LoginComponent() {
     }
   })
 
+  // __EFFECT's
+  useMounted(() => {
+    AuthService.logout()
+  })
+
   // __RENDER
   return (
-    <div className='ui--login-modal relative w-80 rounded-xl border-4 border-solid border-neutral-900/80 bg-neutral-950/80 px-12 pb-8 pt-12'>
+    <div className={cls('ui--login-modal relative w-80 rounded-xl px-12 pb-8 pt-12', className)}>
       <div className='ui--login-header'>
-        <h2 className='capitalize leading-6'>system login</h2>
+        <h2 className='capitalize leading-6'>system sign-in</h2>
         <p className='desc text-xs italic text-neutral-400'>Generate Lorem Ipsum placeholder text.</p>
       </div>
 
@@ -70,46 +81,25 @@ export function LoginComponent() {
 
         <div className='mt-6 grid'>
           <button className='btn btn-primary h-12' type='submit'>
-            <span className='text-base font-bold capitalize'>login</span>
+            <span className='text-base font-bold capitalize'>sign-in</span>
           </button>
         </div>
       </form>
 
       <div className='ui--login-footer border-0 border-t border-solid border-neutral-900 pt-4 text-center'>
-        <p className='italic text-neutral-400'>or Login with,</p>
+        <p className='italic text-neutral-400'>or Sign-In with</p>
 
         <div className='mb-6 mt-4 grid grid-flow-col justify-center gap-4'>
           <button className='btn btn-addon'>
-            <Image
-              className='icon twitter'
-              src='/static/images/icons/twitter.png'
-              width={26}
-              height={26}
-              quality={90}
-              alt='Twitter icon'
-            />
+            <span className='icon bi bi-github text-xl' />
           </button>
 
           <button className='btn btn-addon'>
-            <Image
-              className='icon discord'
-              src='/static/images/icons/discord.png'
-              width={26}
-              height={26}
-              quality={90}
-              alt='Discord icon'
-            />
+            <span className='icon bi bi-discord text-xl' />
           </button>
 
           <button className='btn btn-addon'>
-            <Image
-              className='icon github'
-              src='/static/images/icons/github.png'
-              width={26}
-              height={26}
-              quality={90}
-              alt='Github icon'
-            />
+            <span className='icon bi bi-twitter-x text-lg' />
           </button>
         </div>
 

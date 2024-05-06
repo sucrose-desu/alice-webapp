@@ -20,7 +20,6 @@ enum Roles {
 enum Category {
   ANIME
   CINEMA
-  CLASSIFIED
   MOVIE
   UNKNOWN
 }

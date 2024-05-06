@@ -1,4 +1,4 @@
-export class Arrs {
+export class ArrayService {
   /**
    * Create array by length.
    *
@@ -6,7 +6,7 @@ export class Arrs {
    * @param {number} length
    * @param {boolean} shuffle default: true
    */
-  static from<P extends Record<string, any>>(payload: P[], length: number, shuffle: boolean = true): P[] {
+  static from<P = any>(payload: P[], length: number, shuffle: boolean = true): P[] {
     let result: P[] = []
     let index = 0
 
@@ -24,15 +24,6 @@ export class Arrs {
     return result
   }
 
-  /**
-   * Shuffle randomly array.
-   *
-   * @param {array} payload
-   */
-  static shuffle<P extends Record<string, any>>(payload: P[]): P[] {
-    return payload.sort(() => 0.5 - Math.random())
-  }
-
   static chunk<T>(arr: T[], chunkSize: number): T[][] {
     const result: T[][] = []
     chunkSize = Math.min(arr.length, chunkSize)
@@ -44,23 +35,32 @@ export class Arrs {
     return result
   }
 
-  static findOne<P extends Record<string, any>>(payload: P[], prop: keyof P, value: any) {
+  /**
+   * Shuffle randomly array.
+   *
+   * @param {array} payload
+   */
+  static shuffle<P = any>(payload: P[]): P[] {
+    return payload.sort(() => 0.5 - Math.random())
+  }
+
+  static findOne<P = any>(payload: P[], prop: keyof P, value: any) {
     return payload.find((record) => record[prop] === value)
   }
 
-  static findAll<P extends Record<string, any>>(payload: P[], prop: keyof P, value: any) {
+  static findAll<P = any>(payload: P[], prop: keyof P, value: any) {
     return payload.filter((record) => record[prop] === value)
   }
 
-  static remove<P extends Record<string, any>>(payload: P[], prop: keyof P, value: any) {
+  static remove<P = any>(payload: P[], prop: keyof P, value: any) {
     return payload.filter((record) => record[prop] !== value)
   }
 
-  static removeDuplicates<P extends Record<string, any>>(payload: P[]): P[] {
+  static removeDuplicates<T = any>(payload: T[]): T[] {
     return payload.filter((record, index) => payload.indexOf(record) === index)
   }
 
-  static groupBy<P extends Record<string, any>>(payload: P[], prop: keyof P) {
+  static groupBy<P = any>(payload: P[], prop: keyof P) {
     return payload.reduce((previousValue: any, currentValue) => {
       previousValue[currentValue[prop]] = [...(previousValue[currentValue[prop]] || []), currentValue]
 
@@ -68,20 +68,29 @@ export class Arrs {
     }, {})
   }
 
-  static orderBy<P extends Record<string, any>>(payload: P[], prop: keyof P, type: 'asc' | 'desc' = 'asc') {
+  static orderBy<P = any>(payload: P[], prop: keyof P, type: 'asc' | 'desc' = 'asc') {
     return payload.sort((a, b) => {
-      const propA = typeof a[prop] === 'string' ? a[prop].toUpperCase() : a[prop]
-      const propB = typeof b[prop] === 'string' ? b[prop].toUpperCase() : b[prop]
+      let propA: any = a[prop]
+      propA = typeof propA === 'string' ? propA.toUpperCase() : propA
 
-      if (propA === propB) {
-        return 0
-      }
+      let propB: any = b[prop]
+      propB = typeof propB === 'string' ? propB.toUpperCase() : propB
 
-      if (type === 'asc') {
-        return propA < propB ? -1 : 1
-      } else {
-        return propA > propB ? -1 : 1
-      }
+      return type === 'desc'
+        ? propB < propA
+          ? -1
+          : propB > propA
+            ? 1
+            : propB >= propA
+              ? 0
+              : NaN
+        : propA < propB
+          ? -1
+          : propA > propB
+            ? 1
+            : propA >= propB
+              ? 0
+              : NaN
     })
   }
 }

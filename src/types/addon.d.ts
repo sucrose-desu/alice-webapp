@@ -1,16 +1,12 @@
 import type { ReactNode } from 'react'
-import { DialogName, ModalName, NoticeName } from '@/constants'
 
-export type DialogContent = ReactNode | DialogName
-export type ModalContent = ReactNode | ModalName
-export type NoticeContent = ReactNode | NoticeName
 export type NoticeTypes = 'info' | 'success' | 'warn' | 'error'
 
 export interface Dialog {
   visible: boolean
   type?: 'alert' | 'confirm'
   title?: string
-  content: DialogContent
+  content: ReactNode
   confirmLabel?: string
   cancelLabel?: string
   resolve?: (value: DialogResults | PromiseLike<DialogResults>) => void
@@ -21,7 +17,7 @@ export interface Modal {
   visible: boolean
   className?: string
   allowEscape?: boolean
-  content: ModalContent
+  content: ReactNode
 }
 
 export interface Notice {
@@ -29,7 +25,7 @@ export interface Notice {
   name?: string
   type: NoticeTypes
   title: string
-  content: NoticeContent
+  content: ReactNode
   duration?: number
 }
 

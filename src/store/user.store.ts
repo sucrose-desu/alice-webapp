@@ -1,5 +1,5 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
-import { UserRole } from '@/constants'
+import { Roles } from '@prisma/client'
 import type { User } from '@/types/user'
 
 /**
@@ -10,7 +10,7 @@ export interface UserState extends User {}
 export const initialState: UserState = {
   id: 0,
   uid: '',
-  role: UserRole.GUEST,
+  role: Roles.GUEST,
   displayName: '',
   avatar: '',
   email: ''
@@ -37,6 +37,6 @@ export default createReducer(initialState, (builder) => {
       Object.assign(state, payload)
     })
     .addCase(userAct.reset, () => {
-      return { id: 0, uid: '', role: UserRole.GUEST, displayName: '', avatar: '', email: '' }
+      return { id: 0, uid: '', role: Roles.GUEST, displayName: '', avatar: '', email: '' }
     })
 })

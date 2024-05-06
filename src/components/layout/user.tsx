@@ -29,7 +29,7 @@ export function UserComponent() {
             alt='User Avatar'
           />
 
-          <div className='text-left leading-tight'>
+          <div className='text-left leading-tight max-sm:hidden'>
             <h4 className='text-sm font-normal capitalize leading-4 text-neutral-300'>{user.displayName}</h4>
             <i className='text-xs lowercase text-neutral-500'>{user.email}</i>
           </div>

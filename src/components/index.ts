@@ -9,3 +9,4 @@ export class AddonProvider {
 }
 
 export { LayoutContainer } from './layout'
+export { Link } from './link'

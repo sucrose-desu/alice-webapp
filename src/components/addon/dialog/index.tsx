@@ -8,8 +8,6 @@ import { scrollOff } from '@/utils'
 import { useDispatch, useSelector } from '@/store'
 import type { Dialog } from '@/types/addon'
 
-import { getCurrentContant } from './register'
-
 export default function DialogContainer() {
   // __STATE's
   const dispatch = useDispatch()
@@ -92,7 +90,14 @@ export default function DialogContainer() {
             </button>
           </div>
 
-          <div className='ui--modal-boby'>{state && getCurrentContant(state)}</div>
+          <div className='ui--modal-boby'>
+            {state &&
+              (typeof state.content === 'string' ? (
+                <div className='_dangerously' dangerouslySetInnerHTML={{ __html: state.content }} />
+              ) : (
+                state.content
+              ))}
+          </div>
 
           <div className='ui--modal-footer'>
             {useConfirm && (
