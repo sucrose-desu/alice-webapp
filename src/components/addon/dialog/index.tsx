@@ -1,117 +1,56 @@
 'use client'
 
-import { useCallback, useEffect, useMemo, useRef } from 'react'
-import { CSSTransition } from 'react-transition-group'
+import { useCallback, useEffect, useRef } from 'react'
+import cls from 'classnames'
 
+import { useDispatch, useSelector } from '@/store'
 import { appAct } from '@/store/app.store'
 import { scrollOff } from '@/utils'
-import { useDispatch, useSelector } from '@/store'
-import type { Dialog } from '@/types/addon'
 
-export default function DialogContainer() {
+import { DialogContext } from './context'
+
+export function DialogObserver() {
   // __STATE's
-  const dispatch = useDispatch()
-  const state = useSelector(({ app }) => app.dialog)
-
   const nodeRef = useRef<HTMLDivElement>(null)
-  const btnConfirm = useRef<HTMLButtonElement>(null)
-  const useConfirm = useMemo(() => state?.type === 'confirm', [state?.type])
+
+  const dispatch = useDispatch()
+  const dialogs = useSelector(({ app }) => app.dialogs)
 
   // __FUNCTION's
-  const handleClose = useCallback(
-    (value: boolean = true) => {
-      if (!state) return void 0
-      if (state?.resolve) {
-        state.resolve({
-          isConfirmed: value,
-          isDenied: !value
-        })
+  const handleListener = useCallback(
+    ({ code }: KeyboardEvent) => {
+      if (code.toLowerCase() === 'escape') {
+        const latest = dialogs.filter((dialog) => dialog?.allowEscape).slice(-1)[0]
+        if (latest) {
+          const payload = { ...latest, visible: false }
+          dispatch(appAct.setDialog(payload))
+        }
       }
-
-      const payload: Dialog = {
-        ...state,
-        visible: false,
-        resolve: void 0
-      }
-
-      dispatch(appAct.setDialog(payload))
     },
-    [state, dispatch]
+    [dialogs]
   )
-
-  const handleOnExited = useCallback(() => {
-    dispatch(appAct.setDialog({ visible: false, content: null }))
-    scrollOff(false)
-  }, [dispatch])
 
   // __EFFECT's
   useEffect(() => {
-    function listener({ code }: KeyboardEvent) {
-      switch (code) {
-        case 'Enter' || 'Space':
-          handleClose()
-          break
-
-        case 'Escape':
-          handleClose(false)
-          break
-      }
-    }
-
-    if (state?.visible) {
-      addEventListener('keydown', listener)
-      if (btnConfirm.current) btnConfirm.current.focus()
+    if (dialogs.length) {
+      scrollOff(true)
+      addEventListener('keydown', handleListener, true)
     } else {
-      removeEventListener('keydown', listener)
+      scrollOff(false)
+      removeEventListener('keydown', handleListener, true)
     }
 
     return () => {
-      removeEventListener('keydown', listener)
+      removeEventListener('keydown', handleListener, true)
     }
-  }, [state, btnConfirm])
+  }, [handleListener])
 
   // __RENDER
   return (
-    <CSSTransition
-      nodeRef={nodeRef}
-      in={state?.visible}
-      timeout={128}
-      unmountOnExit={true}
-      onEnter={() => scrollOff(true)}
-      onExited={handleOnExited}
-    >
-      <div className='ui--modal-wrapper is-dialog' ref={nodeRef}>
-        <div className='ui--modal-container'>
-          <div className='ui--modal-header'>
-            <div className='title'>{state?.title || 'System Alert'}</div>
-
-            <button className='btn btn-close' title='Close.' onClick={() => handleClose(false)}>
-              <span className='icon bi bi-x-lg'></span>
-            </button>
-          </div>
-
-          <div className='ui--modal-boby'>
-            {state &&
-              (typeof state.content === 'string' ? (
-                <div className='_dangerously' dangerouslySetInnerHTML={{ __html: state.content }} />
-              ) : (
-                state.content
-              ))}
-          </div>
-
-          <div className='ui--modal-footer'>
-            {useConfirm && (
-              <button className='btn btn-overlay btn-close' onClick={() => handleClose(false)}>
-                <span className='text'>{state?.cancelLabel}</span>
-              </button>
-            )}
-
-            <button className='btn btn-primary btn-confirm' ref={btnConfirm} onClick={() => handleClose()}>
-              <span className='text'>{state?.confirmLabel}</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </CSSTransition>
+    <div className={cls('ui--dialogs-wrapper', { active: dialogs.length })} ref={nodeRef}>
+      {dialogs.map((dialog, index) => (
+        <DialogContext dialog={dialog} index={index} key={index} />
+      ))}
+    </div>
   )
 }

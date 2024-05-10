@@ -1,19 +1,20 @@
 html,
 body {
-  @apply scroll-smooth bg-black font-primary text-white antialiased;
+  @apply scroll-smooth bg-theme-dark bg-cover bg-fixed bg-center bg-no-repeat font-primary text-white antialiased;
+  background-image: linear-gradient(0deg, rgba(4 4 4 / 0.9), rgba(4 4 4 / 0.9)), url('/static/images/8456328.jpg');
 }
 
 * {
   &::-webkit-scrollbar {
-    @apply size-[5px];
+    @apply size-2;
   }
 
   &::-webkit-scrollbar-track {
-    @apply bg-white/[0.06];
+    @apply bg-theme-dark;
   }
 
   &::-webkit-scrollbar-thumb {
-    @apply rounded-[1px] bg-white/20 hover:bg-white/40;
+    @apply rounded-sm border-x-2 border-y-0 border-solid border-theme-dark bg-theme-light/10 hover:bg-theme-light/20;
   }
 }
 

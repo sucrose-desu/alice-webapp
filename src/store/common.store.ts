@@ -1,8 +1,6 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import type { Genre } from '@/types/common'
 
-import { Genres } from '@/constants/genre'
-
 /**
  * STATE
  */
@@ -11,7 +9,7 @@ export interface CommonState {
 }
 
 export const initialState: CommonState = {
-  genres: Genres
+  genres: []
 }
 
 /**

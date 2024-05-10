@@ -8,16 +8,16 @@ import type { Notice } from '@/types/addon'
 
 import { NoticeItem } from './item'
 
-export default function NoticeContainer() {
+export function NoticeObserver() {
   // __STATE's
   const dispatch = useDispatch()
-  const notices = useSelector(({ app }) => app.notice)
+  const notices = useSelector(({ app }) => app.notices)
 
   // __FUNCTION's
   const handleRemove = useCallback((notice: Notice) => {
     const payload: Notice = {
       ...notice,
-      name: `rm:${notice.name}`,
+      vid: `rm:${notice.vid}`,
       visible: false
     }
 
@@ -27,8 +27,8 @@ export default function NoticeContainer() {
   // __RENDER
   if (!notices) return null
   return (
-    <div className='ui--notice pointer-events-none fixed right-8 top-8 z-50'>
-      {Object.values(notices).map((record, index) => (
+    <div className='ui--notice pointer-events-none fixed right-8 top-8'>
+      {notices.map((record, index) => (
         <NoticeItem key={index} record={record} onRemove={handleRemove} />
       ))}
     </div>

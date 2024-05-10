@@ -32,7 +32,7 @@ export function LoginComponent({ className }: Props) {
 
   // __FUNCTION's
   const onSubmit = handleSubmit(async (data) => {
-    const response = await AuthService.login(data)
+    const response = await AuthService.signIn(data)
     if (response) {
       await AuthService.profile()
 
@@ -45,12 +45,12 @@ export function LoginComponent({ className }: Props) {
 
   // __EFFECT's
   useMounted(() => {
-    AuthService.logout()
+    AuthService.signOut()
   })
 
   // __RENDER
   return (
-    <div className={cls('ui--login-modal relative w-80 rounded-xl px-12 pb-8 pt-12', className)}>
+    <div className={cls('ui--login-modal relative', className)}>
       <div className='ui--login-header'>
         <h2 className='capitalize leading-6'>system sign-in</h2>
         <p className='desc text-xs italic text-neutral-400'>Generate Lorem Ipsum placeholder text.</p>

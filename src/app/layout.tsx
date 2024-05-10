@@ -18,7 +18,7 @@ export default function RootLayout({ children }: Props) {
 
       <body
         className='overflow-x-hidden text-sm'
-        style={{ backgroundColor: '#000', textRendering: 'optimizeLegibility' }}
+        style={{ backgroundColor: '#040404', textRendering: 'optimizeLegibility' }}
       >
         <AppProvider>{children}</AppProvider>
       </body>

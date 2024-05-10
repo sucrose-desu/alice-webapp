@@ -11,7 +11,7 @@
     &:hover,
     &:focus-within {
       @include class-endWith('-poster') {
-        transform: translateY(-8px) scale(1.032);
+        transform: translateY(-6px) scale(1.032);
 
         &:after {
           transform: translateY(-32%);

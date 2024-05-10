@@ -1,25 +1,22 @@
 'use client'
 
-import { useEffect } from 'react'
-
 import { configs } from '@/constants'
-import { useAuth, useLoader, useMounted } from '@/hooks'
+import { useLoader, useMounted } from '@/hooks'
 import { AuthService, CommonService } from '@/services'
 import { useDispatch } from '@/store'
 import { userAct } from '@/store/user.store'
-import { modal } from '@/utils/addon'
 import { cookie } from '@/utils/storage'
 import { Hexadecimal } from '@/utils/hex'
 import type { User } from '@/types/user'
+import { useCallback } from 'react'
 
 export default function Bootstrap() {
-  // __STATE <Rect.Hooks>
+  // __STATE's
   const dispatch = useDispatch()
   const loader = useLoader()
-  const user = useAuth()
 
-  // __EFFECT's
-  useMounted(() => {
+  // __FuNCTION's
+  const starter = useCallback(async () => {
     const [accessToken, userProfile] = [cookie.get(configs.APP_AUTH_ACCESS), cookie.get(configs.APP_USER_INFO)]
     if (accessToken) {
       if (userProfile) {
@@ -27,26 +24,26 @@ export default function Bootstrap() {
         dispatch(userAct.setProfile(user))
       }
 
-      AuthService.profile()
-      // CommonService.getGenres()
+      await AuthService.profile()
     } else {
-      AuthService.logout()
+      AuthService.signOut()
     }
+
+    await CommonService.getGenres()
 
     const elm = document.querySelector('.ui--app-container')
     if (elm) {
       setTimeout(() => {
         elm.classList.add('ready')
         loader.off()
-      }, 1e3)
+      }, 720)
     }
-  })
+  }, [])
 
-  useEffect(() => {
-    if (user.isAuth()) {
-      modal.off('md-login')
-    }
-  }, [user])
+  // __EFFECT's
+  useMounted(() => {
+    starter()
+  })
 
   // __RENDER
   return null

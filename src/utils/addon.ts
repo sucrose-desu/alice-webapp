@@ -1,122 +1,114 @@
+import type { ReactNode } from 'react'
 import { addSeconds } from 'date-fns'
+
 import { dispatch } from '@/store'
 import { appAct } from '@/store/app.store'
 import type {
   Dialog,
-  DialogContent,
-  DialogOptions,
-  DialogResults,
-  Modal,
-  ModalContent,
-  ModalOptions,
+  DialogAlertOptions,
+  DialogConfirmOptions,
+  DialogModalOptions,
   Notice,
-  NoticeContent,
   NoticeOptions
 } from '@/types/addon'
 
-export async function dialog(content: DialogContent, options?: DialogOptions): Promise<DialogResults> {
-  return new Promise((resolve) => {
-    const action = appAct.setDialog({
-      visible: true,
-      content,
-      resolve,
-      ...options
+export class dialog {
+  static async alert(children: ReactNode, options?: DialogAlertOptions) {
+    return new Promise((resolve, reject) => {
+      const vid = Math.random().toString(16).slice(2)
+      const payload: Extract<Dialog, { type: 'alert' }> = {
+        ...options,
+        type: 'alert',
+        visible: true,
+        vid,
+        children,
+        resolve
+      }
+
+      dispatch(appAct.setDialog(payload))
     })
+  }
 
-    dispatch(action)
-  })
-}
+  static async confirm(children: ReactNode, options?: DialogConfirmOptions) {
+    return new Promise((resolve, reject) => {
+      const vid = Math.random().toString(16).slice(2)
+      const payload: Extract<Dialog, { type: 'confirm' }> = {
+        ...options,
+        type: 'confirm',
+        visible: true,
+        vid,
+        children,
+        resolve
+      }
 
-export class modal {
-  static on(content: ModalContent, options?: ModalOptions) {
-    const vid = options?.className || Math.random().toString(16).slice(2)
-    const action = appAct.setModal({
+      dispatch(appAct.setDialog(payload))
+    })
+  }
+
+  static modal(children: ReactNode, options?: DialogModalOptions) {
+    const vid = options?.name || Math.random().toString(16).slice(2)
+    const payload: Extract<Dialog, { type: 'modal' }> = {
+      type: 'modal',
+      name: vid,
+      visible: true,
       vid,
-      content,
-      visible: true,
-      className: options?.className,
-      allowEscape: options?.allowEscape || true
-    })
+      children,
+      ...options
+    }
 
-    dispatch(action)
+    dispatch(appAct.setDialog(payload))
   }
 
   static off(vid: string) {
-    const action = appAct.setModal({
-      vid,
-      visible: false,
-      content: null
-    })
-
-    dispatch(action)
+    const payload: any = { vid, visible: false }
+    dispatch(appAct.setDialog(payload))
   }
 }
 
 export class notice {
-  static on(option: Notice) {
-    const name = option.name || Math.random().toString(16).slice(2)
-    const title = option.title || "Notification's"
-    const duration = option.duration !== 0 ? +addSeconds(Date.now(), option.duration || 3) : undefined
+  static set(option: Omit<Notice, 'vid' | 'visible'>) {
+    const vid = Math.random().toString(16).slice(2)
+    const title = option?.title || "Notification's"
+    const duration = option?.duration !== 0 ? +addSeconds(Date.now(), option.duration || 3) : undefined
 
-    dispatch(
-      appAct.setNotice({
-        ...option,
-        visible: true,
-        name,
-        title,
-        duration
-      })
-    )
+    const payload: Notice = {
+      ...option,
+      visible: true,
+      vid,
+      title,
+      duration
+    }
 
-    return name
+    dispatch(appAct.setNotice(payload))
+
+    return vid
   }
 
-  static info(content: NoticeContent, option?: NoticeOptions) {
-    return this.on({
-      type: 'info',
-      title: '',
-      content,
-      ...option
-    })
+  static info(children: ReactNode, option?: NoticeOptions) {
+    return this.set({ ...option, type: 'info', children })
   }
 
-  static success(content: NoticeContent, option?: NoticeOptions) {
-    return this.on({
-      type: 'success',
-      title: '',
-      content,
-      ...option
-    })
+  static success(children: ReactNode, option?: NoticeOptions) {
+    return this.set({ ...option, type: 'success', children })
   }
 
-  static warn(content: NoticeContent, option?: NoticeOptions) {
-    return this.on({
-      type: 'warn',
-      title: '',
-      content,
-      ...option
-    })
+  static warn(children: ReactNode, option?: NoticeOptions) {
+    return this.set({ ...option, type: 'warn', children })
   }
 
-  static error(content: NoticeContent, option?: NoticeOptions) {
-    return this.on({
-      type: 'error',
-      title: '',
-      content,
-      ...option
-    })
+  static error(children: ReactNode, option?: NoticeOptions) {
+    return this.set({ ...option, type: 'error', children })
   }
 
   static close(name: string) {
-    const payload = appAct.setNotice({
-      name: `rm:${name}`,
+    const payload: Notice = {
+      vid: `rm:${name}`,
       type: 'info',
-      title: '',
-      content: null,
+      children: null,
       visible: false
-    })
+    }
 
-    dispatch(payload)
+    dispatch(appAct.setNotice(payload))
   }
 
   static clear() {

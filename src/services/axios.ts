@@ -6,10 +6,10 @@ import { cookie } from '@/utils/storage'
  * Create axios instance.
  */
 const Axios: AxiosInstance = axios.create({
-  baseURL: `${configs.API_GATEWAY}/services`,
+  baseURL: `${configs.isBrowser ? location.origin : configs.API_GATEWAY}/services`,
   headers: {
     'X-Secret-Auth': configs.API_SECRET_KEY,
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': configs.isBrowser ? location.origin : '*',
     'Access-Control-Allow-Methods': 'GET,POST,PATCH,DELETE'
   }
 })

@@ -2,10 +2,6 @@
   .btn {
     @apply relative grid grid-flow-col items-center justify-center gap-1 rounded-md leading-5 duration-150 ease-out;
 
-    .text {
-      @apply font-medium;
-    }
-
     &-text {
       &:hover {
         .text {
@@ -15,10 +11,10 @@
     }
 
     &-primary {
-      @apply bg-rose-600 text-neutral-50;
+      @apply bg-theme-light font-bold text-theme-dark transition-all;
 
       &:hover {
-        @apply bg-rose-700;
+        @apply outline outline-2 outline-offset-2 outline-theme-light/20;
       }
     }
 

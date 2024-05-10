@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { useSelector } from '@/store'
 import cls from 'classnames'
 
-export default function LoaderProvider() {
+export function LoaderObserver() {
   // __STATE's
   const state = useSelector(({ app }) => app.loader)
   const [visible, setVisible] = useState<boolean>(false)

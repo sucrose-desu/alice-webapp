@@ -1,0 +1,180 @@
+@layer components {
+  .ui--dialogs {
+    &-wrapper {
+      @apply fixed inset-0 grid bg-theme-dark/75 p-4;
+      z-index: 1000;
+
+      &:not(.active) {
+        pointer-events: none !important;
+        opacity: 0 !important;
+      }
+    }
+
+    &-context {
+      @apply absolute z-10;
+
+      &.as-alert {
+        @apply m-8 self-start justify-self-center rounded-2xl bg-theme-dark/75 p-6 ring-2 ring-theme-light/10 backdrop-blur-lg;
+
+        min-width: 320px;
+        max-width: 480px;
+        opacity: 0;
+
+        &.enter-active,
+        &.enter-done,
+        &.exit {
+          opacity: 1;
+        }
+
+        &.exit {
+          transition: all 128ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        &.exit-active {
+          transform: translateY(-4px);
+          opacity: 0;
+        }
+      }
+
+      &.as-confirm {
+        @apply m-8 self-start justify-self-center rounded-2xl bg-theme-dark/75 p-6 ring-2 ring-theme-light/10 backdrop-blur-lg;
+
+        min-width: 320px;
+        max-width: 480px;
+        opacity: 0;
+
+        &.enter-active,
+        &.enter-done,
+        &.exit {
+          opacity: 1;
+        }
+
+        &.exit {
+          transition: all 128ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        &.exit-active {
+          transform: translateY(-4px) scale(0.99);
+          opacity: 0;
+        }
+      }
+
+      &.as-modal {
+        @apply m-8 justify-self-center rounded-2xl bg-theme-dark/80 ring-2 ring-theme-light/10 backdrop-blur-lg;
+        max-width: 720px;
+        transition: all 256ms cubic-bezier(0.4, 0, 0.2, 1);
+
+        &.start {
+          @apply -translate-y-1 self-start opacity-0;
+
+          &.enter-active,
+          &.enter-done,
+          &.exit {
+            transform: translateY(0);
+            opacity: 1;
+          }
+
+          &.exit-active {
+            transform: translateY(2px);
+            opacity: 0;
+          }
+        }
+
+        &.center {
+          @apply scale-[1.04] self-center opacity-0;
+
+          &.enter-active,
+          &.enter-done,
+          &.exit {
+            transform: unset;
+            opacity: 1;
+          }
+
+          &.exit-active {
+            transform: scale(0.98);
+            opacity: 0;
+          }
+        }
+      }
+    }
+
+    &-alert {
+      &.as-header {
+        @apply pb-4;
+
+        .h4::before {
+          content: '\01F4E2';
+          font-style: normal;
+          margin-right: 0.35rem;
+        }
+      }
+
+      &.as-body {
+        @apply border-t-2 border-theme-light/5 pb-6 pt-4 text-theme-light/90;
+      }
+
+      &.as-footer {
+        @apply flex justify-end gap-4;
+
+        .btn {
+          @apply h-7 px-5;
+
+          &:focus {
+            @apply outline outline-1 outline-offset-2 outline-theme-light/30;
+          }
+
+          &-ok {
+            @apply bg-theme-light text-theme-dark;
+          }
+        }
+      }
+    }
+
+    &-confirm {
+      &.as-header {
+        @apply pb-4;
+
+        .h4::before {
+          content: '\01F4E2';
+          font-style: normal;
+          margin-right: 0.35rem;
+        }
+      }
+
+      &.as-body {
+        @apply border-t-2 border-theme-light/5 pb-6 pt-4 text-theme-light/90;
+
+        .input {
+          @apply mt-4 h-9 rounded bg-theme-light/[0.04] px-3;
+
+          &:focus {
+            @apply outline outline-1 outline-offset-2 outline-theme-light/20;
+          }
+        }
+      }
+
+      &.as-footer {
+        @apply flex justify-end gap-4;
+
+        .btn {
+          @apply h-7;
+
+          &-confirm {
+            @apply bg-theme-light px-4 text-theme-dark;
+
+            &:focus {
+              @apply outline outline-1 outline-offset-2 outline-theme-light/30;
+            }
+          }
+
+          &-cancel {
+            @apply px-2 text-theme-light/60 hover:text-theme-light;
+          }
+        }
+      }
+    }
+
+    &-modal {
+    }
+  }
+}

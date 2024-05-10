@@ -47,6 +47,7 @@ model Account {
 
 model Genre {
   id        Int            @id @default(autoincrement()) @db.Integer
+  group     Int            @default(1) @db.Integer
   text      String         @unique @db.Text
   updatedAt DateTime       @default(now()) @db.Timestamptz()
   albums    GenreOfAlbum[]

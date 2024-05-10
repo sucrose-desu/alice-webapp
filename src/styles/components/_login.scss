@@ -1,6 +1,6 @@
 .ui--login {
   &-modal {
-    @apply my-16 min-w-96 border-4 border-solid border-neutral-900/80 bg-neutral-950/20 backdrop-blur-lg;
+    @apply min-w-96 px-10 pb-10 pt-14;
   }
 
   &-header {
@@ -12,7 +12,7 @@
   &-footer {
     .btn {
       &-addon {
-        @apply size-12 rounded-xl hover:bg-neutral-950;
+        @apply size-12 rounded-xl hover:bg-theme-dark;
         box-shadow:
           0 0 0 3px rgb(10 10 10),
           0 0 0 4px rgb(25 25 25);

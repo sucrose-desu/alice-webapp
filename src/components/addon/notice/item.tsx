@@ -62,33 +62,30 @@ export function NoticeItem({ record, ...rest }: Props) {
       unmountOnExit
       onExited={() => rest?.onRemove && rest.onRemove(record)}
     >
-      <div
-        className='ui--notice-item pointer-events-auto relative ml-auto grid w-fit min-w-[275px] max-w-[425px] grid-cols-[40px_1fr] overflow-hidden rounded-md transition-all'
-        ref={nodeRef}
-      >
-        <div className={cls('ui--notice-type', 'grid items-start justify-center bg-black/75 py-4', record.type)}>
-          <span className={cls('icon', 'bi', icon)} />
+      <div className='ui--notice-item' ref={nodeRef}>
+        <div className={cls('ui--notice-type', 'grid items-start justify-center py-3', record.type)}>
+          <span className={cls('icon bi text-xl', icon)} />
         </div>
 
-        <div className='ui--notice-content bg-black/90 py-3 pl-4 pr-9'>
+        <div className='ui--notice-content py-3 pl-4 pr-9'>
           <h4 className='text-sm font-bold'>{record.title}</h4>
-          <div className='mt-1 text-xs text-neutral-700'>
-            {typeof record.content === 'string' ? (
-              <div className='_dangerously' dangerouslySetInnerHTML={{ __html: record.content }} />
+          <div className='mt-1 text-xs text-neutral-400'>
+            {typeof record.children === 'string' ? (
+              <div className='_dangerously' dangerouslySetInnerHTML={{ __html: record.children }} />
             ) : (
-              record.content
+              record.children
             )}
           </div>
         </div>
 
         <div className='ui--notice-close absolute right-0 top-0 z-[1] pr-1 pt-1'>
           <button
-            className='btn size-7 p-0 text-neutral-600 hover:text-rose-500'
+            className='btn size-7 p-0 text-neutral-400 hover:text-rose-600'
             type='button'
             title='Close'
             onClick={() => setVisible(false)}
           >
-            <span className='bi bi-x-lg' />
+            <span className='bi bi-x text-xl' />
           </button>
         </div>
       </div>

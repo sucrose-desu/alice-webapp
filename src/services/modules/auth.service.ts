@@ -1,5 +1,5 @@
 import { addDays } from 'date-fns'
-import { configs, UserRole } from '@/constants'
+import { configs } from '@/constants'
 import { dispatch } from '@/store'
 import { userAct } from '@/store/user.store'
 import { cookie, storage } from '@/utils/storage'
@@ -11,11 +11,11 @@ import { tryCatch } from '../catch'
 
 export class AuthService {
   /**
-   * Login service.
+   * Sign-In
    *
-   * @param data FormLogin
+   * @param data FormSignIn
    */
-  static async login(data: FormLogin) {
+  static async signIn(data: FormLogin) {
     try {
       const response = await axios.post<XHRLogin>('/auth/sign-in', data)
       if (response.data) {
@@ -27,8 +27,23 @@ export class AuthService {
         return true
       }
     } catch (error) {
-      tryCatch('`AuthService.login`', error)
+      tryCatch('`AuthService.signIn`', error)
     }
+  }
+
+  /**
+   * Destroy all browser session.
+   *
+   * @param cb Callback function.
+   */
+  static signOut(cb?: Function) {
+    cookie.remove(configs.APP_AUTH_ACCESS)
+    cookie.remove(configs.APP_AUTH_REFRESH)
+    storage.remove(configs.APP_USER_INFO)
+
+    dispatch(userAct.reset(0))
+
+    if (cb) cb()
   }
 
   /**
@@ -44,20 +59,5 @@ export class AuthService {
     } catch (error) {
       tryCatch('`AuthService.profile`', error)
     }
-  }
-
-  /**
-   * Destroy all browser session.
-   *
-   * @param cb Callback function.
-   */
-  static logout(cb?: Function) {
-    cookie.remove(configs.APP_AUTH_ACCESS)
-    cookie.remove(configs.APP_AUTH_REFRESH)
-    storage.remove(configs.APP_USER_INFO)
-
-    dispatch(userAct.reset(0))
-
-    if (cb) cb()
   }
 }

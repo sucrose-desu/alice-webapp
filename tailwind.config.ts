@@ -13,8 +13,8 @@ const tailwindConfig: Config = {
       colors: {
         theme: {
           DEFAULT: '#6366f1',
-          light: '#818cf8',
-          dark: '#5b54f1'
+          light: '#fafafa',
+          dark: '#040404'
         }
       },
 

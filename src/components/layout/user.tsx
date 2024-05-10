@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { useAuth } from '@/hooks'
-import { modal } from '@/utils/addon'
+import { dialog } from '@/utils/addon'
 
 import { SVG } from '../svg'
 import { LoginComponent } from '../modals/login'
@@ -35,7 +35,12 @@ export function UserComponent() {
           </div>
         </Link>
       ) : (
-        <button className='btn btn-auth' onClick={() => modal.on(<LoginComponent />, { className: 'md-login' })}>
+        <button
+          className='btn btn-auth'
+          onClick={() =>
+            dialog.modal(<LoginComponent />, { name: 'sign-in', allowEscape: true, style: { align: 'start' } })
+          }
+        >
           <SVG className='bi-person-fill aspect-square w-6' key='person-fill'>
             <path d='M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z' />
           </SVG>

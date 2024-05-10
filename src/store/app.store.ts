@@ -1,25 +1,26 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { Theme } from '@/constants'
-import type { Dialog, Modal, Notice } from '@/types/addon'
+import type { Notice, Dialog } from '@/types/addon'
 
 /**
  * STATE
  */
-export interface AppState {
+export type AppState = {
   appVersion: string
   lang: string
   theme: Theme
   loader: boolean
-  dialog?: Dialog
-  modal?: Record<any, Modal>
-  notice?: Record<any, Notice>
+  dialogs: Dialog[]
+  notices: Notice[]
 }
 
 export const initialState: AppState = {
-  appVersion: 'v0.1-beta (April, 2023)',
+  appVersion: 'v0.2-beta (July, 2024)',
   lang: 'en-US',
   theme: Theme.DARK,
-  loader: true
+  loader: true,
+  dialogs: [],
+  notices: []
 }
 
 /**
@@ -30,7 +31,6 @@ export enum ActionTypes {
   SET_THEME = 'SET_APP_THEME',
   SET_LOADER = 'SET_APP_LOADER',
   SET_DIALOG = 'SET_APP_DIALOG',
-  SET_MODALS = 'SET_APP_MODALS',
   SET_NOTICE = 'SET_APP_NOTICE'
 }
 
@@ -39,7 +39,6 @@ export class appAct {
   static setTheme = createAction<Theme, ActionTypes>(ActionTypes.SET_THEME)
   static setLoader = createAction<boolean, ActionTypes>(ActionTypes.SET_LOADER)
   static setDialog = createAction<Dialog, ActionTypes>(ActionTypes.SET_DIALOG)
-  static setModal = createAction<Modal, ActionTypes>(ActionTypes.SET_MODALS)
   static setNotice = createAction<Notice | null, ActionTypes>(ActionTypes.SET_NOTICE)
 }
 
@@ -61,78 +60,42 @@ export default createReducer(initialState, (builder) => {
     })
 
     .addCase(appAct.setDialog, (state, { payload }) => {
-      state.dialog = {
-        type: payload?.type || 'alert',
-        confirmLabel: payload?.confirmLabel || 'OK',
-        cancelLabel: payload?.cancelLabel || 'Cancel',
-        resolve: payload?.resolve,
-        ...payload
-      }
-    })
-
-    .addCase(appAct.setModal, (state, { payload }) => {
-      if (state.modal) {
+      if (state.dialogs.length) {
         const regex = /^rm:|remove:/g
-        const vid = payload.vid.replace(regex, '').trim()
-
-        const modals = Object.values(state.modal)
-        let draft: Record<number, Modal> = {}
+        const vid = payload.vid.replaceAll(regex, '').trim()
 
         if (regex.test(payload.vid)) {
-          modals.forEach((record, index) => {
-            if (record.vid !== vid) {
-              draft[index] = record
-            }
-          })
+          state.dialogs = state.dialogs.filter((r) => r.vid !== vid)
         } else {
-          if (!payload.visible) {
-            modals.forEach((record, index) => {
-              if (record.vid === vid) {
-                record.visible = payload.visible
-              }
-
-              draft[index] = record
+          if (payload.visible) state.dialogs.push(payload)
+          else {
+            state.dialogs = state.dialogs.map((r) => {
+              if (r.vid === vid) r.visible = payload.visible
+              return r
             })
-          } else {
-            const nextKey = Object.keys(state.modal).length
-            draft = state.modal
-            draft[nextKey] = payload
           }
         }
-
-        state.modal = draft
       } else {
-        state.modal = { 0: payload }
+        state.dialogs = [payload]
       }
     })
 
     .addCase(appAct.setNotice, (state, { payload }) => {
-      if (state.notice) {
+      if (state.notices.length) {
         if (payload) {
           const regex = /^rm:|remove:/g
-          const name = payload.name!.replace(regex, '').trim()
+          const vid = payload.vid.replaceAll(regex, '').trim()
 
-          const notices = Object.values(state.notice)
-          let draft: Record<number, Notice> = {}
-
-          if (regex.test(payload.name!)) {
-            notices.forEach((record, index) => {
-              if (record.name !== name) {
-                draft[index] = record
-              }
-            })
+          if (regex.test(payload.vid)) {
+            state.notices = state.notices.filter((r) => r.vid !== vid)
           } else {
-            const nextKey = Object.keys(state.notice).length
-            draft = state.notice
-            draft[nextKey] = payload
+            state.notices.push(payload)
           }
-
-          state.notice = draft
         } else {
-          state.notice = void 0
+          state.notices = []
         }
       } else {
-        if (payload) state.notice = { 0: payload }
+        state.notices = payload ? [payload] : []
       }
     })
 })
