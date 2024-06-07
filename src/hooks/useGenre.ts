@@ -20,7 +20,7 @@ export function useGenre() {
     [genres]
   )
 
-  // __RENDER
+  // __RETURN
   return useMemo(() => {
     return {
       list: genres,

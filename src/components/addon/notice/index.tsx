@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback } from 'react'
+import cls from 'classnames'
 
 import { appAct } from '@/store/app.store'
 import { useDispatch, useSelector } from '@/store'
@@ -27,7 +28,7 @@ export function NoticeObserver() {
   // __RENDER
   if (!notices) return null
   return (
-    <div className='ui--notice pointer-events-none fixed right-8 top-8'>
+    <div className={cls('ui--notice-wrapper', { active: notices.length })}>
       {notices.map((record, index) => (
         <NoticeItem key={index} record={record} onRemove={handleRemove} />
       ))}

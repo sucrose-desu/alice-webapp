@@ -1,11 +1,10 @@
-import { dialog, modal, notice } from './addon'
+import { dialog, notice } from './addon'
 
 export { Hexadecimal } from './hex'
 export { queryString } from './qs'
 
 export class xs {
   static readonly alert = dialog
-  static readonly modal = modal
   static readonly notice = notice
 }
 
@@ -23,6 +22,10 @@ export function scrollOff(input: boolean = true) {
 
 export function toCapitalize(input: string) {
   return input.charAt(0).toUpperCase() + input.slice(1)
+}
+
+export function dateToSeconds(date: Date) {
+  return (+date - Date.now()) / 1e3
 }
 
 /**

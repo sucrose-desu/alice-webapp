@@ -1,5 +1,7 @@
 'use client'
 
+import { useCallback } from 'react'
+
 import { configs } from '@/constants'
 import { useLoader, useMounted } from '@/hooks'
 import { AuthService, CommonService } from '@/services'
@@ -8,14 +10,13 @@ import { userAct } from '@/store/user.store'
 import { cookie } from '@/utils/storage'
 import { Hexadecimal } from '@/utils/hex'
 import type { User } from '@/types/user'
-import { useCallback } from 'react'
 
 export default function Bootstrap() {
   // __STATE's
   const dispatch = useDispatch()
   const loader = useLoader()
 
-  // __FuNCTION's
+  // __FUNCTION's
   const starter = useCallback(async () => {
     const [accessToken, userProfile] = [cookie.get(configs.APP_AUTH_ACCESS), cookie.get(configs.APP_USER_INFO)]
     if (accessToken) {

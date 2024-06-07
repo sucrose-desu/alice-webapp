@@ -1,18 +1,23 @@
 @layer components {
   .ui--notice {
-    z-index: 2000;
+    &-wrapper {
+      @apply fixed right-8 top-8;
+      z-index: 2000;
+
+      &:not(.active) {
+        pointer-events: none !important;
+        opacity: 0 !important;
+      }
+    }
 
     &-item {
-      @apply pointer-events-auto relative ml-auto grid w-fit min-w-64 max-w-96 overflow-hidden rounded-md backdrop-blur-lg transition-all;
+      @apply pointer-events-auto relative ml-auto grid w-fit min-w-64 max-w-96 translate-x-2 overflow-hidden rounded-md opacity-0 backdrop-blur-lg;
       box-shadow: 0 0 0 2px rgba(white, 0.08);
       grid-template-columns: 40px 1fr;
+      transition: all 128ms cubic-bezier(0.4, 0, 0.2, 1);
 
       &:not(:last-child) {
-        margin-bottom: 1rem;
-      }
-
-      &.enter {
-        @apply translate-x-2 opacity-0;
+        @apply mb-4;
       }
 
       &.enter-active,

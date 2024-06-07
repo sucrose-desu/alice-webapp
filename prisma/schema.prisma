@@ -25,24 +25,41 @@ enum Category {
 }
 
 model Account {
-  id          String     @id @default(uuid()) @db.Uuid
-  uid         String     @unique @db.Text
-  email       String     @db.Text
-  password    String     @db.Text
-  role        Roles      @default(USER)
-  displayName String     @default("diaplay name") @db.Text
-  avatar      String     @default("https://i.pravatar.cc/320") @db.Text
-  bio         String?    @db.Text
-  provider    String     @default("email") @db.Text
-  isActive    Boolean    @default(true) @db.Boolean
-  isVerified  Boolean    @default(false) @db.Boolean
-  createdAt   DateTime   @default(now()) @db.Timestamptz()
-  updatedAt   DateTime   @default(now()) @db.Timestamptz()
+  id          String                @id @default(uuid()) @db.Uuid
+  uid         String                @unique @db.Text
+  email       String                @db.Text
+  password    String                @db.Text
+  role        Roles                 @default(USER)
+  displayName String                @default("diaplay name") @db.Text
+  avatar      String                @default("default-avatar.png") @db.Text
+  bio         String?               @db.Text
+  provider    String                @default("email") @db.Text
+  isActive    Boolean               @default(true) @db.Boolean
+  isVerified  Boolean               @default(false) @db.Boolean
+  createdAt   DateTime              @default(now()) @db.Timestamptz()
+  updatedAt   DateTime              @default(now()) @db.Timestamptz()
+  permissions PermissionOfAccount[]
   watchList   Watch[]
   favorites   Favorite[]
 
   @@index(fields: [uid, email])
   @@map("accounts")
+}
+
+model Permission {
+  id        Int                   @id @default(autoincrement()) @db.Integer
+  key       String                @db.Text
+  name      String?               @db.Text
+  canCreate Boolean               @default(false) @db.Boolean
+  canRead   Boolean               @default(true) @db.Boolean
+  canEdit   Boolean               @default(false) @db.Boolean
+  canDelete Boolean               @default(false) @db.Boolean
+  createdAt DateTime              @default(now()) @db.Timestamptz()
+  updatedAt DateTime              @default(now()) @db.Timestamptz()
+  accounts  PermissionOfAccount[]
+
+  @@index(fields: [key])
+  @@map("permissions")
 }
 
 model Genre {
@@ -62,7 +79,7 @@ model Album {
   description String?        @db.Text
   poster      String         @db.Text
   category    Category       @default(ANIME)
-  groupId     String         @default(uuid()) @db.Uuid
+  group       String         @default(uuid()) @db.Uuid
   seasonNo    Int            @default(1) @db.Integer
   isActive    Boolean        @default(true) @db.Boolean
   releaseAt   DateTime?      @db.Timestamptz()
@@ -81,10 +98,9 @@ model Track {
   title       String   @unique @db.Text
   description String?  @db.Text
   poster      String?  @db.Text
-  seasonNo    Int      @default(1) @db.Integer
   episodeNo   Int      @default(1) @db.Integer
   duration    Float    @default(0) @db.DoublePrecision
-  skip        Json?    @db.Json
+  skip        Json?    @db.JsonB
   filePath    String   @db.Text
   fileSize    Float    @db.DoublePrecision
   chunkSize   Float    @default(0) @db.DoublePrecision
@@ -119,6 +135,17 @@ model Favorite {
   album     Album   @relation(fields: [albumId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("favorites")
+}
+
+model PermissionOfAccount {
+  id           Int        @id @default(autoincrement()) @db.Integer
+  accountId    String     @db.Uuid
+  account      Account    @relation(fields: [accountId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  permissionId Int        @db.Integer
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt    DateTime   @default(now()) @db.Timestamptz()
+
+  @@map("_permissionOfAccount")
 }
 
 model GenreOfAlbum {

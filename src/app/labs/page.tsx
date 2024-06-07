@@ -2,6 +2,7 @@ import { ArrayService } from '@/utils/array'
 
 import { CardComponent } from './components/card'
 import { ContextComponent } from './components/context'
+import { CountdownComponent } from './components/countdown'
 import { GenreComponent } from './components/genre'
 import '@/styles/pages/labs.scss'
 
@@ -23,6 +24,8 @@ export default function LabsContainer() {
         <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h5>
         <h6>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h6>
       </div>
+
+      <CountdownComponent />
 
       <div className='mb-8 grid grid-flow-col justify-start gap-4'>
         <CardComponent
