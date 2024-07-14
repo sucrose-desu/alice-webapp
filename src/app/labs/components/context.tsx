@@ -45,23 +45,23 @@ export function ContextComponent() {
   // __RENDER
   return (
     <div className='grid grid-flow-col justify-start gap-5'>
-      <button className='btn btn-primary h-10 px-8' type='button' onClick={handleLoader}>
+      <button className='btn btn-primary btn-clicky h-10 px-8' type='button' onClick={handleLoader}>
         <span className='text capitalize'>use loader</span>
       </button>
 
-      <button className='btn btn-primary h-10 px-8' type='button' onClick={handleNotice}>
+      <button className='btn btn-primary btn-clicky h-10 px-8' type='button' onClick={handleNotice}>
         <span className='text capitalize'>use notice</span>
       </button>
 
-      <button className='btn btn-primary h-10 px-8' type='button' onClick={handleAlert}>
+      <button className='btn btn-primary btn-clicky h-10 px-8' type='button' onClick={handleAlert}>
         <span className='text capitalize'>use alert</span>
       </button>
 
-      <button className='btn btn-primary h-10 px-8' type='button' onClick={handleConfirm}>
+      <button className='btn btn-primary btn-clicky h-10 px-8' type='button' onClick={handleConfirm}>
         <span className='text capitalize'>use confirm</span>
       </button>
 
-      <button className='btn btn-primary h-10 px-8' type='button' onClick={handleModal}>
+      <button className='btn btn-primary btn-clicky h-10 px-8' type='button' onClick={handleModal}>
         <span className='text capitalize'>use modal</span>
       </button>
     </div>

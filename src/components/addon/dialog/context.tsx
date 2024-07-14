@@ -19,7 +19,6 @@ type Props = {
 export function DialogContext({ dialog, index }: Props) {
   // __STATE's
   const dispatch = useDispatch()
-  const zIndex = useMemo(() => index * 10 + 10, [index])
 
   // __FUNCTION's
   const handleClose = useCallback(() => {
@@ -35,15 +34,13 @@ export function DialogContext({ dialog, index }: Props) {
   // __RENDER
   switch (dialog.type) {
     case 'alert':
-      return <AlertComponent key={zIndex} data={dialog} zIndex={zIndex} onClose={handleClose} onRemove={handleRemove} />
+      return <AlertComponent key={index} data={dialog} onClose={handleClose} onRemove={handleRemove} />
 
     case 'confirm':
-      return (
-        <ConfirmComponent key={zIndex} data={dialog} zIndex={zIndex} onClose={handleClose} onRemove={handleRemove} />
-      )
+      return <ConfirmComponent key={index} data={dialog} onClose={handleClose} onRemove={handleRemove} />
 
     case 'modal':
-      return <ModalComponent key={zIndex} data={dialog} zIndex={zIndex} onRemove={handleRemove} />
+      return <ModalComponent key={index} data={dialog} onRemove={handleRemove} />
 
     default:
       return <div className='ui--dialogs-context as-default place-self-center bg-white p-4 text-black'>Context</div>

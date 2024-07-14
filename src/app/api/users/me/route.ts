@@ -4,7 +4,6 @@ import { PrismaClient } from '@prisma/client'
 import { APP_USER_INFO } from '@/constants/configs'
 import { getAuthorize } from '@/helpers'
 import { apiTryCatch } from '@/services/catch'
-import { Hexadecimal } from '@/utils'
 
 const prismaService = new PrismaClient()
 

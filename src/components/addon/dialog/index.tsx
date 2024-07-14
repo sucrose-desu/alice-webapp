@@ -48,8 +48,12 @@ export function DialogObserver() {
   // __RENDER
   return (
     <div className={cls('ui--dialogs-wrapper', { active: dialogs.length })} ref={nodeRef}>
+      <div className='ui--dialogs-backdrop' />
+
       {dialogs.map((dialog, index) => (
-        <DialogContext dialog={dialog} index={index} key={index} />
+        <div className='ui--dialogs-list' style={{ zIndex: index * 10 + 10 }} key={dialog.vid}>
+          <DialogContext dialog={dialog} index={index} key={index} />
+        </div>
       ))}
     </div>
   )

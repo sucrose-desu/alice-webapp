@@ -8,7 +8,6 @@ import type { Dialog } from '@/types/addon'
 
 type Props = {
   data: Extract<Dialog, { type: 'alert' }>
-  zIndex: number
   onClose?: () => void
   onRemove?: () => void
 }
@@ -35,7 +34,7 @@ export function AlertComponent({ data, ...rest }: Props) {
   // __RENDER
   return (
     <CSSTransition nodeRef={nodeRef} in={state} timeout={128} unmountOnExit={true} onExited={rest?.onRemove}>
-      <div className='ui--dialogs-context as-alert' style={{ zIndex: rest.zIndex }} ref={nodeRef}>
+      <div className='ui--dialogs-context as-alert' ref={nodeRef}>
         <div className='ui--dialogs-alert as-header'>
           <h4 className='h4 font-bold italic'>{data?.title || 'System Alert'}</h4>
         </div>

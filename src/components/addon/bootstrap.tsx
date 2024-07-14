@@ -1,15 +1,14 @@
 'use client'
 
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 
 import { configs } from '@/constants'
 import { useLoader, useMounted } from '@/hooks'
 import { AuthService, CommonService } from '@/services'
 import { useDispatch } from '@/store'
 import { userAct } from '@/store/user.store'
+import { playSound } from '@/utils/media'
 import { cookie } from '@/utils/storage'
-import { Hexadecimal } from '@/utils/hex'
-import type { User } from '@/types/user'
 
 export default function Bootstrap() {
   // __STATE's
@@ -18,11 +17,11 @@ export default function Bootstrap() {
 
   // __FUNCTION's
   const starter = useCallback(async () => {
-    const [accessToken, userProfile] = [cookie.get(configs.APP_AUTH_ACCESS), cookie.get(configs.APP_USER_INFO)]
+    const accessToken = cookie.get(configs.APP_AUTH_ACCESS)
     if (accessToken) {
-      if (userProfile) {
-        const user = JSON.parse(Hexadecimal.decode(userProfile)) as User
-        dispatch(userAct.setProfile(user))
+      const profile = cookie.get(configs.APP_USER_INFO, 1)
+      if (profile) {
+        dispatch(userAct.setProfile(profile))
       }
 
       await AuthService.profile()
@@ -45,6 +44,17 @@ export default function Bootstrap() {
   useMounted(() => {
     starter()
   })
+
+  useEffect(() => {
+    function listener(e?: any) {
+      if (e.target?.classList?.contains('btn-clicky')) playSound()
+    }
+
+    addEventListener('click', listener)
+    return () => {
+      removeEventListener('click', listener)
+    }
+  }, [])
 
   // __RENDER
   return null

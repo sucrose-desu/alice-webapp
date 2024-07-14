@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { intervalToDuration, addSeconds } from 'date-fns'
 import type { CountdownDuration } from '@/types'

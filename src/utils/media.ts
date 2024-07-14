@@ -41,3 +41,8 @@ export async function getMediaBlob(file: string | Blob | File): Promise<IMedia> 
     isAudio: file.type.includes('audio')
   }
 }
+
+export function playSound() {
+  const audio = new Audio('/static/media/ww-click.mp3')
+  audio.play()
+}

@@ -1,12 +1,4 @@
-import { dialog, notice } from './addon'
-
-export { Hexadecimal } from './hex'
 export { queryString } from './qs'
-
-export class xs {
-  static readonly alert = dialog
-  static readonly notice = notice
-}
 
 export function isIE() {
   return new RegExp('MSIE|Trident').test(navigator.userAgent)

@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import cls from 'classnames'
 
@@ -17,7 +17,6 @@ type Props = {
 export function LoginComponent({ className }: Props) {
   // __STATE's
   const router = useRouter()
-  const searchParams = useSearchParams()
   const {
     register,
     handleSubmit,
@@ -36,10 +35,10 @@ export function LoginComponent({ className }: Props) {
     if (response) {
       await AuthService.profile()
 
-      const fallbackTo = searchParams.get('fallback')
-      if (fallbackTo) {
-        router.push(fallbackTo)
-      }
+      // const fallbackTo = searchParams.get('fallback')
+      // if (fallbackTo) {
+      //   router.push(fallbackTo)
+      // }
     }
   })
 

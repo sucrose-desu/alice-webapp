@@ -35,6 +35,10 @@ export class ArrayService {
     return result
   }
 
+  static random<P = any>(payload: P[]) {
+    return this.shuffle(payload)[0]
+  }
+
   /**
    * Shuffle randomly array.
    *

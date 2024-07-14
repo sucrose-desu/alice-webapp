@@ -8,7 +8,6 @@ import type { Dialog } from '@/types/addon'
 
 type Props = {
   data: Extract<Dialog, { type: 'modal' }>
-  zIndex: number
   onRemove?: () => void
 }
 
@@ -30,7 +29,6 @@ export function ModalComponent({ data, ...rest }: Props) {
     <CSSTransition nodeRef={nodeRef} in={state} timeout={256} unmountOnExit={true} onExited={rest?.onRemove}>
       <div
         className={cls('ui--dialogs-context as-modal', data?.style?.align || 'center')}
-        style={{ zIndex: rest.zIndex }}
         ref={nodeRef}
         data-vid={data.vid}
       >

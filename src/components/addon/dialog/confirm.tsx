@@ -8,7 +8,6 @@ import type { Dialog } from '@/types/addon'
 
 type Props = {
   data: Extract<Dialog, { type: 'confirm' }>
-  zIndex: number
   onClose?: () => void
   onRemove?: () => void
 }
@@ -48,7 +47,7 @@ export function ConfirmComponent({ data, ...rest }: Props) {
   // __RENDER
   return (
     <CSSTransition nodeRef={nodeRef} in={state} timeout={128} unmountOnExit={true} onExited={rest?.onRemove}>
-      <div className='ui--dialogs-context as-confirm' style={{ zIndex: rest.zIndex }} ref={nodeRef}>
+      <div className='ui--dialogs-context as-confirm' ref={nodeRef}>
         <div className='ui--dialogs-confirm as-header'>
           <h4 className='h4 font-bold italic'>{data?.title || 'System Alert'}</h4>
         </div>

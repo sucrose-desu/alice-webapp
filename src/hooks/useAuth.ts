@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation'
 import { useMemo } from 'react'
 
-import { configs, UserRole } from '@/constants'
+import { configs } from '@/constants'
 import { useSelector } from '@/store'
 import { cookie } from '@/utils/storage'
 

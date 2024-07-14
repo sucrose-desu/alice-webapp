@@ -1,7 +1,7 @@
 @layer components {
   .ui--dialogs {
     &-wrapper {
-      @apply fixed inset-0 grid bg-theme-dark/75 p-4;
+      @apply fixed inset-0;
       z-index: 1000;
 
       &:not(.active) {
@@ -10,8 +10,16 @@
       }
     }
 
+    &-backdrop {
+      @apply fixed inset-0 bg-theme-dark/75;
+    }
+
+    &-list {
+      @apply absolute inset-0 z-10 grid p-4;
+    }
+
     &-context {
-      @apply absolute z-10;
+      @apply absolute;
 
       &.as-alert {
         @apply m-8 self-start justify-self-center rounded-2xl bg-theme-dark/75 p-6 ring-2 ring-theme-light/10 backdrop-blur-lg;
