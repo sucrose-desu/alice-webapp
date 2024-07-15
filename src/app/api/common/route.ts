@@ -1,5 +1,5 @@
 import { type NextRequest } from 'next/server'
-import { apiTryCatch } from '@/services/catch'
+import { ApiResponse } from '@/services/catch'
 import { queryString } from '@/utils'
 
 export const dynamic = 'force-dynamic'
@@ -7,8 +7,8 @@ export const dynamic = 'force-dynamic'
 export async function GET(request: NextRequest) {
   try {
     const result = queryString.toJSON(request.nextUrl.searchParams)
-    return Response.json(result)
+    return ApiResponse.json(result)
   } catch (error) {
-    return apiTryCatch(error)
+    return ApiResponse.catch(error)
   }
 }

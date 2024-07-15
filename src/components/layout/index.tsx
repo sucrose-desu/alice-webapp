@@ -4,7 +4,6 @@ import { usePathname } from 'next/navigation'
 import { ReactNode, useMemo } from 'react'
 
 import { NavigatorComponent } from './navigator'
-import { WaveComponent } from './wave'
 
 type Props = { node: ReactNode }
 
@@ -17,7 +16,6 @@ export function LayoutContainer({ node }: Props) {
   if (protectedPage) return node
   return (
     <div className='ui--app-container'>
-      <WaveComponent />
       <main className='ui--router-view'>{node}</main>
       <NavigatorComponent />
     </div>

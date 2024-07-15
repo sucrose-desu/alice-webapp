@@ -20,6 +20,10 @@ export function dateToSeconds(date: Date) {
   return (+date - Date.now()) / 1e3
 }
 
+export function omit<T extends Record<string, any>, K extends keyof T>(obj: T, keys: K[]): Omit<T, K> {
+  return Object.fromEntries(Object.entries(obj).filter(([key]) => !keys.includes(key as K))) as Omit<T, K>
+}
+
 /**
  * Provides a way to easily construct a set of key/value pairs representing form fields and their values,
  * which can then be easily sent using the XMLHttpRequest.send() method.

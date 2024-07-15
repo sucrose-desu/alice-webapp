@@ -1,64 +1,34 @@
 import { type NextRequest } from 'next/server'
-import { PrismaClient } from '@prisma/client'
-import { createSecretKey } from 'crypto'
-import { addDays } from 'date-fns'
-import { SignJWT } from 'jose'
-import { v5 as uuidV5, NIL } from 'uuid'
 import bcrypt from 'bcrypt'
 
-import { configs, ThrowErrs } from '@/constants'
-import { signInValidator, type SignIn } from '@/helpers/validator.zod'
-import { apiTryCatch } from '@/services/catch'
-
-const prismaService = new PrismaClient()
+import { createAccessToken } from '@/helpers'
+import { signInValidator } from '@/helpers/validator.zod'
+import { prismaService } from '@/services'
+import { ApiResponse } from '@/services/catch'
 
 export async function POST(request: NextRequest) {
   try {
-    const body = (await request.json()) as SignIn
-    await signInValidator.parseAsync(body)
-
+    const body = await signInValidator.parseAsync(await request.json())
     const account = await prismaService.account.findFirst({
-      where: {
-        email: body.email,
-        isActive: true
-      }
+      where: { email: body.email }
     })
 
     if (account) {
-      const match = bcrypt.compareSync(body.password, account.password)
-
-      if (!match) {
-        return Response.json({ statusCode: 422, message: ThrowErrs.AUTH_FAILED })
+      if (!account.isActive) {
+        return ApiResponse.message('Your account has been suspended.', 423)
       }
 
-      const secretKey = createSecretKey(process.env.NEXT_PUBLIC_JWT_SECRET!, 'utf-8')
-      const jwt = new SignJWT({
-        sub: account.id,
-        uid: account.uid,
-        role: account.role,
-        email: account.email,
-        provider: account.provider
-      })
-        .setProtectedHeader({ alg: 'HS256' })
-        .setIssuedAt()
-        .setIssuer(configs.APP_NAME)
-        .setExpirationTime(process.env.NEXT_PUBLIC_JWT_TTL || '1 day')
+      const match = bcrypt.compareSync(body.password, account.password)
+      if (!match) {
+        return ApiResponse.message('Your password is incorrect.', 400)
+      }
 
-      const accessToken = await jwt.sign(secretKey)
-      const refreshKey = uuidV5(`${configs.APP_NAME}//${account.id}:${account.uid}`, NIL)
-
-      return Response.json(
-        {
-          accessToken,
-          refreshKey,
-          expiresAt: addDays(Date.now(), 30).toISOString()
-        } as XHRLogin,
-        { status: 200 }
-      )
+      const results = await createAccessToken(account)
+      return ApiResponse.json(results)
     }
 
-    return Response.json({ statusCode: 422, message: ThrowErrs.ACCOUNT_404 })
+    return ApiResponse.message('The account not found.', 404)
   } catch (error) {
-    return apiTryCatch(error)
+    return ApiResponse.catch(error)
   }
 }

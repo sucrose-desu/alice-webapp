@@ -1,23 +1,20 @@
 import { type NextRequest } from 'next/server'
-import { PrismaClient } from '@prisma/client'
 
-import { createUserValidator, type CreateUser } from '@/helpers/validator.zod'
-import { apiTryCatch } from '@/services/catch'
-
-const prismaService = new PrismaClient()
+import { createUserValidator } from '@/helpers/validator.zod'
+import { prismaService } from '@/services'
+import { ApiResponse } from '@/services/catch'
 
 export async function GET(request: NextRequest) {
   try {
-    return Response.json({})
+    return ApiResponse.json({})
   } catch (error) {
-    return apiTryCatch(error)
+    return ApiResponse.catch(error)
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const body = (await request.json()) as CreateUser
-    await createUserValidator.parseAsync(body)
+    const body = await createUserValidator.parseAsync(await request.json())
 
     // if (error) return apiTryCatch(error, error.status)
     if (1) {
@@ -28,11 +25,11 @@ export async function POST(request: NextRequest) {
       //   }
       // })
 
-      return Response.json({ statusCode: 201, message: 'The record has been successfully created.' }, { status: 201 })
+      return ApiResponse.message('The record has been successfully created.', 201)
     }
 
-    return Response.json({ statusCode: 422, message: 'Unknown an error occurred.' })
+    return ApiResponse.catch(null)
   } catch (error) {
-    return apiTryCatch(error)
+    return ApiResponse.catch(error)
   }
 }

@@ -1,15 +1,13 @@
 import { type NextRequest } from 'next/server'
-import { PrismaClient } from '@prisma/client'
 
-import { apiTryCatch } from '@/services/catch'
-
-const prismaService = new PrismaClient()
+import { prismaService } from '@/services'
+import { ApiResponse } from '@/services/catch'
 
 export async function GET(request: NextRequest) {
   try {
     const genres = await prismaService.genre.findMany()
-    return Response.json(genres)
+    return ApiResponse.json(genres)
   } catch (error) {
-    return apiTryCatch(error)
+    return ApiResponse.catch(error)
   }
 }

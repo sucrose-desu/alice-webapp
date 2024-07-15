@@ -1,6 +1,14 @@
-import { Roles } from '@prisma/client'
+import { Permission, Roles } from '@prisma/client'
 
-interface User extends BaseDate {
+export interface JWTPayload {
+  sub: string
+  uid: string
+  role: Roles
+  email: string
+  permissions: Omit<Permission, 'name' | 'createdAt' | 'updatedAt'>[]
+}
+
+export interface User extends BaseDate {
   id: number
   uid: string
   role: Roles
@@ -14,4 +22,4 @@ interface User extends BaseDate {
   updatedAt?: Date | string
 }
 
-interface UserQuery extends BaseQuery {}
+export interface UserQuery extends BaseQuery {}
