@@ -1,14 +1,12 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { Roles } from '@prisma/client'
-import type { User } from '@/types/user'
+import type { User as UserState } from '@/types/user'
 
 /**
  * STATE
  */
-export interface UserState extends User {}
-
-export const initialState: UserState = {
-  id: 0,
+export const initialState: Partial<UserState> = {
+  id: '',
   uid: '',
   role: Roles.GUEST,
   displayName: '',
@@ -25,8 +23,8 @@ export enum ActionTypes {
 }
 
 export class userAct {
-  static setProfile = createAction<User, ActionTypes>(ActionTypes.SET_PROFILE)
-  static reset = createAction<any, ActionTypes>(ActionTypes.RESET_PROFILE)
+  static setProfile = createAction<UserState, ActionTypes>(ActionTypes.SET_PROFILE)
+  static reset = createAction<void, ActionTypes>(ActionTypes.RESET_PROFILE)
 }
 /**
  * REDUCER's
@@ -37,6 +35,6 @@ export default createReducer(initialState, (builder) => {
       Object.assign(state, payload)
     })
     .addCase(userAct.reset, () => {
-      return { id: 0, uid: '', role: Roles.GUEST, displayName: '', avatar: '', email: '' }
+      return { id: '', uid: '', role: Roles.GUEST, displayName: '', avatar: '', email: '' }
     })
 })

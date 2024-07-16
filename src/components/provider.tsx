@@ -19,7 +19,7 @@ export function AppProvider({ children }: ProviderProps) {
       <Bootstrap />
       <LoaderObserver />
 
-      <LayoutContainer node={children} />
+      <LayoutContainer>{children}</LayoutContainer>
 
       <DialogObserver />
       <NoticeObserver />

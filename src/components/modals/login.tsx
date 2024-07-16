@@ -2,9 +2,9 @@
 
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
+import { useEffectOnce } from 'react-use'
 import cls from 'classnames'
 
-import { useMounted } from '@/hooks'
 import { AuthService } from '@/services'
 import type { FormLogin } from '@/types/form'
 
@@ -43,7 +43,7 @@ export function LoginComponent({ className }: Props) {
   })
 
   // __EFFECT's
-  useMounted(() => {
+  useEffectOnce(() => {
     AuthService.signOut()
   })
 

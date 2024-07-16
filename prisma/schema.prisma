@@ -9,31 +9,16 @@ generator client {
   previewFeatures = ["driverAdapters"]
 }
 
-enum Roles {
-  ROOT
-  ADMIN
-  MEMBER
-  USER
-  GUEST
-}
-
-enum Category {
-  ANIME
-  CINEMA
-  MOVIE
-  UNKNOWN
-}
-
 model Account {
   id          String                @id @default(uuid()) @db.Uuid
   uid         String                @unique @db.Text
   email       String                @db.Text
   password    String                @db.Text
-  role        Roles                 @default(USER)
+  role        String                @default("USER") @db.Text
   displayName String                @default("diaplay name") @db.Text
   avatar      String                @default("default-avatar.png") @db.Text
   bio         String?               @db.Text
-  provider    String                @default("email") @db.Text
+  provider    String                @default("EMAIL") @db.Text
   isActive    Boolean               @default(true) @db.Boolean
   isVerified  Boolean               @default(false) @db.Boolean
   createdAt   DateTime              @default(now()) @db.Timestamptz()
@@ -78,7 +63,7 @@ model Album {
   name        String         @unique @db.Text
   description String?        @db.Text
   poster      String         @db.Text
-  category    Category       @default(ANIME)
+  category    String         @default("ANIME") @db.Text
   group       String         @default(uuid()) @db.Uuid
   seasonNo    Int            @default(1) @db.Integer
   isActive    Boolean        @default(true) @db.Boolean
@@ -118,7 +103,7 @@ model Track {
 model Watch {
   id        String  @id @default(uuid()) @db.Uuid
   seekTime  Float   @default(0) @db.DoublePrecision
-  status    String  @default("new") @db.Text
+  status    String  @default("NEW") @db.Text
   accountId String  @db.Uuid
   account   Account @relation(fields: [accountId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   trackId   String  @db.Uuid

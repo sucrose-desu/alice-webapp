@@ -2,7 +2,18 @@ import { NextRequest, NextResponse } from 'next/server'
 import { APP_AUTH_ACCESS } from '@/constants/configs'
 
 export const config = {
-  matcher: ['/watch/:path*', '/my/:path*']
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    '/((?!api|services|_next/static|_next/image|manifest|static|favicon.ico).*)',
+    '/watch/:path*',
+    '/my/:path*'
+  ]
 }
 
 export async function middleware({ cookies, url, nextUrl }: NextRequest) {
@@ -12,7 +23,7 @@ export async function middleware({ cookies, url, nextUrl }: NextRequest) {
     const searchParams = new URLSearchParams(nextUrl.searchParams)
     searchParams.set('fallback', nextUrl.pathname)
 
-    return NextResponse.redirect(new URL(`/guard/sign-in?${searchParams}`, url))
+    return NextResponse.redirect(`/guard/sign-in?${searchParams}`)
   }
 
   return NextResponse.next()

@@ -2,15 +2,12 @@
 
 import { useCallback } from 'react'
 
-import { useLoader, useMounted } from '@/hooks'
+import { useLoader } from '@/hooks'
 import { dialog, notice } from '@/utils/addon'
-import { useDispatch } from '@/store'
-import { appAct } from '@/store/app.store'
 
 export function ContextComponent() {
   // __STATE's
   const loader = useLoader()
-  const dispatch = useDispatch()
 
   // __FUNCTION's
   const handleLoader = useCallback(() => {
@@ -19,7 +16,7 @@ export function ContextComponent() {
   }, [])
 
   const handleNotice = useCallback(() => {
-    notice.success('Generate Lorem Ipsum placeholder text.', { title: 'Successful', duration: 10 })
+    notice.success('Generate Lorem Ipsum placeholder text.', { title: 'Successful', duration: 5 })
   }, [])
 
   const handleModal = useCallback(() => {
@@ -38,9 +35,6 @@ export function ContextComponent() {
 
     console.table(r)
   }, [])
-
-  // __EFFECT's
-  // useMounted(() => {})
 
   // __RENDER
   return (

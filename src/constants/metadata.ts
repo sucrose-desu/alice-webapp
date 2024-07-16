@@ -1,4 +1,4 @@
-import type { Metadata,Viewport } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { APP_WEB_TITLE } from './configs'
 
 export const metadata: Metadata = {
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  colorScheme:'dark light',
+  colorScheme: 'dark light',
   themeColor: [
-    { media: '(prefers-color-scheme: dark)', color: '#000000' },
+    { media: '(prefers-color-scheme: dark)', color: '#040404' },
     { media: '(prefers-color-scheme: light)', color: '#ffffff' }
-  ],
+  ]
 }

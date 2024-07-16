@@ -5,18 +5,18 @@ import { ReactNode, useMemo } from 'react'
 
 import { NavigatorComponent } from './navigator'
 
-type Props = { node: ReactNode }
+type Props = { children: ReactNode }
 
-export function LayoutContainer({ node }: Props) {
+export function LayoutContainer({ children }: Props) {
   // __STATE's
   const pathname = usePathname()
   const protectedPage = useMemo(() => pathname.startsWith('/watch'), [pathname])
 
   // __RENDER
-  if (protectedPage) return node
+  if (protectedPage) return children
   return (
     <div className='ui--app-container'>
-      <main className='ui--router-view'>{node}</main>
+      <main className='ui--router-view'>{children}</main>
       <NavigatorComponent />
     </div>
   )

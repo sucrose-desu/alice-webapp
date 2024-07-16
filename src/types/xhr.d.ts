@@ -14,7 +14,7 @@ interface IPaginate<D extends Record<string, any>> {
   totalPage: number
 }
 
-interface XHRLogin {
+interface XHRSignIn {
   accessToken: string
   refreshKey: string
   expiresAt: Date | string

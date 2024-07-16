@@ -6,9 +6,9 @@ import { decodeJwt, SignJWT } from 'jose'
 import { v5 as uuidV5, NIL } from 'uuid'
 
 import { APP_NAME } from '@/constants/configs'
-import { prismaService } from '@/services'
-import { omit } from '@/utils'
 import type { JWTPayload } from '@/types/user'
+
+import { prismaService } from './'
 
 export function useAuthGuard(headers: ReadonlyHeaders) {
   const bearerToken = headers.get('Authorization')
@@ -21,13 +21,13 @@ export function useAuthGuard(headers: ReadonlyHeaders) {
   throw new Response(null, { status: 401, statusText: 'Unauthorized' })
 }
 
-export async function createAccessToken(account: Account): Promise<XHRLogin> {
+export async function signAuthToken(account: Account): Promise<XHRLogin> {
   const results = await prismaService.permissionOfAccount.findMany({
     where: { accountId: account.id },
     include: { permission: true }
   })
 
-  const permissions = results?.map((r) => omit(r.permission, ['id', 'name', 'createdAt', 'updatedAt'])) || []
+  const permissions = results?.map(({ permission: { id, name, createdAt, updatedAt, ...r } }) => r) || []
   const secretKey = createSecretKey(process.env.NEXT_PUBLIC_JWT_SECRET!, 'utf-8')
   const jwt = new SignJWT({
     sub: account.id,

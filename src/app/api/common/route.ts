@@ -1,5 +1,6 @@
 import { type NextRequest } from 'next/server'
-import { ApiResponse } from '@/services/catch'
+
+import { ApiResponse } from '@/services/server'
 import { queryString } from '@/utils'
 
 export const dynamic = 'force-dynamic'

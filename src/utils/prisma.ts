@@ -8,10 +8,12 @@ export function usePrismaExcludeFields<T extends Entity, K extends Keys<T>>(type
   type Key = Exclude<Keys<T>, K>
   type TMap = Record<Key, true>
   const result: TMap = {} as TMap
+
   for (const key in Prisma[`${type}ScalarFieldEnum`]) {
     if (!omit.includes(key as K)) {
       result[key as Key] = true
     }
   }
+
   return result
 }

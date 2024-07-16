@@ -1,13 +1,11 @@
-import { useRouter } from 'next/navigation'
 import { useMemo } from 'react'
 
-import { configs } from '@/constants'
+import { APP_AUTH_ACCESS } from '@/constants/configs'
 import { useSelector } from '@/store'
 import { cookie } from '@/utils/storage'
 
 export function useAuth() {
   // __STATE's
-  const router = useRouter()
   const user = useSelector(({ user }) => user)
 
   // __RETURN
@@ -15,10 +13,10 @@ export function useAuth() {
     () => ({
       ...user,
       isAuth: () => {
-        const accessToken = cookie.get(configs.APP_AUTH_ACCESS)
+        const accessToken = cookie.get(APP_AUTH_ACCESS)
         return Boolean(user.id && accessToken)
       }
     }),
-    [router, user]
+    [user]
   )
 }

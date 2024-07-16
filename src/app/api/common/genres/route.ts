@@ -1,7 +1,6 @@
 import { type NextRequest } from 'next/server'
 
-import { prismaService } from '@/services'
-import { ApiResponse } from '@/services/catch'
+import { ApiResponse, prismaService } from '@/services/server'
 
 export async function GET(request: NextRequest) {
   try {

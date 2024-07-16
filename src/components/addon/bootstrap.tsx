@@ -1,9 +1,10 @@
 'use client'
 
-import { useCallback, useEffect } from 'react'
+import { useCallback } from 'react'
+import { useEffectOnce } from 'react-use'
 
 import { configs } from '@/constants'
-import { useLoader, useMounted } from '@/hooks'
+import { useLoader } from '@/hooks'
 import { AuthService, CommonService } from '@/services'
 import { useDispatch } from '@/store'
 import { userAct } from '@/store/user.store'
@@ -41,11 +42,11 @@ export default function Bootstrap() {
   }, [])
 
   // __EFFECT's
-  useMounted(() => {
+  useEffectOnce(() => {
     starter()
   })
 
-  useEffect(() => {
+  useEffectOnce(() => {
     function listener(e?: any) {
       if (e.target?.classList?.contains('btn-clicky')) playSound()
     }
@@ -54,7 +55,7 @@ export default function Bootstrap() {
     return () => {
       removeEventListener('click', listener)
     }
-  }, [])
+  })
 
   // __RENDER
   return null

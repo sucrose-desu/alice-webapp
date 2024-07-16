@@ -29,6 +29,7 @@
     "react-hook-form": "^7.52.1",
     "react-redux": "^9.1.2",
     "react-transition-group": "^4.4.5",
+    "react-use": "^17.5.0",
     "universal-cookie": "^7.1.4",
     "uuid": "^10.0.0",
     "zod": "^3.23.8"
@@ -49,12 +50,12 @@
     "prisma": "^5.16.2",
     "rimraf": "^6.0.1",
     "sass": "^1.77.8",
-    "tailwindcss": "^3.4.4",
+    "tailwindcss": "^3.4.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.3"
   },
   "engines": {
-    "node": ">=20.14.0"
+    "node": ">=20.15"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.prisma.ts"

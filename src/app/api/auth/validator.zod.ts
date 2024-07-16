@@ -1,0 +1,7 @@
+import { z } from 'zod'
+
+export const signInValidator = z.object({
+  email: z.string().email(),
+  password: z.string(),
+  keepLoggedIn: z.boolean().optional()
+})

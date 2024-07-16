@@ -1,10 +1,10 @@
 import { type NextRequest } from 'next/server'
 import bcrypt from 'bcrypt'
 
-import { createAccessToken } from '@/helpers'
-import { signInValidator } from '@/helpers/validator.zod'
-import { prismaService } from '@/services'
-import { ApiResponse } from '@/services/catch'
+import { ApiResponse, prismaService } from '@/services/server'
+import { signAuthToken } from '@/services/server/auth'
+
+import { signInValidator } from '../validator.zod'
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
         return ApiResponse.message('Your password is incorrect.', 400)
       }
 
-      const results = await createAccessToken(account)
+      const results = await signAuthToken(account)
       return ApiResponse.json(results)
     }
 
