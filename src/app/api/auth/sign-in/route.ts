@@ -10,7 +10,14 @@ export async function POST(request: NextRequest) {
   try {
     const body = await signInValidator.parseAsync(await request.json())
     const account = await prismaService.account.findFirst({
-      where: { email: body.email }
+      where: { email: body.email },
+      include: {
+        permissions: {
+          include: {
+            permission: true
+          }
+        }
+      }
     })
 
     if (account) {

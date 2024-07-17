@@ -1,152 +1,154 @@
+import type { Genre } from '@prisma/client'
+
 export default [
   {
-    "text": "Action (ต่อสู้)"
+    text: 'Action (ต่อสู้)'
   },
   {
-    "text": "Adventure (ผจญภัย)"
+    text: 'Adventure (ผจญภัย)'
   },
   {
-    "text": "Comedy (ตลก)"
+    text: 'Comedy (ตลก)'
   },
   {
-    "text": "Demons (ปีศาจ)"
+    text: 'Demons (ปีศาจ)'
   },
   {
-    "text": "Detective (นักสืบ)"
+    text: 'Detective (นักสืบ)'
   },
   {
-    "text": "Drama (ดราม่า)"
+    text: 'Drama (ดราม่า)'
   },
   {
-    "text": "Ecchi (ทะลึ่ง)"
+    text: 'Ecchi (ทะลึ่ง)'
   },
   {
-    "text": "Fantasy (แฟนตาซี)"
+    text: 'Fantasy (แฟนตาซี)'
   },
   {
-    "text": "Game (เกม)"
+    text: 'Game (เกม)'
   },
   {
-    "text": "Gourmet (อาหาร)"
+    text: 'Gourmet (อาหาร)'
   },
   {
-    "text": "Harem (ฮาเร็ม)"
+    text: 'Harem (ฮาเร็ม)'
   },
   {
-    "text": "Hentai (เฮ็นไต)"
+    text: 'Hentai (เฮ็นไต)'
   },
   {
-    "text": "Historical (ประวัติศาสตร์)"
+    text: 'Historical (ประวัติศาสตร์)'
   },
   {
-    "text": "Horror (สยองขวัญ)"
+    text: 'Horror (สยองขวัญ)'
   },
   {
-    "text": "Idols (ไอดอล)"
+    text: 'Idols (ไอดอล)'
   },
   {
-    "text": "Isekai (ต่างโลก)"
+    text: 'Isekai (ต่างโลก)'
   },
   {
-    "text": "Iyashikei (ดีต่อใจ)"
+    text: 'Iyashikei (ดีต่อใจ)'
   },
   {
-    "text": "Josei (เด็กผู้หญิง)"
+    text: 'Josei (เด็กผู้หญิง)'
   },
   {
-    "text": "Love Polygon (รักสามเศร้า)"
+    text: 'Love Polygon (รักสามเศร้า)'
   },
   {
-    "text": "Magic (เวทย์มนต์)"
+    text: 'Magic (เวทย์มนต์)'
   },
   {
-    "text": "Martial Arts (ศิลปะการต่อสู้)"
+    text: 'Martial Arts (ศิลปะการต่อสู้)'
   },
   {
-    "text": "Mecha (หุ่นยนต์)"
+    text: 'Mecha (หุ่นยนต์)'
   },
   {
-    "text": "Military (ทหาร)"
+    text: 'Military (ทหาร)'
   },
   {
-    "text": "Music (เพลง)"
+    text: 'Music (เพลง)'
   },
   {
-    "text": "Mystery (ลึกลับ)"
+    text: 'Mystery (ลึกลับ)'
   },
   {
-    "text": "Parody (ล้อเลียน)"
+    text: 'Parody (ล้อเลียน)'
   },
   {
-    "text": "Performing Arts (ศิลปะการแสดง)"
+    text: 'Performing Arts (ศิลปะการแสดง)'
   },
   {
-    "text": "Police (ตำรวจ)"
+    text: 'Police (ตำรวจ)'
   },
   {
-    "text": "Psychological (จิตวิทยา)"
+    text: 'Psychological (จิตวิทยา)'
   },
   {
-    "text": "Racing (แข่งรถ)"
+    text: 'Racing (แข่งรถ)'
   },
   {
-    "text": "Reincarnation (การกลับชาติมาเกิดใหม่)"
+    text: 'Reincarnation (การกลับชาติมาเกิดใหม่)'
   },
   {
-    "text": "Romance (โรแมนติก)"
+    text: 'Romance (โรแมนติก)'
   },
   {
-    "text": "Samurai (ซามูไร)"
+    text: 'Samurai (ซามูไร)'
   },
   {
-    "text": "School (โรงเรียน)"
+    text: 'School (โรงเรียน)'
   },
   {
-    "text": "Sci-Fi (ไซ-ไฟ)"
+    text: 'Sci-Fi (ไซ-ไฟ)'
   },
   {
-    "text": "Seinen (วัยรุ่น)"
+    text: 'Seinen (วัยรุ่น)'
   },
   {
-    "text": "Shoujo (สาวน้อย)"
+    text: 'Shoujo (สาวน้อย)'
   },
   {
-    "text": "Shoujo Ai (ยูริ)"
+    text: 'Shoujo Ai (ยูริ)'
   },
   {
-    "text": "Shounen (หนุ่มน้อย)"
+    text: 'Shounen (หนุ่มน้อย)'
   },
   {
-    "text": "Shounen Ai (ยาโอย)"
+    text: 'Shounen Ai (ยาโอย)'
   },
   {
-    "text": "Slice of Life (ชีวิตประจำวัน)"
+    text: 'Slice of Life (ชีวิตประจำวัน)'
   },
   {
-    "text": "Space (อวกาศ)"
+    text: 'Space (อวกาศ)'
   },
   {
-    "text": "Sports (กีฬา)"
+    text: 'Sports (กีฬา)'
   },
   {
-    "text": "Super Power (พลังพิเศษ)"
+    text: 'Super Power (พลังพิเศษ)'
   },
   {
-    "text": "Supernatural (เหนือธรรมชาติ)"
+    text: 'Supernatural (เหนือธรรมชาติ)'
   },
   {
-    "text": "Suspense (ตื่นเต้น)"
+    text: 'Suspense (ตื่นเต้น)'
   },
   {
-    "text": "Time Travel (การเดินทางข้ามเวลา)"
+    text: 'Time Travel (การเดินทางข้ามเวลา)'
   },
   {
-    "text": "Tokusatsu (โทคุซัทสึ)"
+    text: 'Tokusatsu (โทคุซัทสึ)'
   },
   {
-    "text": "Vampire (แวมไพร์)"
+    text: 'Vampire (แวมไพร์)'
   },
   {
-    "text": "Workplace (ที่ทำงาน)"
+    text: 'Workplace (ที่ทำงาน)'
   }
-]
+] as Pick<Genre, 'group' | 'text'>[]

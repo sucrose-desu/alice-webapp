@@ -1,3 +1,7 @@
+interface NextParams<T = any> {
+  params: T
+}
+
 interface BaseRecord<V = any> {
   label: string
   value: V

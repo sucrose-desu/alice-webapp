@@ -1,5 +1,5 @@
 import type { ReadonlyHeaders } from 'next/dist/server/web/spec-extension/adapters/headers'
-import { type Account } from '@prisma/client'
+import { type Account, type Permission, type PermissionOfAccount } from '@prisma/client'
 import { createSecretKey } from 'crypto'
 import { addYears } from 'date-fns'
 import { decodeJwt, SignJWT } from 'jose'
@@ -7,8 +7,6 @@ import { v5 as uuidV5, NIL } from 'uuid'
 
 import { APP_NAME } from '@/constants/configs'
 import type { JWTPayload } from '@/types/user'
-
-import { prismaService } from './'
 
 export function useAuthGuard(headers: ReadonlyHeaders) {
   const bearerToken = headers.get('Authorization')
@@ -21,20 +19,14 @@ export function useAuthGuard(headers: ReadonlyHeaders) {
   throw new Response(null, { status: 401, statusText: 'Unauthorized' })
 }
 
-export async function signAuthToken(account: Account): Promise<XHRLogin> {
-  const results = await prismaService.permissionOfAccount.findMany({
-    where: { accountId: account.id },
-    include: { permission: true }
-  })
-
-  const permissions = results?.map(({ permission: { id, name, createdAt, updatedAt, ...r } }) => r) || []
+type AccountWithPermissions = Account & { permissions: (PermissionOfAccount & { permission: Permission })[] }
+export async function signAuthToken(account: AccountWithPermissions): Promise<XHRSignIn> {
   const secretKey = createSecretKey(process.env.NEXT_PUBLIC_JWT_SECRET!, 'utf-8')
   const jwt = new SignJWT({
     sub: account.id,
     uid: account.uid,
     role: account.role,
-    email: account.email,
-    permissions
+    permissions: account.permissions.map(({ permission: { id, createdAt, updatedAt, ...permission } }) => permission)
   })
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()

@@ -8,7 +8,14 @@ export async function GET(request: NextRequest) {
   try {
     const auth = useAuthGuard(headers())
     const account = await prismaService.account.findUnique({
-      where: { id: auth.sub, uid: auth.uid }
+      where: { id: auth.sub, uid: auth.uid },
+      include: {
+        permissions: {
+          include: {
+            permission: true
+          }
+        }
+      }
     })
 
     if (account) {

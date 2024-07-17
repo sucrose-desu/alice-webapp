@@ -12,7 +12,7 @@ generator client {
 model Account {
   id          String                @id @default(uuid()) @db.Uuid
   uid         String                @unique @db.Text
-  email       String                @db.Text
+  email       String                @unique @db.Text
   password    String                @db.Text
   role        String                @default("USER") @db.Text
   displayName String                @default("diaplay name") @db.Text
@@ -113,6 +113,7 @@ model Watch {
   @@map("watch")
 }
 
+// Explicit many-to-many
 model Favorite {
   id        Int     @id @default(autoincrement()) @db.Integer
   accountId String  @db.Uuid
@@ -124,6 +125,7 @@ model Favorite {
   @@map("favorites")
 }
 
+// Explicit many-to-many
 model PermissionOfAccount {
   id           Int        @id @default(autoincrement()) @db.Integer
   accountId    String     @db.Uuid
@@ -136,6 +138,7 @@ model PermissionOfAccount {
   @@map("_permissionOfAccount")
 }
 
+// Explicit many-to-many
 model GenreOfAlbum {
   id        Int      @id @default(autoincrement()) @db.Integer
   albumId   String   @db.Uuid

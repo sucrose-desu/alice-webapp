@@ -19,6 +19,10 @@ export enum AccountProvider {
   EMAIL = 'EMAIL'
 }
 
+export enum GenreGroup {
+  GENERAL = 1
+}
+
 export enum AlbumCategory {
   ANIME = 'ANIME',
   CINEMA = 'CINEMA',

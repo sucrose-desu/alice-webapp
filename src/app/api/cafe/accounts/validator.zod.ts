@@ -1,8 +1,8 @@
-import { Roles } from '@prisma/client'
+import { AccountRole } from '@/constants'
 import { z } from 'zod'
 
 export const createAccountValidator = z.object({
-  role: z.nativeEnum(Roles).optional().default(Roles.USER),
+  role: z.nativeEnum(AccountRole).default(AccountRole.USER).optional(),
   email: z.string().email(),
   password: z.string().min(8).max(32),
   displayName: z.string().optional()
@@ -10,7 +10,7 @@ export const createAccountValidator = z.object({
 
 export const updateAccountValidator = z
   .object({
-    role: z.nativeEnum(Roles),
+    role: z.nativeEnum(AccountRole),
     email: z.string().email(),
     password: z.string().min(8).max(32),
     displayName: z.string(),

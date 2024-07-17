@@ -8,6 +8,10 @@ export function generateId(radix: number = 16) {
   return Math.random().toString(radix).slice(2)
 }
 
+export function generateUid(radix: number = 10) {
+  return '1' + Math.random().toString(radix).slice(2, 8).padStart(8, '0')
+}
+
 export function scrollOff(input: boolean = true) {
   document.body.style.overflowY = input ? 'hidden' : 'auto'
 }
@@ -22,6 +26,28 @@ export function dateToSeconds(date: Date) {
 
 export function omit<T extends Record<string, any>, K extends keyof T>(obj: T, keys: K[]): Omit<T, K> {
   return Object.fromEntries(Object.entries(obj).filter(([key]) => !keys.includes(key as K))) as Omit<T, K>
+}
+
+/**
+ * `{ take: limit, skip: (page - 1) * limit }`
+ * @param payload Object
+ * @param total Number
+ * @param page Number
+ * @param limit Number
+ */
+export function createPaginate<P = any>(payload: P[], total: number, page: number, limit: number) {
+  const lastPage = Math.ceil(total / limit)
+  const nextPage = page + 1 > lastPage ? null : page + 1
+  const prevPage = page - 1 < 1 ? null : page - 1
+
+  return {
+    data: payload,
+    total,
+    currentPage: page,
+    nextPage,
+    prevPage,
+    lastPage
+  }
 }
 
 /**

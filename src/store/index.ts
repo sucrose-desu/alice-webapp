@@ -3,13 +3,11 @@ import { useSelector as useReduxSelector, useDispatch as useReduxDispatch, Typed
 import { configs } from '@/constants'
 
 import app from './app.store'
-import common from './common.store'
 import user from './user.store'
 
 const createStore = configureStore({
   reducer: {
     app,
-    common,
     user
   },
   devTools: configs.isDevelop,

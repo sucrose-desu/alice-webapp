@@ -5,8 +5,7 @@ export interface JWTPayload {
   sub: string
   uid: string
   role: AccountRole
-  email: string
-  permissions: Omit<Permission, 'name' | 'createdAt' | 'updatedAt'>[]
+  permissions: Omit<Permission, 'id' | 'createdAt' | 'updatedAt'>[]
 }
 
 export interface User extends Omit<Account, 'password'> {

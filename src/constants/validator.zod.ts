@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const paramValidator = z.object({ id: z.string().transform((value) => Number(value)) })
+export const paramValidator = z.object({ id: z.any() })
 
 export const queryValidator = z.object({
   page: z

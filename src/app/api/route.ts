@@ -1,13 +1,15 @@
 import { type NextRequest } from 'next/server'
-import { ApiResponse } from '@/services/catch'
+
+import { paramValidator, queryValidator } from '@/constants/validator.zod'
+import { ApiResponse } from '@/services/server'
 import { queryString } from '@/utils'
 
-export const dynamic = 'force-dynamic'
-
 export async function GET(request: NextRequest) {
+  const searchParams = queryString.toJSON(request.nextUrl.searchParams)
+
   try {
-    const result = queryString.toJSON(request.nextUrl.searchParams)
-    return ApiResponse.json(result)
+    const qs = await queryValidator.parseAsync(searchParams)
+    return ApiResponse.json(qs)
   } catch (error) {
     return ApiResponse.catch(error)
   }
@@ -15,31 +17,30 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const formData = await request.formData()
-    const file = formData.get('file') as File | null
-
-    if (file) console.log(file)
-
-    return ApiResponse.json({
-      statusCode: 200,
-      message: 'The record has been successfully created.'
-    })
+    // TODO:
+    return ApiResponse.message('The record has been successfully created.', 201)
   } catch (error) {
     return ApiResponse.catch(error)
   }
 }
 
-export async function PATCH(request: NextRequest) {
+export async function PATCH(request: NextRequest, { params }: NextParams) {
   try {
-    return ApiResponse.json({ statusCode: 200, message: 'The record has been successfully updated.' })
+    const { id } = await paramValidator.parseAsync(params)
+    // TODO:
+
+    return ApiResponse.message('The record has been successfully updated.')
   } catch (error) {
     return ApiResponse.catch(error)
   }
 }
 
-export async function DELETE(request: NextRequest) {
+export async function DELETE(request: NextRequest, { params }: NextParams) {
   try {
-    return ApiResponse.json({ statusCode: 200, message: 'The record has been successfully deleted.' })
+    const { id } = await paramValidator.parseAsync(params)
+    // TODO:
+
+    return ApiResponse.message('The record has been successfully deleted.')
   } catch (error) {
     return ApiResponse.catch(error)
   }

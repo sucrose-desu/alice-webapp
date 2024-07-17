@@ -1,9 +1,8 @@
-import { addDays } from 'date-fns'
 import { configs } from '@/constants'
 import { dispatch } from '@/store'
 import { userAct } from '@/store/user.store'
 import { cookie, storage } from '@/utils/storage'
-import type { FormLogin } from '@/types/form'
+import type { FormSignIn } from '@/types/form'
 import type { User } from '@/types/user'
 
 import axios from '../axios'
@@ -15,9 +14,9 @@ export class AuthService {
    *
    * @param data FormSignIn
    */
-  static async signIn(data: FormLogin) {
+  static async signIn(data: FormSignIn) {
     try {
-      const response = await axios.post<XHRLogin>('/auth/sign-in', data)
+      const response = await axios.post<XHRSignIn>('/auth/sign-in', data)
       if (response.data) {
         const { accessToken, refreshKey, expiresAt } = response.data
 
@@ -41,7 +40,7 @@ export class AuthService {
     cookie.remove(configs.APP_AUTH_REFRESH)
     storage.remove(configs.APP_USER_INFO)
 
-    dispatch(userAct.reset(0))
+    dispatch(userAct.reset())
 
     if (cb) cb()
   }
