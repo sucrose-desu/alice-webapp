@@ -6,13 +6,14 @@ import { Prisma } from '@prisma/client'
 import { queryValidator } from '@/constants/validator.zod'
 import { ApiResponse, prismaService } from '@/services/server'
 import { useAuthGuard } from '@/services/server/auth'
-import { createPaginate, generateUid, omit, queryString } from '@/utils'
+import { createPaginate, generateUid, omit } from '@/utils'
 import { usePrismaExcludeFields } from '@/utils/prisma'
+import { queryString } from '@/utils/qs'
 
 import { createAccountValidator } from './validator.zod'
 
 export async function GET(request: NextRequest) {
-  const searchParams = queryString.toJSON(request.nextUrl.searchParams)
+  const searchParams = queryString.toJSON(request.nextUrl.search)
 
   try {
     const auth = useAuthGuard(headers())

@@ -30,6 +30,21 @@ export enum AlbumCategory {
   UNKNOWN = 'UNKNOWN'
 }
 
+export enum AlbumSource {
+  GAME = 'GAME',
+  MANGA = 'MANGA',
+  NOVEL = 'LIGHT_NOVEL',
+  ORIGINAL = 'ORIGINAL',
+  OTHER = 'OTHER',
+  WEB_MANGA = 'WEB_MANGA'
+}
+
+export enum AlbumStatus {
+  AIRING = 'AIRING',
+  AWAIT = 'AWAITING',
+  FINISHED = 'FINISHED'
+}
+
 export enum WatchStatus {
   NEW = 'NEW'
 }

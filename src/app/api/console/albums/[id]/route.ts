@@ -1,27 +1,19 @@
 import { type NextRequest } from 'next/server'
+import { headers } from 'next/headers'
 
-import { paramValidator, queryValidator } from '@/constants/validator.zod'
+import { paramValidator } from '@/constants/validator.zod'
 import { ApiResponse } from '@/services/server'
-import { queryString } from '@/utils/qs'
+import { useAuthGuard } from '@/services/server/auth'
 
-export async function GET(request: NextRequest) {
-  const searchParams = queryString.toJSON(request.nextUrl.search)
+import { updateAlbumValidator } from '../validator.zod'
 
+export async function GET(request: NextRequest, { params }: NextParams) {
   try {
-    const qs = await queryValidator.parseAsync(searchParams)
-    return ApiResponse.json(qs)
-  } catch (error) {
-    return ApiResponse.catch(error)
-  }
-}
-
-export async function POST(request: NextRequest) {
-  try {
-    const body = await request.json()
-    const formData = await request.formData()
+    const auth = useAuthGuard(headers())
+    const { id } = await paramValidator.parseAsync(params)
     // TODO:
 
-    return ApiResponse.message('The record has been successfully created.', 201)
+    return ApiResponse.json({})
   } catch (error) {
     return ApiResponse.catch(error)
   }
@@ -29,9 +21,9 @@ export async function POST(request: NextRequest) {
 
 export async function PATCH(request: NextRequest, { params }: NextParams) {
   try {
+    const auth = useAuthGuard(headers())
     const { id } = await paramValidator.parseAsync(params)
-    const body = await request.json()
-    const formData = await request.formData()
+    const data = await updateAlbumValidator.parseAsync(await request.json())
     // TODO:
 
     return ApiResponse.message('The record has been successfully updated.')
@@ -42,6 +34,7 @@ export async function PATCH(request: NextRequest, { params }: NextParams) {
 
 export async function DELETE(request: NextRequest, { params }: NextParams) {
   try {
+    const auth = useAuthGuard(headers())
     const { id } = await paramValidator.parseAsync(params)
     // TODO:
 

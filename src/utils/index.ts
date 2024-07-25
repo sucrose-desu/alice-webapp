@@ -1,5 +1,3 @@
-export { queryString } from './qs'
-
 export function isIE() {
   return new RegExp('MSIE|Trident').test(navigator.userAgent)
 }
@@ -26,6 +24,10 @@ export function dateToSeconds(date: Date) {
 
 export function omit<T extends Record<string, any>, K extends keyof T>(obj: T, keys: K[]): Omit<T, K> {
   return Object.fromEntries(Object.entries(obj).filter(([key]) => !keys.includes(key as K))) as Omit<T, K>
+}
+
+export function randomIntNetween(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
 /**

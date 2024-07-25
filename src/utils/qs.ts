@@ -1,14 +1,8 @@
 import qs, { type IParseOptions } from 'qs'
 
 export class queryString {
-  static toJSON(searchParams: URLSearchParams | string, options?: IParseOptions) {
-    const searchString: string[] = []
-
-    for (const [key, value] of searchParams) {
-      searchString.push(`${key}=${value}`)
-    }
-
-    return qs.parse(searchString.join('&'), {
+  static toJSON(searchParams: string, options?: IParseOptions) {
+    return qs.parse(searchParams, {
       ...options,
       allowDots: true,
       comma: true,
