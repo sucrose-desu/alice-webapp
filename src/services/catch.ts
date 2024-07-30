@@ -1,4 +1,4 @@
-import { notice } from '@/utils/addon'
+import { notice } from '@/components/addons'
 
 export function tryCatch(message: string, error: any) {
   console.error(message, error)
@@ -13,7 +13,7 @@ export function tryCatch(message: string, error: any) {
       content = `<p>- ${content}</p>`
     }
 
-    notice.error(content, { title: `${statusCode}: ${statusText}`, duration: 600 })
+    notice.error(content, { title: `${statusCode}: ${statusText}`, duration: 6 })
   } else {
     notice.error(error.message, { title: error.code, duration: 6 })
   }

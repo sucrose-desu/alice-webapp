@@ -18,6 +18,11 @@ const tailwindConfig: Config = {
         }
       },
 
+      backgroundImage: {
+        rainbow:
+          'linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #eeff41, #f9a825, #ff5722)'
+      },
+
       grayscale: {
         25: '25%',
         50: '50%',

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import cls from 'classnames'
 
-import type { Dialog } from '@/types/addon'
+import type { Dialog } from './dialog.type'
 
 type Props = {
   data: Extract<Dialog, { type: 'modal' }>

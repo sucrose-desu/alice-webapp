@@ -5,7 +5,7 @@ import { useEffectOnce } from 'react-use'
 
 import { configs } from '@/constants'
 import { useLoader } from '@/hooks'
-import { AuthService, CommonService } from '@/services'
+import { AuthService } from '@/services'
 import { useDispatch } from '@/store'
 import { userAct } from '@/store/user.store'
 import { playSound } from '@/utils/media'
@@ -29,8 +29,6 @@ export default function Bootstrap() {
     } else {
       AuthService.signOut()
     }
-
-    await CommonService.getGenres()
 
     const elm = document.querySelector('.ui--app-container')
     if (elm) {

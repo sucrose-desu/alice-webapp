@@ -4,17 +4,19 @@ import { useCallback, useEffect, useRef } from 'react'
 import cls from 'classnames'
 
 import { useDispatch, useSelector } from '@/store'
-import { appAct } from '@/store/app.store'
 import { scrollOff } from '@/utils'
 
+import { addonAct } from '../addons.store'
 import { DialogContext } from './context'
+
+import './style.scss'
 
 export function DialogObserver() {
   // __STATE's
   const nodeRef = useRef<HTMLDivElement>(null)
 
   const dispatch = useDispatch()
-  const dialogs = useSelector(({ app }) => app.dialogs)
+  const dialogs = useSelector(({ addons }) => addons.dialogs)
 
   // __FUNCTION's
   const handleListener = useCallback(
@@ -23,7 +25,7 @@ export function DialogObserver() {
         const latest = dialogs.filter((dialog) => dialog?.allowEscape).slice(-1)[0]
         if (latest) {
           const payload = { ...latest, visible: false }
-          dispatch(appAct.setDialog(payload))
+          dispatch(addonAct.setDialog(payload))
         }
       }
     },

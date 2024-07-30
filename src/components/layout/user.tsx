@@ -3,11 +3,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { dialog } from '@/components/addons'
 import { useAuth } from '@/hooks'
-import { dialog } from '@/utils/addon'
 
 import { SVG } from '../svg'
-import { LoginComponent } from '../modals/login'
+import { SignInComponent } from '../modals/sign-in'
 
 export function UserComponent() {
   // __STATE's
@@ -38,7 +38,7 @@ export function UserComponent() {
         <button
           className='btn btn-auth'
           onClick={() =>
-            dialog.modal(<LoginComponent />, { name: 'sign-in', allowEscape: true, style: { align: 'start' } })
+            dialog.modal(<SignInComponent />, { name: 'sign-in', allowEscape: true, style: { align: 'start' } })
           }
         >
           <SVG className='bi-person-fill aspect-square w-6' key='person-fill'>

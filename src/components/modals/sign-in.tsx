@@ -6,7 +6,7 @@ import { useEffectOnce } from 'react-use'
 import cls from 'classnames'
 
 import { AuthService } from '@/services'
-import type { FormLogin } from '@/types/form'
+import type { FormSignIn } from '@/types/form'
 
 import { InputComponent as Input } from '../input/main'
 
@@ -14,14 +14,14 @@ type Props = {
   className?: string
 }
 
-export function LoginComponent({ className }: Props) {
+export function SignInComponent({ className }: Props) {
   // __STATE's
   const router = useRouter()
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<FormLogin>({
+  } = useForm<FormSignIn>({
     defaultValues: {
       email: 'app.ts@alice.live',
       password: '',

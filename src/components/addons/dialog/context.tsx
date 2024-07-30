@@ -4,12 +4,12 @@ import { useCallback, useMemo } from 'react'
 import cls from 'classnames'
 
 import { useDispatch } from '@/store'
-import { appAct } from '@/store/app.store'
-import type { Dialog } from '@/types/addon'
 
+import { addonAct } from '../addons.store'
 import { AlertComponent } from './alert'
 import { ConfirmComponent } from './confirm'
 import { ModalComponent } from './modal'
+import type { Dialog } from './dialog.type'
 
 type Props = {
   dialog: Dialog
@@ -23,12 +23,12 @@ export function DialogContext({ dialog, index }: Props) {
   // __FUNCTION's
   const handleClose = useCallback(() => {
     const payload = { ...dialog, visible: false }
-    dispatch(appAct.setDialog(payload))
+    dispatch(addonAct.setDialog(payload))
   }, [window])
 
   const handleRemove = useCallback(() => {
     const payload = { ...dialog, vid: `rm:${dialog.vid}` }
-    dispatch(appAct.setDialog(payload))
+    dispatch(addonAct.setDialog(payload))
   }, [window])
 
   // __RENDER

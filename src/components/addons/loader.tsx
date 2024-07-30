@@ -41,7 +41,13 @@ export function LoaderObserver() {
           !state && 'max-w-full animate-none'
         )}
       >
-        <div className='ui--loader-rainbow relative h-full animate-rainbow bg-theme bg-[length:200%]'></div>
+        <div
+          className='ui--loader-rainbow bg-rainbow relative h-full animate-rainbow bg-theme bg-[length:200%]'
+          style={{
+            backgroundImage:
+              'linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #eeff41, #f9a825, #ff5722)'
+          }}
+        />
       </div>
     </div>
   )

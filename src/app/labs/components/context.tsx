@@ -2,8 +2,8 @@
 
 import { useCallback } from 'react'
 
+import { dialog, notice, toast } from '@/components/addons'
 import { useLoader } from '@/hooks'
-import { dialog, notice } from '@/utils/addon'
 
 export function ContextComponent() {
   // __STATE's
@@ -17,6 +17,10 @@ export function ContextComponent() {
 
   const handleNotice = useCallback(() => {
     notice.success('Generate Lorem Ipsum placeholder text.', { title: 'Successful', duration: 5 })
+  }, [])
+
+  const handleToast = useCallback(() => {
+    toast.on('Generate Lorem Ipsum placeholder text.')
   }, [])
 
   const handleModal = useCallback(() => {
@@ -45,6 +49,10 @@ export function ContextComponent() {
 
       <button className='btn btn-primary btn-clicky h-10 px-8' type='button' onClick={handleNotice}>
         <span className='text capitalize'>use notice</span>
+      </button>
+
+      <button className='btn btn-primary btn-clicky h-10 px-8' type='button' onClick={handleToast}>
+        <span className='text capitalize'>use toast</span>
       </button>
 
       <button className='btn btn-primary btn-clicky h-10 px-8' type='button' onClick={handleAlert}>

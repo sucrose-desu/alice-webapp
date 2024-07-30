@@ -1,0 +1,32 @@
+.ui--toast {
+  &-wrapper {
+    @apply fixed left-1/2 top-16 -translate-x-1/2;
+    z-index: 2000;
+
+    &:not(.active) {
+      pointer-events: none !important;
+      opacity: 0 !important;
+    }
+  }
+
+  &-item {
+    @apply pointer-events-auto relative w-fit min-w-64 max-w-96 -translate-y-1 overflow-hidden rounded-xl bg-black/50 opacity-0 backdrop-blur-lg;
+    box-shadow: 0 0 0 2px rgba(white, 0.08);
+    grid-template-columns: 40px 1fr;
+    transition: all 128ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:not(:last-child) {
+      @apply mb-2;
+    }
+
+    &.enter-active,
+    &.enter-done,
+    &.exit {
+      @apply translate-y-0 opacity-100;
+    }
+
+    &.exit-active {
+      @apply translate-y-1 opacity-0;
+    }
+  }
+}

@@ -5,7 +5,7 @@ import { CSSTransition } from 'react-transition-group'
 import { isAfter } from 'date-fns'
 import cls from 'classnames'
 
-import type { Notice } from '@/types/addon'
+import type { Notice } from './notice.type'
 
 type Props = {
   record: Notice
