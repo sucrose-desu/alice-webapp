@@ -1,9 +1,7 @@
-// import '@/styles/pages/guard.scss'
-
 import { SignInComponent } from '@/components/modals/sign-in'
 
 export default function SignInContainer() {
-  // __STATE<Next.14>
+  // __STATE's'
 
   // __RENDER
   return (

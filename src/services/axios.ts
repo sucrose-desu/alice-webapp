@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from 'axios'
+
 import { configs } from '@/constants'
 import { cookie } from '@/utils/storage'
 
@@ -25,7 +26,12 @@ Axios.interceptors.request.use((reqConfig) => {
   if (reqConfig.headers) {
     const accessToken = cookie.get(configs.APP_AUTH_ACCESS)
     if (accessToken) {
-      reqConfig.headers.Authorization = `Bearer ${accessToken}`
+      reqConfig.headers.set('Authorization', `Bearer ${accessToken}`)
+    }
+
+    const language = cookie.get(configs.APP_LANG)
+    if (language) {
+      reqConfig.headers.set(configs.CONTENT_LANG, language)
     }
   }
 

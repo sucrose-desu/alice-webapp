@@ -1,10 +1,10 @@
+import '@/styles/pages/labs.scss'
 import { ArrayService } from '@/utils/array'
 
 import { CardComponent } from './components/card'
 import { ContextComponent } from './components/context'
 import { CountdownComponent } from './components/countdown'
 import { GenreComponent } from './components/genre'
-import '@/styles/pages/labs.scss'
 
 export default function LabsContainer() {
   // __STATE's
@@ -15,7 +15,7 @@ export default function LabsContainer() {
 
   // __RENDER
   return (
-    <div className='ui--labs-container p-8'>
+    <div className='ui--labs-container'>
       <div className='mb-8 grid gap-1'>
         <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
         <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h2>
@@ -71,10 +71,10 @@ export default function LabsContainer() {
           นักเวทสาวได้ร่วมมือกับพวกผู้กล้าฮิลเมลจัดการจอมมารในช่วงสุดท้ายของการผจญภัยกว่าสิบปีและนำพาสันติสุขคืนสู่โลก
           เธอผู้เป็นเอลฟ์ที่มีอายุยืนยาวกว่าพันปีได้สัญญาว่าจะกลับมาพบกับพวกฮิลเมลอีกครั้งและออกเดินทางคนเดียว
           หลังจากนั้น 50 ปี ฟรีเรนได้มาเยี่ยมเยือนฮิลเมล
-          แต่ฮิลเมลกลับแก่ชราลงไปและอยู่ในช่วงบั้นปลายของชีวิตทั้งที่เธอยังเหมือนเมื่อ 50 ปีก่อนไม่เปลี่ยนแปลง จากนั้น
-          เธอก็ได้เห็นฮิลเมลที่ความตายมาเยือนต่อหน้าต่อตา และได้ตระหนักว่าที่ผ่านมาตัวเองไม่ได้ "รู้จักมนุษย์"
-          เอาเสียเลย ฟรีเรนผู้สำนึกเสียใจจึงได้ออกเดินทาง "เพื่อให้รู้จักมนุษย์" บนเส้นทางนั้น เธอได้พบกับผู้คนหลากหลาย
-          ได้พบกับเรื่องราวมากมายที่กำลังรออยู่
+          แต่ฮิลเมลกลับแก่ชราลงไปและอยู่ในช่วงบั้นปลายของชีวิตทั้งที่เธอยังเหมือนเมื่อ 50 ปีก่อนไม่เปลี่ยนแปลง
+          จากนั้น เธอก็ได้เห็นฮิลเมลที่ความตายมาเยือนต่อหน้าต่อตา และได้ตระหนักว่าที่ผ่านมาตัวเองไม่ได้
+          "รู้จักมนุษย์" เอาเสียเลย ฟรีเรนผู้สำนึกเสียใจจึงได้ออกเดินทาง "เพื่อให้รู้จักมนุษย์" บนเส้นทางนั้น
+          เธอได้พบกับผู้คนหลากหลาย ได้พบกับเรื่องราวมากมายที่กำลังรออยู่
         </p>
 
         <GenreComponent />

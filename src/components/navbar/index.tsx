@@ -1,15 +1,15 @@
-import { UserComponent } from './user'
 import { Link } from '../link'
+import { UserComponent } from './user'
 
-export function NavigatorComponent() {
+export function NavbarComponent() {
   // __RENDER
   return (
-    <nav className='ui--navigator fixed inset-x-4 bottom-4 z-10 flex justify-center'>
+    <nav className='ui--navigator z-100 fixed inset-x-4 bottom-4 flex justify-center'>
       <div className='ui--navigator-container grid grid-flow-col gap-2 rounded-lg p-2'>
         <div className='ui--navigator-main rounded-lg bg-black/40'>
           <button className='btn btn-home' type='button'>
             <span className='font-normal'>w. home</span>
-            <span className='bi bi-list size-4'></span>
+            <span className='bi bi-list leading-none'></span>
           </button>
         </div>
 

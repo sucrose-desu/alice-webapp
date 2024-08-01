@@ -2,10 +2,11 @@
 
 import type { ReactNode } from 'react'
 import { Provider } from 'react-redux'
+
 import ReduxStore from '@/store'
 
-import { Bootstrap, DialogObserver, LoaderObserver, NoticeObserver, ToastObserver } from './addons'
-import { LayoutContainer } from './layout'
+import { DialogObserver, LoaderObserver, NoticeObserver, ToastObserver } from './addons'
+import { Bootstrap } from './bootstrap'
 
 type ProviderProps = { children: ReactNode }
 
@@ -15,7 +16,7 @@ export function AppProvider({ children }: ProviderProps) {
     <Provider store={ReduxStore}>
       <Bootstrap />
 
-      <LayoutContainer>{children}</LayoutContainer>
+      {children}
 
       <LoaderObserver />
       <DialogObserver />

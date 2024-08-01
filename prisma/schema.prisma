@@ -69,6 +69,7 @@ model Album {
   poster      String    @db.Text
   group       String    @default(uuid()) @db.Uuid
   category    String    @default("ANIME") @db.Text
+  dubbed      String    @default("JAPAN") @db.Text
   status      String    @default("AIRING") @db.Text
   studio      String?   @db.Text
   source      String?   @default("OTHER") @db.Text

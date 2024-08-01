@@ -1,11 +1,11 @@
-import type { ReadonlyHeaders } from 'next/dist/server/web/spec-extension/adapters/headers'
 import { type Account, type Permission, type PermissionOfAccount } from '@prisma/client'
 import { createSecretKey } from 'crypto'
 import { addYears } from 'date-fns'
-import { decodeJwt, SignJWT } from 'jose'
-import { v5 as uuidV5, NIL } from 'uuid'
+import { SignJWT, decodeJwt } from 'jose'
+import { NIL, v5 as uuidV5 } from 'uuid'
 
 import { APP_NAME } from '@/constants/configs'
+import type { ReadonlyHeaders } from '@/types'
 import type { JWTPayload } from '@/types/user'
 
 export function useAuthGuard(headers: ReadonlyHeaders) {
@@ -26,7 +26,9 @@ export async function signAuthToken(account: AccountWithPermissions): Promise<XH
     sub: account.id,
     uid: account.uid,
     role: account.role,
-    permissions: account.permissions.map(({ permission: { id, createdAt, updatedAt, ...permission } }) => permission)
+    permissions: account.permissions.map(
+      ({ permission: { id, createdAt, updatedAt, ...permission } }) => permission
+    )
   })
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()

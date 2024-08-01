@@ -11,7 +11,7 @@ import { userAct } from '@/store/user.store'
 import { playSound } from '@/utils/media'
 import { cookie } from '@/utils/storage'
 
-export default function Bootstrap() {
+export function Bootstrap() {
   // __STATE's
   const dispatch = useDispatch()
   const loader = useLoader()
@@ -30,13 +30,7 @@ export default function Bootstrap() {
       AuthService.signOut()
     }
 
-    const elm = document.querySelector('.ui--app-container')
-    if (elm) {
-      setTimeout(() => {
-        elm.classList.add('ready')
-        loader.off()
-      }, 720)
-    }
+    loader.off()
   }, [])
 
   // __EFFECT's

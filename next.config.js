@@ -13,6 +13,12 @@ const nextConfig = {
     ignoreDuringBuilds: true
   },
 
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '2mb'
+    }
+  },
+
   httpAgentOptions: {
     keepAlive: true
   },

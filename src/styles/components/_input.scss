@@ -57,7 +57,7 @@
     }
 
     &-errors {
-      @apply block text-xs font-normal italic text-rose-600;
+      @apply block text-xs font-normal text-red-500;
     }
   }
 }

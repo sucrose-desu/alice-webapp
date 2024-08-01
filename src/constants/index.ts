@@ -7,6 +7,15 @@ export enum Theme {
   DARK = 'dark'
 }
 
+export enum Locales {
+  CN = 'zh-CN',
+  JP = 'ja-JP',
+  KR = 'ko-KR',
+  TH = 'th-TH',
+  US = 'en-US',
+  UK = 'en-UK'
+}
+
 export enum AccountRole {
   ROOT = 'ROOT',
   ADMIN = 'ADMIN',
@@ -16,10 +25,15 @@ export enum AccountRole {
 }
 
 export enum AccountProvider {
-  EMAIL = 'EMAIL'
+  DISCORD = 'DISCORD',
+  EMAIL = 'EMAIL',
+  GITHUB = 'GITHUB',
+  GOOGLE = 'GOOGLE',
+  TWITTER = 'TWITTER'
 }
 
 export enum GenreGroup {
+  CLASSIFIED = 0,
   GENERAL = 1
 }
 
@@ -30,13 +44,21 @@ export enum AlbumCategory {
   UNKNOWN = 'UNKNOWN'
 }
 
+export enum AlbumDubbed {
+  CHINESE = 'CHINESE',
+  ENGLISH = 'ENGLISH',
+  JAPAN = 'JAPAN',
+  KOREA = 'KOREA',
+  THAI = 'THAI'
+}
+
 export enum AlbumSource {
   GAME = 'GAME',
   MANGA = 'MANGA',
-  NOVEL = 'LIGHT_NOVEL',
+  NOVEL = 'LIGHT-NOVEL',
   ORIGINAL = 'ORIGINAL',
   OTHER = 'OTHER',
-  WEB_MANGA = 'WEB_MANGA'
+  WEBMANGA = 'WEB-MANGA'
 }
 
 export enum AlbumStatus {

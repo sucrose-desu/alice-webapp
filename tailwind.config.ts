@@ -10,6 +10,10 @@ const tailwindConfig: Config = {
         primary: ["'Inter'", "'Noto Sans Thai'", 'sans-serif']
       },
 
+      fontSize: {
+        xe: ['11px', '15px']
+      },
+
       colors: {
         theme: {
           DEFAULT: '#6366f1',
@@ -23,10 +27,20 @@ const tailwindConfig: Config = {
           'linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #eeff41, #f9a825, #ff5722)'
       },
 
+      container: {
+        center: true
+      },
+
       grayscale: {
         25: '25%',
         50: '50%',
         75: '75%'
+      },
+
+      zIndex: {
+        100: '100',
+        150: '150',
+        max: '9999'
       },
 
       animation: {

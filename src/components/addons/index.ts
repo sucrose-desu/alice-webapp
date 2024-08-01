@@ -1,4 +1,3 @@
-export { default as Bootstrap } from './bootstrap'
 export { DialogObserver } from './dialog'
 export { LoaderObserver } from './loader'
 export { NoticeObserver } from './notice'

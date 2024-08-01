@@ -1,4 +1,5 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
+
 import { AccountRole } from '@/constants'
 import type { User as UserState } from '@/types/user'
 
