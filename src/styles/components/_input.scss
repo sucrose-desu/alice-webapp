@@ -13,35 +13,30 @@
       }
 
       .text {
-        @apply text-sm text-neutral-300;
       }
     }
 
     &-desc {
-      @apply mt-2 text-xs text-neutral-400;
     }
 
     &-field {
-      @apply relative flex;
+      &.is-pssword {
+        @apply relative flex;
+
+        input {
+          @apply pr-10;
+        }
+      }
 
       input {
-        @apply mt-2 block h-12 rounded-md bg-neutral-500/10 px-4 font-normal text-neutral-100 transition-all;
+        @apply h-12 rounded-md bg-neutral-500/10 px-4 font-normal text-neutral-100 transition-all;
 
         &:focus {
-          @apply bg-neutral-500/5;
-          box-shadow: 0 0 0 1px rgba(white, 0.08);
-        }
-
-        & ~ .icon {
-          @apply absolute bottom-[1px] right-0 flex h-11 w-8 items-center justify-center text-neutral-400;
-
-          &.is-text {
-            @apply text-neutral-100;
-          }
+          @apply bg-neutral-500/5 ring-1 ring-white/[0.08];
         }
 
         @include attr('type', 'password') {
-          @apply font-bold tracking-[2px];
+          @apply tracking-[2px];
         }
 
         @include attr('type', ('number', 'search')) {
@@ -54,10 +49,12 @@
           }
         }
       }
-    }
 
-    &-errors {
-      @apply block text-xs font-normal text-red-500;
+      .btn {
+        &-password {
+          @apply absolute bottom-0 right-0 flex h-12 w-10 items-center justify-center;
+        }
+      }
     }
   }
 }

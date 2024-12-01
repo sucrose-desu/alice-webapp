@@ -1,10 +1,11 @@
-import '@/styles/pages/labs.scss'
-import { ArrayService } from '@/utils/array'
+import { shuffle } from 'lodash'
 
 import { CardComponent } from './components/card'
 import { ContextComponent } from './components/context'
 import { CountdownComponent } from './components/countdown'
 import { GenreComponent } from './components/genre'
+
+import '@/styles/pages/labs.scss'
 
 export default function LabsContainer() {
   // __STATE's
@@ -61,7 +62,7 @@ export default function LabsContainer() {
         <img
           className='h-[400px] w-[280px] rounded object-cover object-center'
           alt='Sousou no Frieren'
-          src={`/static/images/posters/${ArrayService.shuffle(['127908l', '136959l', '137254l', '138006l'])[0]}.jpg`}
+          src={`/static/images/posters/${shuffle(['127908l', '136959l', '137254l', '138006l'])[0]}.jpg`}
         />
 
         <h2>Sousou no Frieren</h2>

@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
-import { intervalToDuration, addSeconds } from 'date-fns'
+import { addSeconds, intervalToDuration } from 'date-fns'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+
 import type { CountdownDuration } from '@/types'
 
 /**

@@ -1,10 +1,14 @@
 import { useCallback, useMemo } from 'react'
-import { dispatch } from '@/store'
+
+import { dispatch, useSelector } from '@/store'
 import { appAct } from '@/store/app.store'
 
 export function useLoader() {
+  // __STATE's
+  const status = useSelector(({ app }) => app.loader)
+
   // __FUNCTION's
-  const handleAction = useCallback((active: boolean, delay: number = 512) => {
+  const handleAction = useCallback((active: boolean = true, delay: number = 480) => {
     const action = appAct.setLoader(active)
 
     if (active) {
@@ -19,8 +23,9 @@ export function useLoader() {
   // __RETURN
   return useMemo(() => {
     return {
-      on: () => handleAction(true),
+      isLoading: status,
+      on: handleAction,
       off: (delay?: number) => handleAction(false, delay)
     }
-  }, [handleAction])
+  }, [status, handleAction])
 }

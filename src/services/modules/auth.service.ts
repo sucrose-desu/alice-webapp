@@ -1,9 +1,9 @@
 import { configs } from '@/constants'
 import { dispatch } from '@/store'
 import { userAct } from '@/store/user.store'
-import { cookie, storage } from '@/utils/storage'
 import type { FormSignIn } from '@/types/form'
 import type { User } from '@/types/user'
+import { cookie, storage } from '@/utils/storage'
 
 import axios from '../axios'
 import { tryCatch } from '../catch'

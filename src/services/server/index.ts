@@ -1,16 +1,10 @@
-import { Prisma, PrismaClient } from '@prisma/client'
 import { ZodError } from 'zod'
 
-export const prismaService = new PrismaClient({
-  errorFormat: 'pretty',
-  transactionOptions: {
-    isolationLevel: Prisma.TransactionIsolationLevel.Serializable
-  }
-})
+import { headers } from '@/constants'
 
 export class ApiResponse {
   static json(data: any, statusCode: number = 200) {
-    return Response.json(data, { status: statusCode })
+    return Response.json(data, { status: statusCode, headers })
   }
 
   static message(str: string | string[], statusCode: number = 200) {
@@ -20,7 +14,8 @@ export class ApiResponse {
         message: str
       },
       {
-        status: statusCode
+        status: statusCode,
+        headers
       }
     )
   }

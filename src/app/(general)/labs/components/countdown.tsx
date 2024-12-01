@@ -5,7 +5,9 @@ import { dateToSeconds } from '@/utils'
 
 export function CountdownComponent() {
   // __STATE's
-  const { duration, pause, resume } = useCountdownTimer(dateToSeconds(new Date('2025-01-01T00:00:00.000+07:00')))
+  const { duration, pause, resume } = useCountdownTimer(
+    dateToSeconds(new Date('2025-01-01T00:00:00.000+07:00'))
+  )
 
   // __FUNCTION's
 

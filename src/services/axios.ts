@@ -1,6 +1,6 @@
-import axios, { AxiosInstance } from 'axios'
+import axios, { AxiosHeaders, AxiosInstance } from 'axios'
 
-import { configs } from '@/constants'
+import { configs, headers } from '@/constants'
 import { cookie } from '@/utils/storage'
 
 /**
@@ -9,9 +9,9 @@ import { cookie } from '@/utils/storage'
 const Axios: AxiosInstance = axios.create({
   baseURL: `${configs.isBrowser ? location.origin : configs.API_GATEWAY}/services`,
   headers: {
+    ...(headers as AxiosHeaders),
     'X-Secret-Auth': configs.API_SECRET_KEY,
-    'Access-Control-Allow-Origin': configs.isBrowser ? location.origin : '*',
-    'Access-Control-Allow-Methods': 'GET,POST,PATCH,DELETE'
+    'Access-Control-Allow-Origin': configs.isBrowser ? location.origin : '*'
   }
 })
 

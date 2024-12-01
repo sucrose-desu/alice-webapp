@@ -1,13 +1,16 @@
-import { type NextRequest } from 'next/server'
-import path from 'path'
 import fs from 'fs'
-import mime from 'mime'
+import path from 'path'
 
-import { ApiResponse } from '@/services/server'
+import mime from 'mime'
+import { type NextRequest } from 'next/server'
+
 import { getFileFormat } from '@/libs/ffmpeg'
+import { ApiResponse } from '@/services/server'
 import { queryString } from '@/utils/qs'
 
 import { queryValidator } from './validator.zod'
+
+export const dynamic = 'force-dynamic'
 
 export async function GET(request: NextRequest) {
   const searchParams = queryString.toJSON(request.nextUrl.search)

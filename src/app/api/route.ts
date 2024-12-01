@@ -1,8 +1,15 @@
-import { type NextRequest } from 'next/server'
+import { NextRequest } from 'next/server'
 
 import { paramValidator, queryValidator } from '@/constants/validator.zod'
 import { ApiResponse } from '@/services/server'
 import { queryString } from '@/utils/qs'
+
+// https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
+// Force dynamic rendering, which will result in routes being rendered for each user at request time.
+export const dynamic = 'force-dynamic'
+
+// Next.js will invalidate the cache when a request comes in, at most once every 30 seconds.
+// export const revalidate = 30
 
 export async function GET(request: NextRequest) {
   const searchParams = queryString.toJSON(request.nextUrl.search)

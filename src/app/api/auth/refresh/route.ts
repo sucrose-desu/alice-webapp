@@ -1,8 +1,11 @@
-import { type NextRequest } from 'next/server'
 import { headers } from 'next/headers'
+import { type NextRequest } from 'next/server'
 
-import { ApiResponse, prismaService } from '@/services/server'
-import { useAuthGuard, signAuthToken } from '@/services/server/auth'
+import { prismaService } from '@/libs/prisma'
+import { ApiResponse } from '@/services/server'
+import { signAuthToken, useAuthGuard } from '@/services/server/auth'
+
+export const dynamic = 'force-dynamic'
 
 export async function GET(request: NextRequest) {
   try {

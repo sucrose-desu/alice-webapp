@@ -1,8 +1,9 @@
 'use client'
 
-import { useLoader } from '@/hooks'
 import Link from 'next/link'
 import { useCallback, useEffect } from 'react'
+
+import { useLoader } from '@/hooks'
 
 type Props = {
   error: Error & { digest?: string }

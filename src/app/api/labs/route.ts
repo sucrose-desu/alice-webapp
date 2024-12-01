@@ -7,6 +7,8 @@ import { queryString } from '@/utils/qs'
 
 const paramValidator = z.object({ path: z.string() })
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: NextRequest) {
   const searchParams = queryString.toJSON(request.nextUrl.search)
 

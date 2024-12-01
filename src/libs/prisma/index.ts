@@ -1,8 +1,18 @@
-import { Prisma } from '@prisma/client'
+import { Prisma, PrismaClient } from '@prisma/client'
+
+export const prismaService = new PrismaClient({
+  errorFormat: 'pretty',
+  transactionOptions: {
+    isolationLevel: Prisma.TransactionIsolationLevel.Serializable
+  }
+})
 
 type A<T extends string> = T extends `${infer U}ScalarFieldEnum` ? U : never
 type Entity = A<keyof typeof Prisma>
-type Keys<T extends Entity> = Extract<keyof (typeof Prisma)[keyof Pick<typeof Prisma, `${T}ScalarFieldEnum`>], string>
+type Keys<T extends Entity> = Extract<
+  keyof (typeof Prisma)[keyof Pick<typeof Prisma, `${T}ScalarFieldEnum`>],
+  string
+>
 
 export function usePrismaExcludeFields<T extends Entity, K extends Keys<T>>(type: T, omit: K[]) {
   type Key = Exclude<Keys<T>, K>

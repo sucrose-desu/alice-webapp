@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+
 import { APP_WEB_TITLE } from './configs'
 
 export const metadata: Metadata = {

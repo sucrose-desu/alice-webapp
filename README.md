@@ -9,7 +9,8 @@ src               # App entry point.
 └─ app            # App Router.
 └─ components     # Global custom components.
 └─ constants      # Constant variable.
-└─ hooks          # Customs React hooks.
+└─ hooks          # Customs hooks.
+└─ libs           # Libraries.
 └─ services       # APIs services.
 └─ store          # Redux state management.
 └─ styles         # Stylesheet.

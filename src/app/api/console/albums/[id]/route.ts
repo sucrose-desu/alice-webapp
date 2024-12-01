@@ -1,11 +1,13 @@
-import { type NextRequest } from 'next/server'
 import { headers } from 'next/headers'
+import { type NextRequest } from 'next/server'
 
 import { paramValidator } from '@/constants/validator.zod'
 import { ApiResponse } from '@/services/server'
 import { useAuthGuard } from '@/services/server/auth'
 
 import { updateAlbumValidator } from '../validator.zod'
+
+export const dynamic = 'force-dynamic'
 
 export async function GET(request: NextRequest, { params }: NextParams) {
   try {

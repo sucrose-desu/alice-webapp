@@ -1,7 +1,8 @@
-import { type Account, type Permission, type PermissionOfAccount } from '@prisma/client'
 import { createSecretKey } from 'crypto'
+
+import { type Account, type Permission, type PermissionOfAccount } from '@prisma/client'
 import { addYears } from 'date-fns'
-import { SignJWT, decodeJwt } from 'jose'
+import { decodeJwt, SignJWT } from 'jose'
 import { NIL, v5 as uuidV5 } from 'uuid'
 
 import { APP_NAME } from '@/constants/configs'

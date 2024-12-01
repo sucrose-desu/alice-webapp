@@ -1,10 +1,13 @@
-import { type NextRequest } from 'next/server'
 import { genSaltSync, hashSync } from 'bcrypt'
+import { type NextRequest } from 'next/server'
 
-import { ApiResponse, prismaService } from '@/services/server'
+import { prismaService } from '@/libs/prisma'
+import { ApiResponse } from '@/services/server'
 import { generateUid, omit } from '@/utils'
 
 import { signUpValidator } from '../validator.zod'
+
+export const dynamic = 'force-dynamic'
 
 export async function POST(request: NextRequest) {
   try {

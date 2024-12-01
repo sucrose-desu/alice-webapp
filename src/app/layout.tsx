@@ -2,6 +2,7 @@ import { type ReactNode } from 'react'
 
 import { AppProvider } from '@/components/provider'
 import { Locales } from '@/constants'
+
 import '@/styles/main.scss'
 
 type Props = { children: ReactNode }

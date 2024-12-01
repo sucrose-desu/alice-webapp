@@ -1,5 +1,6 @@
-import { AccountProvider } from '@/constants'
 import { z } from 'zod'
+
+import { AccountProvider } from '@/constants'
 
 export const signInValidator = z.object({
   email: z.string().email(),

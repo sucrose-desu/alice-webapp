@@ -1,14 +1,13 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
-import { useForm } from 'react-hook-form'
-import { useEffectOnce } from 'react-use'
 import cls from 'classnames'
+import { useRouter } from 'next/navigation'
+import { useCallback } from 'react'
+import { useEffectOnce } from 'react-use'
 
 import { AuthService } from '@/services'
-import type { FormSignIn } from '@/types/form'
 
-import { InputComponent as Input } from '../input/main'
+import { FormSignInComponent } from '../forms/sign-in'
 
 type Props = {
   className?: string
@@ -17,30 +16,11 @@ type Props = {
 export function SignInComponent({ className }: Props) {
   // __STATE's
   const router = useRouter()
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<FormSignIn>({
-    defaultValues: {
-      email: 'app.ts@alice.live',
-      password: '',
-      keepLoggedIn: true
-    }
-  })
 
   // __FUNCTION's
-  const onSubmit = handleSubmit(async (data) => {
-    const response = await AuthService.signIn(data)
-    if (response) {
-      await AuthService.profile()
-
-      // const fallbackTo = searchParams.get('fallback')
-      // if (fallbackTo) {
-      //   router.push(fallbackTo)
-      // }
-    }
-  })
+  const handleCallback = useCallback((to?: string) => {
+    if (to) router.push(to)
+  }, [])
 
   // __EFFECT's
   useEffectOnce(() => {
@@ -55,35 +35,7 @@ export function SignInComponent({ className }: Props) {
         <p className='desc text-xs italic text-neutral-400'>Generate Lorem Ipsum placeholder text.</p>
       </div>
 
-      <form className='ui--login-form mx-auto my-8' onSubmit={onSubmit}>
-        <div className='grid gap-4'>
-          <Input
-            key='.email'
-            type='text'
-            name='email'
-            label='Email Address'
-            register={register}
-            errors={errors.email}
-            rules={{ required: true }}
-          />
-
-          <Input
-            key='.password'
-            type='password'
-            name='password'
-            label='Password'
-            register={register}
-            errors={errors.password}
-            rules={{ required: true }}
-          />
-        </div>
-
-        <div className='mt-6 grid'>
-          <button className='btn btn-primary h-12' type='submit'>
-            <span className='text-base font-bold capitalize'>sign-in</span>
-          </button>
-        </div>
-      </form>
+      <FormSignInComponent onCallback={handleCallback} />
 
       <div className='ui--login-footer border-0 border-t border-solid border-neutral-900 pt-4 text-center'>
         <p className='italic text-neutral-400'>or Sign-In with</p>

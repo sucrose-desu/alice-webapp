@@ -89,10 +89,3 @@ export function abbreviateNumber(input: number, fractionDigits: number = 1) {
 
   return (input / scale).toFixed(fractionDigits) + suffix
 }
-
-/**
- * @param delay Add a delay of milliseconds (default: 1 second)
- */
-export async function depay(delay: number = 1e3) {
-  return await new Promise((resolve) => setTimeout(resolve, delay))
-}

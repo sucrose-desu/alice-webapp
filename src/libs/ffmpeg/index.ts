@@ -1,5 +1,6 @@
-import fluent, { type FfprobeFormat } from 'fluent-ffmpeg'
 import path from 'path'
+
+import fluent, { type FfprobeFormat } from 'fluent-ffmpeg'
 
 import { randomIntNetween } from '@/utils'
 

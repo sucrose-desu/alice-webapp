@@ -1,15 +1,18 @@
-import { type NextRequest } from 'next/server'
-import { headers } from 'next/headers'
 import { Prisma } from '@prisma/client'
+import { headers } from 'next/headers'
+import { type NextRequest } from 'next/server'
 
 import { queryValidator } from '@/constants/validator.zod'
-import { ApiResponse, prismaService } from '@/services/server'
+import { prismaService } from '@/libs/prisma'
+import { ApiResponse } from '@/services/server'
 import { useAuthGuard } from '@/services/server/auth'
 import { createPaginate } from '@/utils'
-import { queryString } from '@/utils/qs'
 import { base16 } from '@/utils/convert'
+import { queryString } from '@/utils/qs'
 
 import { createAlbumValidator } from './validator.zod'
+
+export const dynamic = 'force-dynamic'
 
 export async function GET(request: NextRequest) {
   const searchParams = queryString.toJSON(request.nextUrl.search)

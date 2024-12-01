@@ -1,16 +1,18 @@
-import { type NextRequest } from 'next/server'
-import { headers } from 'next/headers'
-import { genSaltSync, hashSync } from 'bcrypt'
 import { Prisma } from '@prisma/client'
+import { genSaltSync, hashSync } from 'bcrypt'
+import { headers } from 'next/headers'
+import { NextRequest } from 'next/server'
 
 import { queryValidator } from '@/constants/validator.zod'
-import { ApiResponse, prismaService } from '@/services/server'
+import { prismaService, usePrismaExcludeFields } from '@/libs/prisma'
+import { ApiResponse } from '@/services/server'
 import { useAuthGuard } from '@/services/server/auth'
 import { createPaginate, generateUid, omit } from '@/utils'
-import { usePrismaExcludeFields } from '@/utils/prisma'
 import { queryString } from '@/utils/qs'
 
 import { createAccountValidator } from './validator.zod'
+
+export const dynamic = 'force-dynamic'
 
 export async function GET(request: NextRequest) {
   const searchParams = queryString.toJSON(request.nextUrl.search)

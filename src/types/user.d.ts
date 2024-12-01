@@ -1,4 +1,5 @@
 import { type Account, type Permission } from '@prisma/client'
+
 import { AccountRole } from '@/constants'
 
 export interface JWTPayload {
